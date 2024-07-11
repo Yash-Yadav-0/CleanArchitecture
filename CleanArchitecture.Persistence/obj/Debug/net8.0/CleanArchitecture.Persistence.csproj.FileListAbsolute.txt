@@ -1,0 +1,11 @@
+C:\Users\Yash\source\repos\CleanArchitecture\CleanArchitecture.Persistence\bin\Debug\net8.0\CleanArchitecture.Persistence.deps.json
+C:\Users\Yash\source\repos\CleanArchitecture\CleanArchitecture.Persistence\bin\Debug\net8.0\CleanArchitecture.Persistence.dll
+C:\Users\Yash\source\repos\CleanArchitecture\CleanArchitecture.Persistence\bin\Debug\net8.0\CleanArchitecture.Persistence.pdb
+C:\Users\Yash\source\repos\CleanArchitecture\CleanArchitecture.Persistence\obj\Debug\net8.0\CleanArchitecture.Persistence.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Yash\source\repos\CleanArchitecture\CleanArchitecture.Persistence\obj\Debug\net8.0\CleanArchitecture.Persistence.AssemblyInfoInputs.cache
+C:\Users\Yash\source\repos\CleanArchitecture\CleanArchitecture.Persistence\obj\Debug\net8.0\CleanArchitecture.Persistence.AssemblyInfo.cs
+C:\Users\Yash\source\repos\CleanArchitecture\CleanArchitecture.Persistence\obj\Debug\net8.0\CleanArchitecture.Persistence.csproj.CoreCompileInputs.cache
+C:\Users\Yash\source\repos\CleanArchitecture\CleanArchitecture.Persistence\obj\Debug\net8.0\CleanArchitecture.Persistence.dll
+C:\Users\Yash\source\repos\CleanArchitecture\CleanArchitecture.Persistence\obj\Debug\net8.0\refint\CleanArchitecture.Persistence.dll
+C:\Users\Yash\source\repos\CleanArchitecture\CleanArchitecture.Persistence\obj\Debug\net8.0\CleanArchitecture.Persistence.pdb
+C:\Users\Yash\source\repos\CleanArchitecture\CleanArchitecture.Persistence\obj\Debug\net8.0\ref\CleanArchitecture.Persistence.dll
