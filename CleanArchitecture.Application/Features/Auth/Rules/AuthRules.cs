@@ -20,28 +20,24 @@ namespace CleanArchitecture.Application.Features.Auth.Rules
                 throw new EmailOrPasswordShouldnotbeInvalidException("This User has registered before, use another Values");
             return Task.CompletedTask;
         }
-
         public Task RefreshTokenExpiryTimeShouldnotbeExpiredAsync(DateTime? RefreshTokenExpiryTime)
         {
             if (RefreshTokenExpiryTime < DateTime.Now)
                 throw new RefreshTokenExpiryTimeShouldnotbeExpiredAsyncException();
             return Task.CompletedTask;
         }
-
         public Task EmailShouldnotbeInvalidAsync(User user)
         {
             if (user is null)
                 throw new EmailShouldnotbeInvalidException("This User has registered before, use another Values");
             return Task.CompletedTask;
         }
-
         public Task EmailShouldBeConfirmedAsync(IdentityResult identityResult)
         {
             if (!identityResult.Succeeded || identityResult is null)
                 throw new EmailShouldBeConfirmedException("Your Email is`t confirmed,\n\tyou must confirm it for continue");
             return Task.CompletedTask;
         }
-
         public Task NoMistakeShouldHappenWhileEmailConfirmationAsync(bool value)
         {
             if (!value)
@@ -61,7 +57,6 @@ namespace CleanArchitecture.Application.Features.Auth.Rules
                 throw new UserManagerShouldBeUpdatedException("Your Email is`t Updated,\n\tyou must try again for continue");
             return Task.CompletedTask;
         }
-
         public Task BothOfCodeShouldBeIdenticalAsync()
         {
             throw new BothOfCodeShouldBeIdenticalException("Both Of Code Should Be Identical,\n\tyou must try again for continue");

@@ -1,11 +1,6 @@
 ﻿using CleanArchitecture.Domain.Common;
 using Microsoft.EntityFrameworkCore.Query;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CleanArchitecture.Application.Interfaces.Repositories
 {
@@ -33,9 +28,7 @@ namespace CleanArchitecture.Application.Interfaces.Repositories
            Func<IQueryable<T>, IIncludableQueryable<T, object>>? include = null,
             bool enableTracing = false
            );
-
         Task<IQueryable<T>> Find(Expression<Func<T, bool>>? predicate, bool enableTracing = false);
-
         Task<int> CountAsync(Expression<Func<T, bool>>? predicate = null);
     }
 }

@@ -1,10 +1,4 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Transactions;
 
 namespace CleanArchitecture.Domain.Entities
 {
@@ -17,6 +11,5 @@ namespace CleanArchitecture.Domain.Entities
         public string? CodeForResetPassword { get; set; }
         public DateTime? TimeOfCodeExpiration { get; set; }
         public bool? IsCodeOfResetPasswordTrue { get; set; }
-        public virtual ICollection<Transaction> transactions { get; set; }
     }
 }

@@ -4,7 +4,6 @@ using CleanArchitecture.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 
-
 namespace CleanArchitecture.Application.Features.Auth.Commands.EmailConfirmation
 {
     public class EmailConfirmationCommandHandler : IRequestHandler<EmailConfirmationCommandRequest, Unit>

@@ -1,14 +1,10 @@
-﻿using CleanArchitecture.Domain.Enums;
-using System;
-using System.Collections.Generic;
+﻿using CleanArchitecture.Domain.Common;
+using CleanArchitecture.Domain.Enums;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CleanArchitecture.Domain.Entities
 {
-    public class Order
+    public class Order : EntityBase
     {
         public Order()
         {

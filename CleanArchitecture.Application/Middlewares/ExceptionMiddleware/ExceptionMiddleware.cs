@@ -1,11 +1,6 @@
 ﻿using FluentValidation;
 using Microsoft.AspNetCore.Http;
 using SendGrid.Helpers.Errors.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CleanArchitecture.Application.Middlewares.ExceptionMiddleware
 {
@@ -19,7 +14,6 @@ namespace CleanArchitecture.Application.Middlewares.ExceptionMiddleware
             }
             catch (Exception ex)
             {
-
                 await handleExceptionAsync(httpContext, ex);
             }
 
@@ -57,7 +51,6 @@ namespace CleanArchitecture.Application.Middlewares.ExceptionMiddleware
                .ToString()
                );
         }
-
         private static int getStatusCode(Exception exception) =>
             exception switch
             {

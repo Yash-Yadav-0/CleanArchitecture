@@ -11,13 +11,9 @@ using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace CleanArchitecture.Application
 {
@@ -32,13 +28,11 @@ namespace CleanArchitecture.Application
                 );
 
             services.AddTransient<ExceptionMiddleware>();
-
             services.AddValidatorsFromAssembly(assemlty);
 
             ValidatorOptions.Global.LanguageManager.Culture = new CultureInfo("en-US");
 
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(FluentValidationBehaviors<,>));
-
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RedisCacheBehaviors<,>));
 
             #region Url
@@ -46,17 +40,14 @@ namespace CleanArchitecture.Application
 
             services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
 
-
             services.AddScoped<UrlFactoryHelper>();
 
             services.AddSingleton<EmailConfirmationCommandRequest>();
-
             #endregion
 
             services.AddTransient<ProductRules>();
 
             services.AddTransient<OrderRules>();
-
 
             services.AddTransient<SignInManager<User>>();
 
@@ -74,6 +65,5 @@ namespace CleanArchitecture.Application
 
             return services;
         }
-
     }
 }

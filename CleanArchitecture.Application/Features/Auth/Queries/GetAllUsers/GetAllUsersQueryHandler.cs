@@ -8,7 +8,6 @@ namespace CleanArchitecture.Application.Features.Auth.Queries.GetAllUsers
     public class GetAllUsersQueryHandler : IRequestHandler<GetAllUsersQueryRequest, IList<GetAllUsersQueryResponse>>
     {
         private readonly UserManager<User> userManager;
-
         public GetAllUsersQueryHandler(UserManager<User> userManager)
         {
             this.userManager = userManager;

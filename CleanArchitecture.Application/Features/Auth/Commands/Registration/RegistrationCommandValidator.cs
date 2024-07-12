@@ -1,9 +1,4 @@
 ﻿using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CleanArchitecture.Application.Features.Auth.Commands.Registration
 {
@@ -34,7 +29,6 @@ namespace CleanArchitecture.Application.Features.Auth.Commands.Registration
                    .WithName("Confirm Password")
                    .MinimumLength(8)
                    .Equal(prop => prop.Password);
-
         }
     }
 }

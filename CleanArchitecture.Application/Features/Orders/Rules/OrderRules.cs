@@ -1,10 +1,5 @@
 ﻿using CleanArchitecture.Application.Features.Orders.Exceptions;
 using CleanArchitecture.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CleanArchitecture.Application.Features.Orders.Rules
 {
@@ -16,7 +11,6 @@ namespace CleanArchitecture.Application.Features.Orders.Rules
                 throw new TheSameUserForTheSameOrderException("The Same User should be For The Same Order");
             return Task.CompletedTask;
         }
-
         public Task TheOrderShouldBeExist(Order? order)
         {
             if (order is null)

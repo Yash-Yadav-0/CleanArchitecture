@@ -1,9 +1,4 @@
 ﻿using CleanArchitecture.Domain.Common;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CleanArchitecture.Domain.Entities
 {
@@ -11,9 +6,7 @@ namespace CleanArchitecture.Domain.Entities
     {
         public string FileName { get; set; }
         public string Path { get; set; }
-
         public int ProductId { get; set; }
-
         public virtual Product Product { get; set; }
     }
 }

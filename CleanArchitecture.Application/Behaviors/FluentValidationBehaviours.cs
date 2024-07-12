@@ -1,7 +1,6 @@
 ﻿using FluentValidation;
 using MediatR;
 
-
 namespace CleanArchitecture.Application.Behaviors
 {
     public class FluentValidationBehaviors<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>

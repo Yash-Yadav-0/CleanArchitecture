@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Identity;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 
-
 namespace CleanArchitecture.Application.Features.Auth.Commands.RefreshToken
 {
     public class RefreshTokenCommandHandler : BaseHandler, IRequestHandler<RefreshTokenCommandRequest, RefreshTokenCommandResponse>
