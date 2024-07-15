@@ -26,7 +26,7 @@ namespace CleanArchitecture.Application.Behaviors
                 var response = await next();
 
                 if (response is not null)
-                    await _redisCacheService.SetAsync(CacheKey, response, DateTime.Now.AddMinutes(CacheTime));
+                    await _redisCacheService.SetAsync(CacheKey, response, DateTime.UtcNow.AddMinutes(CacheTime));
                 return response;
 
             }

@@ -51,7 +51,7 @@ namespace CleanArchitecture.Application.Features.Auth.Commands.Login
             int.TryParse(configuration["JWT:RefreshTokenValidityInDays"], out int refreshTokenValidityInDays);
 
             user.RefreshToken = _RefreshToken;
-            user.RefreshTokenExpiryTime = DateTime.Now.AddDays(refreshTokenValidityInDays);
+            user.RefreshTokenExpiryTime = DateTime.UtcNow.AddDays(refreshTokenValidityInDays);
 
             await userManager.UpdateAsync(user);
             await userManager.UpdateSecurityStampAsync(user);

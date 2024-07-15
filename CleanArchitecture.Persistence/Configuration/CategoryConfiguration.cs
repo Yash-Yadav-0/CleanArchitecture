@@ -18,7 +18,7 @@ namespace CleanArchitecture.Persistence.Configuration
                 Priorty = 1,
                 ParentId = 0,
                 IsDeleted = false,
-                AddedOnDate = DateTime.Now,
+                AddedOnDate = DateTime.UtcNow,
             };
 
             Category category02 = new()
@@ -28,7 +28,7 @@ namespace CleanArchitecture.Persistence.Configuration
                 Priorty = 2,
                 ParentId = 0,
                 IsDeleted = false,
-                AddedOnDate = DateTime.Now,
+                AddedOnDate = DateTime.UtcNow,
             };
 
             Category parent01 = new()
@@ -38,7 +38,7 @@ namespace CleanArchitecture.Persistence.Configuration
                 Priorty = 1,
                 ParentId = 1,
                 IsDeleted = false,
-                AddedOnDate = DateTime.Now,
+                AddedOnDate = DateTime.UtcNow,
             };
 
             Category parent02 = new()
@@ -48,7 +48,7 @@ namespace CleanArchitecture.Persistence.Configuration
                 Priorty = 1,
                 ParentId = 2,
                 IsDeleted = false,
-                AddedOnDate = DateTime.Now,
+                AddedOnDate = DateTime.UtcNow,
             };
             builder.HasData(category01, category02, parent01, parent02);
         }

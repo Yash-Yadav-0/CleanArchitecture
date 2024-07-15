@@ -45,6 +45,5 @@ namespace CleanArchitecture.Infrastructure.ScheduleServices
                 }
             }
         }
-
     }
 }

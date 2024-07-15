@@ -16,9 +16,8 @@ namespace CleanArchitecture.Persistence
         public static void AddPersistence(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<ApplicationDbContext>(opt =>
-                     opt.UseLazyLoadingProxies()
-                        .UseNpgsql(configuration.GetConnectionString("DefaultConnection"),
-                        b => b.MigrationsAssembly("CleanArchitecture.Persistence")));
+                    opt.UseLazyLoadingProxies()
+                    .UseNpgsql(configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("CleanArchitecture.Persistence")));
             //.UseLazyLoadingProxies()
 
             services.AddScoped(typeof(IReadRepository<>), typeof(ReadRepository<>));

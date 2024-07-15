@@ -51,7 +51,7 @@ namespace CleanArchitecture.Infrastructure.Tokens
                 issuer: tokenSettings.Issuer,
                 claims: claims,
                 signingCredentials: credentials,
-                expires: DateTime.Now.AddMinutes(tokenSettings.TokenValidityInMinutes)
+                expires: DateTime.UtcNow.AddMinutes(tokenSettings.TokenValidityInMinutes)
                 );
 
             #endregion

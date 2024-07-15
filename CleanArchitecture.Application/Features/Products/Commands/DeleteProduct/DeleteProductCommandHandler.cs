@@ -18,7 +18,7 @@ namespace CleanArchitecture.Application.Features.Products.Commands.DeleteProduct
             Product product = await UnitOfWork.readRepository<Product>().GetAsync(x => x.Id == request.Id && !x.IsDeleted);
             product.IsDeleted = true;
 
-            product.UpdatedDate = DateTime.Now;
+            product.UpdatedDate = DateTime.UtcNow;
             product.AddedOnDate = product.AddedOnDate;
 
             await UnitOfWork.writeRepository<Product>().UpdateAsync(request.Id, product);

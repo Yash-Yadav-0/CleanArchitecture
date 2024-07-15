@@ -19,6 +19,10 @@ namespace CleanArchitecture.Application.Helpers
         public IUrlHelper CreateUrlHelper()
         {
             var actionContext = actionContextAccessor.ActionContext;
+            if (actionContext == null)
+            {
+                throw new InvalidOperationException("ActionContext cannot be null. Ensure that the IActionContextAccessor is correctly configured.");
+            }
             return urlHelperFactory.GetUrlHelper(actionContext);
         }
     }

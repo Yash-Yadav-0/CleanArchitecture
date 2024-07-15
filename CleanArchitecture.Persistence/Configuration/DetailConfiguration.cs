@@ -17,7 +17,7 @@ namespace CleanArchitecture.Persistence.Configuration
                 Title = faker.Lorem.Sentence(1),
                 Description = faker.Lorem.Sentence(5),
                 CategoryId = 1,
-                AddedOnDate = DateTime.Now,
+                AddedOnDate = DateTime.UtcNow,
                 IsDeleted = false,
             };
             Details detail02 = new()
@@ -26,7 +26,7 @@ namespace CleanArchitecture.Persistence.Configuration
                 Title = faker.Lorem.Sentence(2),
                 Description = faker.Lorem.Sentence(5),
                 CategoryId = 3,
-                AddedOnDate = DateTime.Now,
+                AddedOnDate = DateTime.UtcNow,
                 IsDeleted = true,
             };
             Details detail03 = new()
@@ -35,7 +35,7 @@ namespace CleanArchitecture.Persistence.Configuration
                 Title = faker.Lorem.Sentence(1),
                 Description = faker.Lorem.Sentence(5),
                 CategoryId = 4,
-                AddedOnDate = DateTime.Now,
+                AddedOnDate = DateTime.UtcNow,
                 IsDeleted = false,
             };
 

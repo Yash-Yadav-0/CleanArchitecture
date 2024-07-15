@@ -14,7 +14,7 @@ namespace CleanArchitecture.Persistence.Configuration
             {
                 Id = 1,
                 Name = faker.Commerce.Department(),
-                AddedOnDate = DateTime.Now,
+                AddedOnDate = DateTime.UtcNow,
                 IsDeleted = false
             };
 
@@ -22,7 +22,7 @@ namespace CleanArchitecture.Persistence.Configuration
             {
                 Id = 2,
                 Name = faker.Commerce.Department(),
-                AddedOnDate = DateTime.Now,
+                AddedOnDate = DateTime.UtcNow,
                 IsDeleted = true
             };
 
@@ -30,7 +30,7 @@ namespace CleanArchitecture.Persistence.Configuration
             {
                 Id = 3,
                 Name = faker.Commerce.Department(),
-                AddedOnDate = DateTime.Now,
+                AddedOnDate = DateTime.UtcNow,
                 IsDeleted = false
             };
 

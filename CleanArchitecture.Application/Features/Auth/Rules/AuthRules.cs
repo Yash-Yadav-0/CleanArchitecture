@@ -17,19 +17,19 @@ namespace CleanArchitecture.Application.Features.Auth.Rules
         public Task EmailOrPasswordShouldnotbeInvalidAsync(User user, bool checkPassword)
         {
             if (user is null || !checkPassword)
-                throw new EmailOrPasswordShouldnotbeInvalidException("This User has registered before, use another Values");
+                throw new EmailOrPasswordShouldnotbeInvalidException("Password invalid or wrong Password, Or user not found.");
             return Task.CompletedTask;
         }
         public Task RefreshTokenExpiryTimeShouldnotbeExpiredAsync(DateTime? RefreshTokenExpiryTime)
         {
-            if (RefreshTokenExpiryTime < DateTime.Now)
+            if (RefreshTokenExpiryTime < DateTime.UtcNow)
                 throw new RefreshTokenExpiryTimeShouldnotbeExpiredAsyncException();
             return Task.CompletedTask;
         }
         public Task EmailShouldnotbeInvalidAsync(User user)
         {
             if (user is null)
-                throw new EmailShouldnotbeInvalidException("This User has registered before, use another Values");
+                throw new EmailShouldnotbeInvalidException("This User has registered before, use another Values , or invalid email");
             return Task.CompletedTask;
         }
         public Task EmailShouldBeConfirmedAsync(IdentityResult identityResult)
@@ -47,7 +47,7 @@ namespace CleanArchitecture.Application.Features.Auth.Rules
         public Task UserShouldBeFoundAsync(User user)
         {
             if (user is null)
-                throw new UserShouldBeFoundException("User isn`t exist");
+                throw new UserShouldBeFoundException("User doesn`t exist");
             return Task.CompletedTask;
         }
 

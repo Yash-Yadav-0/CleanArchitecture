@@ -10,6 +10,7 @@ using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.Extensions.DependencyInjection;
 using System.Globalization;
 using System.Reflection;
@@ -21,41 +22,26 @@ namespace CleanArchitecture.Application
     {
         public static void AddApplication(this IServiceCollection services)
         {
-            var assemlty = Assembly.GetExecutingAssembly();
-            services.AddMediatR
-                (
-                config => config.RegisterServicesFromAssembly(assemlty)
-                );
-
+            var assembly = Assembly.GetExecutingAssembly();
+            services.AddMediatR(config => config.RegisterServicesFromAssembly(assembly));
             services.AddTransient<ExceptionMiddleware>();
-            services.AddValidatorsFromAssembly(assemlty);
+            services.AddValidatorsFromAssembly(assembly);
 
             ValidatorOptions.Global.LanguageManager.Culture = new CultureInfo("en-US");
 
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(FluentValidationBehaviors<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RedisCacheBehaviors<,>));
 
-            #region Url
-            //services.AddHttpContextAccessor();
-
+            // Register URL helpers
             services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
-
-            services.AddScoped<UrlFactoryHelper>();
+            services.AddSingleton<IUrlHelperFactory, UrlHelperFactory>();
+            services.AddHttpContextAccessor();
 
             services.AddSingleton<EmailConfirmationCommandRequest>();
-            #endregion
-
             services.AddTransient<ProductRules>();
-
             services.AddTransient<OrderRules>();
-
             services.AddTransient<SignInManager<User>>();
-
-            services.AddRulesFromAssemblyContaining(assemlty, typeof(BaseRule));
-
-            //services.AddControllers()
-            //            .AddJsonOptions(config =>
-            //                config.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
+            services.AddRulesFromAssemblyContaining(assembly, typeof(BaseRule));
         }
         public static IServiceCollection AddRulesFromAssemblyContaining(this IServiceCollection services, Assembly assembly, Type type)
         {

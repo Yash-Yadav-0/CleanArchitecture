@@ -26,7 +26,7 @@ namespace CleanArchitecture.Infrastructure.RedisCache
         }
         public async Task SetAsync<T>(string key, T value, DateTime? expirationTime)
         {
-            TimeSpan expirationTimeUnit = expirationTime.Value - DateTime.Now;
+            TimeSpan expirationTimeUnit = expirationTime.Value - DateTime.UtcNow;
 
             await database.StringSetAsync(key, JsonConvert.SerializeObject(value), expirationTimeUnit);
         }

@@ -37,7 +37,7 @@ namespace CleanArchitecture.Infrastructure.Storage
         {
             if (!Directory.Exists($"{_wwwroot}/{FolderPath}/{folderName}"))
                 Directory.CreateDirectory($"{_wwwroot}/{FolderPath}/{folderName}");
-            DateTime DateOfCreation = DateTime.Now;
+            DateTime DateOfCreation = DateTime.UtcNow;
 
             string FileExtention = Path.GetExtension(file.FileName);
 
@@ -57,7 +57,7 @@ namespace CleanArchitecture.Infrastructure.Storage
         {
             if (!Directory.Exists($"{_wwwroot}/{FolderPath}/{folderName}"))
                 Directory.CreateDirectory($"{_wwwroot}/{FolderPath}/{folderName}");
-            DateTime DateOfCreation = DateTime.Now;
+            DateTime DateOfCreation = DateTime.UtcNow;
 
             List<(string FilesName, string Path)> ListOfImages = new();
 

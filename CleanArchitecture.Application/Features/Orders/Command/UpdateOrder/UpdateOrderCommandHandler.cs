@@ -52,7 +52,7 @@ namespace CleanArchitecture.Application.Features.Orders.Command.UpdateOrder
 
             orderObject.UserId = oldOrder.UserId;
 
-            orderObject.UpdatedDate = DateTime.Now;
+            orderObject.UpdatedDate = DateTime.UtcNow;
 
             orderObject.AddedOnDate = oldOrder.AddedOnDate;
 

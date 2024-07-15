@@ -9,7 +9,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CleanArchitecture.Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class firstMigration : Migration
+    public partial class initialDb : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -346,7 +346,7 @@ namespace CleanArchitecture.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ProductsCategories",
+                name: "productsCategories",
                 columns: table => new
                 {
                     ProductId = table.Column<int>(type: "integer", nullable: false),
@@ -354,15 +354,15 @@ namespace CleanArchitecture.Persistence.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ProductsCategories", x => new { x.ProductId, x.CategoryId });
+                    table.PrimaryKey("PK_productsCategories", x => new { x.ProductId, x.CategoryId });
                     table.ForeignKey(
-                        name: "FK_ProductsCategories_categories_CategoryId",
+                        name: "FK_productsCategories_categories_CategoryId",
                         column: x => x.CategoryId,
                         principalTable: "categories",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ProductsCategories_products_ProductId",
+                        name: "FK_productsCategories_products_ProductId",
                         column: x => x.ProductId,
                         principalTable: "products",
                         principalColumn: "Id",
@@ -403,8 +403,8 @@ namespace CleanArchitecture.Persistence.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { new Guid("6bc46fb9-4bfc-43b7-bb67-33d826b256da"), "3cb3de80-cb6c-4f7c-8487-7db48167ad4a", "User", "USER" },
-                    { new Guid("dcee95f0-adc4-4d2f-b11f-4e8746cfbcad"), "13aaef8a-f9a1-4a05-9334-56fd3a59bb2b", "Admin", "ADMIN" }
+                    { new Guid("ea4d7a20-bd4f-43cb-8377-9127308e8bac"), "d5238fdd-42e5-4ee6-9c28-7d5895b7e529", "Admin", "ADMIN" },
+                    { new Guid("fe7df93a-d50c-4920-a4eb-21d1d2b3f437"), "0726768a-dbba-4606-98a7-398028b11953", "User", "USER" }
                 });
 
             migrationBuilder.InsertData(
@@ -412,9 +412,9 @@ namespace CleanArchitecture.Persistence.Migrations
                 columns: new[] { "Id", "AddedOnDate", "DeletedDate", "IsDeleted", "Name", "Picture", "UpdatedDate" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2024, 7, 12, 15, 3, 6, 245, DateTimeKind.Local).AddTicks(9551), new DateTime(2024, 7, 12, 15, 3, 6, 245, DateTimeKind.Local).AddTicks(9506), false, "Toys", null, new DateTime(2024, 7, 12, 15, 3, 6, 245, DateTimeKind.Local).AddTicks(9505) },
-                    { 2, new DateTime(2024, 7, 12, 15, 3, 6, 245, DateTimeKind.Local).AddTicks(9596), new DateTime(2024, 7, 12, 15, 3, 6, 245, DateTimeKind.Local).AddTicks(9554), true, "Clothing & Shoes", null, new DateTime(2024, 7, 12, 15, 3, 6, 245, DateTimeKind.Local).AddTicks(9553) },
-                    { 3, new DateTime(2024, 7, 12, 15, 3, 6, 245, DateTimeKind.Local).AddTicks(9615), new DateTime(2024, 7, 12, 15, 3, 6, 245, DateTimeKind.Local).AddTicks(9598), false, "Electronics, Health & Outdoors", null, new DateTime(2024, 7, 12, 15, 3, 6, 245, DateTimeKind.Local).AddTicks(9597) }
+                    { 1, new DateTime(2024, 7, 15, 4, 9, 8, 197, DateTimeKind.Utc).AddTicks(6632), new DateTime(2024, 7, 15, 4, 9, 8, 197, DateTimeKind.Utc).AddTicks(6586), false, "Books", null, new DateTime(2024, 7, 15, 4, 9, 8, 197, DateTimeKind.Utc).AddTicks(6585) },
+                    { 2, new DateTime(2024, 7, 15, 4, 9, 8, 197, DateTimeKind.Utc).AddTicks(6684), new DateTime(2024, 7, 15, 4, 9, 8, 197, DateTimeKind.Utc).AddTicks(6634), true, "Movies, Jewelery & Industrial", null, new DateTime(2024, 7, 15, 4, 9, 8, 197, DateTimeKind.Utc).AddTicks(6634) },
+                    { 3, new DateTime(2024, 7, 15, 4, 9, 8, 197, DateTimeKind.Utc).AddTicks(6696), new DateTime(2024, 7, 15, 4, 9, 8, 197, DateTimeKind.Utc).AddTicks(6685), false, "Garden & Jewelery", null, new DateTime(2024, 7, 15, 4, 9, 8, 197, DateTimeKind.Utc).AddTicks(6685) }
                 });
 
             migrationBuilder.InsertData(
@@ -422,10 +422,10 @@ namespace CleanArchitecture.Persistence.Migrations
                 columns: new[] { "Id", "AddedOnDate", "DeletedDate", "IsDeleted", "Name", "ParentId", "Priorty", "UpdatedDate" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2024, 7, 12, 15, 3, 6, 247, DateTimeKind.Local).AddTicks(7815), new DateTime(2024, 7, 12, 15, 3, 6, 247, DateTimeKind.Local).AddTicks(7811), false, "Electric", 0, 1, new DateTime(2024, 7, 12, 15, 3, 6, 247, DateTimeKind.Local).AddTicks(7811) },
-                    { 2, new DateTime(2024, 7, 12, 15, 3, 6, 247, DateTimeKind.Local).AddTicks(7818), new DateTime(2024, 7, 12, 15, 3, 6, 247, DateTimeKind.Local).AddTicks(7816), false, "ElModa", 0, 2, new DateTime(2024, 7, 12, 15, 3, 6, 247, DateTimeKind.Local).AddTicks(7816) },
-                    { 3, new DateTime(2024, 7, 12, 15, 3, 6, 247, DateTimeKind.Local).AddTicks(7820), new DateTime(2024, 7, 12, 15, 3, 6, 247, DateTimeKind.Local).AddTicks(7819), false, "Computer", 1, 1, new DateTime(2024, 7, 12, 15, 3, 6, 247, DateTimeKind.Local).AddTicks(7818) },
-                    { 4, new DateTime(2024, 7, 12, 15, 3, 6, 247, DateTimeKind.Local).AddTicks(7822), new DateTime(2024, 7, 12, 15, 3, 6, 247, DateTimeKind.Local).AddTicks(7821), false, "Women", 2, 1, new DateTime(2024, 7, 12, 15, 3, 6, 247, DateTimeKind.Local).AddTicks(7821) }
+                    { 1, new DateTime(2024, 7, 15, 4, 9, 8, 199, DateTimeKind.Utc).AddTicks(6260), new DateTime(2024, 7, 15, 4, 9, 8, 199, DateTimeKind.Utc).AddTicks(6256), false, "Electric", 0, 1, new DateTime(2024, 7, 15, 4, 9, 8, 199, DateTimeKind.Utc).AddTicks(6256) },
+                    { 2, new DateTime(2024, 7, 15, 4, 9, 8, 199, DateTimeKind.Utc).AddTicks(6262), new DateTime(2024, 7, 15, 4, 9, 8, 199, DateTimeKind.Utc).AddTicks(6261), false, "ElModa", 0, 2, new DateTime(2024, 7, 15, 4, 9, 8, 199, DateTimeKind.Utc).AddTicks(6261) },
+                    { 3, new DateTime(2024, 7, 15, 4, 9, 8, 199, DateTimeKind.Utc).AddTicks(6264), new DateTime(2024, 7, 15, 4, 9, 8, 199, DateTimeKind.Utc).AddTicks(6263), false, "Computer", 1, 1, new DateTime(2024, 7, 15, 4, 9, 8, 199, DateTimeKind.Utc).AddTicks(6263) },
+                    { 4, new DateTime(2024, 7, 15, 4, 9, 8, 199, DateTimeKind.Utc).AddTicks(6266), new DateTime(2024, 7, 15, 4, 9, 8, 199, DateTimeKind.Utc).AddTicks(6265), false, "Women", 2, 1, new DateTime(2024, 7, 15, 4, 9, 8, 199, DateTimeKind.Utc).AddTicks(6265) }
                 });
 
             migrationBuilder.InsertData(
@@ -433,9 +433,9 @@ namespace CleanArchitecture.Persistence.Migrations
                 columns: new[] { "Id", "AddedOnDate", "CategoryId", "DeletedDate", "Description", "IsDeleted", "Title", "UpdatedDate" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2024, 7, 12, 15, 3, 6, 249, DateTimeKind.Local).AddTicks(5193), 1, new DateTime(2024, 7, 12, 15, 3, 6, 249, DateTimeKind.Local).AddTicks(5085), "Neque ut iure itaque ullam.", false, "Magnam.", new DateTime(2024, 7, 12, 15, 3, 6, 249, DateTimeKind.Local).AddTicks(5085) },
-                    { 2, new DateTime(2024, 7, 12, 15, 3, 6, 249, DateTimeKind.Local).AddTicks(5226), 3, new DateTime(2024, 7, 12, 15, 3, 6, 249, DateTimeKind.Local).AddTicks(5196), "Quis dicta omnis libero eligendi.", true, "Praesentium dolorum.", new DateTime(2024, 7, 12, 15, 3, 6, 249, DateTimeKind.Local).AddTicks(5196) },
-                    { 3, new DateTime(2024, 7, 12, 15, 3, 6, 249, DateTimeKind.Local).AddTicks(5252), 4, new DateTime(2024, 7, 12, 15, 3, 6, 249, DateTimeKind.Local).AddTicks(5227), "Aut et sapiente itaque consequatur.", false, "Porro.", new DateTime(2024, 7, 12, 15, 3, 6, 249, DateTimeKind.Local).AddTicks(5227) }
+                    { 1, new DateTime(2024, 7, 15, 4, 9, 8, 201, DateTimeKind.Utc).AddTicks(5790), 1, new DateTime(2024, 7, 15, 4, 9, 8, 201, DateTimeKind.Utc).AddTicks(5655), "Enim sed et debitis voluptatibus.", false, "Dolore.", new DateTime(2024, 7, 15, 4, 9, 8, 201, DateTimeKind.Utc).AddTicks(5654) },
+                    { 2, new DateTime(2024, 7, 15, 4, 9, 8, 201, DateTimeKind.Utc).AddTicks(5868), 3, new DateTime(2024, 7, 15, 4, 9, 8, 201, DateTimeKind.Utc).AddTicks(5792), "Quis veritatis et iusto perferendis.", true, "Illo earum.", new DateTime(2024, 7, 15, 4, 9, 8, 201, DateTimeKind.Utc).AddTicks(5792) },
+                    { 3, new DateTime(2024, 7, 15, 4, 9, 8, 201, DateTimeKind.Utc).AddTicks(5896), 4, new DateTime(2024, 7, 15, 4, 9, 8, 201, DateTimeKind.Utc).AddTicks(5869), "Eius mollitia labore architecto incidunt.", false, "Aut.", new DateTime(2024, 7, 15, 4, 9, 8, 201, DateTimeKind.Utc).AddTicks(5869) }
                 });
 
             migrationBuilder.InsertData(
@@ -443,9 +443,9 @@ namespace CleanArchitecture.Persistence.Migrations
                 columns: new[] { "Id", "AddedOnDate", "BrandId", "DeletedDate", "Description", "Discount", "IsDeleted", "Price", "Title", "UpdatedDate" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2024, 7, 12, 15, 3, 6, 251, DateTimeKind.Local).AddTicks(3474), 1, new DateTime(2024, 7, 12, 15, 3, 6, 251, DateTimeKind.Local).AddTicks(3354), "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016", 29.996417299287680m, false, 1973.37m, "Unbranded Concrete Salad", new DateTime(2024, 7, 12, 15, 3, 6, 251, DateTimeKind.Local).AddTicks(3353) },
-                    { 2, new DateTime(2024, 7, 12, 15, 3, 6, 251, DateTimeKind.Local).AddTicks(3498), 1, new DateTime(2024, 7, 12, 15, 3, 6, 251, DateTimeKind.Local).AddTicks(3476), "The Football Is Good For Training And Recreational Purposes", 15.429767683295960m, false, 676.27m, "Ergonomic Fresh Chips", new DateTime(2024, 7, 12, 15, 3, 6, 251, DateTimeKind.Local).AddTicks(3476) },
-                    { 3, new DateTime(2024, 7, 12, 15, 3, 6, 251, DateTimeKind.Local).AddTicks(3523), 3, new DateTime(2024, 7, 12, 15, 3, 6, 251, DateTimeKind.Local).AddTicks(3500), "Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support", 36.757328322690240m, true, 944.12m, "Incredible Rubber Fish", new DateTime(2024, 7, 12, 15, 3, 6, 251, DateTimeKind.Local).AddTicks(3499) }
+                    { 1, new DateTime(2024, 7, 15, 4, 9, 8, 204, DateTimeKind.Utc).AddTicks(1905), 1, new DateTime(2024, 7, 15, 4, 9, 8, 204, DateTimeKind.Utc).AddTicks(1765), "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive", 40.421912349796320m, false, 1982.15m, "Ergonomic Granite Keyboard", new DateTime(2024, 7, 15, 4, 9, 8, 204, DateTimeKind.Utc).AddTicks(1765) },
+                    { 2, new DateTime(2024, 7, 15, 4, 9, 8, 204, DateTimeKind.Utc).AddTicks(1932), 1, new DateTime(2024, 7, 15, 4, 9, 8, 204, DateTimeKind.Utc).AddTicks(1908), "The Football Is Good For Training And Recreational Purposes", 40.879096004844680m, false, 1389.95m, "Gorgeous Metal Chicken", new DateTime(2024, 7, 15, 4, 9, 8, 204, DateTimeKind.Utc).AddTicks(1907) },
+                    { 3, new DateTime(2024, 7, 15, 4, 9, 8, 204, DateTimeKind.Utc).AddTicks(1950), 3, new DateTime(2024, 7, 15, 4, 9, 8, 204, DateTimeKind.Utc).AddTicks(1933), "The Football Is Good For Training And Recreational Purposes", 12.3628725804131680m, true, 1993.91m, "Incredible Steel Cheese", new DateTime(2024, 7, 15, 4, 9, 8, 204, DateTimeKind.Utc).AddTicks(1933) }
                 });
 
             migrationBuilder.CreateIndex(
@@ -511,8 +511,8 @@ namespace CleanArchitecture.Persistence.Migrations
                 column: "BrandId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProductsCategories_CategoryId",
-                table: "ProductsCategories",
+                name: "IX_productsCategories_CategoryId",
+                table: "productsCategories",
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
@@ -557,7 +557,7 @@ namespace CleanArchitecture.Persistence.Migrations
                 name: "orderProducts");
 
             migrationBuilder.DropTable(
-                name: "ProductsCategories");
+                name: "productsCategories");
 
             migrationBuilder.DropTable(
                 name: "ratings");

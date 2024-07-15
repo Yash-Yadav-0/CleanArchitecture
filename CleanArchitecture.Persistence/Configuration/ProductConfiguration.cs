@@ -23,7 +23,7 @@ namespace CleanArchitecture.Persistence.Configuration
                 Description = faker.Commerce.ProductDescription(),
                 Price = faker.Finance.Amount(50, 2000),
                 Discount = faker.Random.Decimal(10, 50),
-                AddedOnDate = DateTime.Now,
+                AddedOnDate = DateTime.UtcNow,
                 IsDeleted = false,
                 BrandId = 1
             };
@@ -34,7 +34,7 @@ namespace CleanArchitecture.Persistence.Configuration
                 Description = faker.Commerce.ProductDescription(),
                 Price = faker.Finance.Amount(50, 2000),
                 Discount = faker.Random.Decimal(10, 50),
-                AddedOnDate = DateTime.Now,
+                AddedOnDate = DateTime.UtcNow,
                 IsDeleted = false,
                 BrandId = 1
             };
@@ -45,7 +45,7 @@ namespace CleanArchitecture.Persistence.Configuration
                 Description = faker.Commerce.ProductDescription(),
                 Price = faker.Finance.Amount(50, 2000),
                 Discount = faker.Random.Decimal(10, 50),
-                AddedOnDate = DateTime.Now,
+                AddedOnDate = DateTime.UtcNow,
                 IsDeleted = true,
                 BrandId = 3
             };

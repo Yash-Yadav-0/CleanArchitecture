@@ -25,7 +25,7 @@ namespace CleanArchitecture.Application.Features.Orders.Comments.DeleteOrder
             await orderRules.TheSameUserForTheSameOrder(order.UserId, Guid.Parse(UserId));
 
             order.IsDeleted = true;
-            order.DeletedDate = DateTime.Now;
+            order.DeletedDate = DateTime.UtcNow;
 
             await UnitOfWork.writeRepository<Order>().UpdateAsync(request.Id, order);
             await UnitOfWork.SaveChangeAsync();

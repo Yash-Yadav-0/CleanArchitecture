@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
 using MimeKit;
 using MailKit.Net.Smtp;
+using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CleanArchitecture.Infrastructure.Mail
 {
@@ -11,53 +13,47 @@ namespace CleanArchitecture.Infrastructure.Mail
         private readonly MailSettings mailSettings;
         public MailService(IOptions<MailSettings> configuration)
         {
-            this.mailSettings = configuration.Value;
+            mailSettings = configuration.Value;
         }
         public async Task SendMessageAsync(string to, string subject, string body, IFormFileCollection? files = null)
         {
-            await SendMessageAsync(new string[] { to }, subject, body, files);
+            await SendMessageAsync(new List<string> { to }, subject, body, files);
         }
         public async Task SendMessageAsync(IList<string> tos, string subject, string body, IFormFileCollection? files = null)
         {
-            MimeMessage email = new MimeMessage()
-            {
-                Sender = MailboxAddress.Parse(mailSettings.Email),
-                Subject = subject,
-            };
+            MimeMessage email = new MimeMessage();
+            email.From.Add(MailboxAddress.Parse(mailSettings.Email));
             foreach (var emailTo in tos)
             {
                 email.To.Add(MailboxAddress.Parse(emailTo));
             }
+            email.Subject = subject;
 
-            BodyBuilder bodyOfMessage = new BodyBuilder();
+            BodyBuilder bodyBuilder = new BodyBuilder();
+            bodyBuilder.HtmlBody = body;
 
             if (files?.Count > 0)
             {
                 foreach (var file in files)
                 {
-                    byte[] DataOfFiles;
-                    if (file.Length > 0)
+                    using (var memoryStream = new MemoryStream())
                     {
-                        await using var memStream = new MemoryStream();
-                        await file.CopyToAsync(memStream);
-                        DataOfFiles = memStream.ToArray();
-                        bodyOfMessage.Attachments.Add(file.FileName, DataOfFiles, ContentType.Parse(file.ContentType));
+                        await file.CopyToAsync(memoryStream);
+                        bodyBuilder.Attachments.Add(file.FileName, memoryStream.ToArray(), ContentType.Parse(file.ContentType));
                     }
                 }
-
             }
 
-            bodyOfMessage.HtmlBody = body;
+            email.Body = bodyBuilder.ToMessageBody();
 
-            email.Body = bodyOfMessage.ToMessageBody();
-            email.From.Add(new MailboxAddress(mailSettings.DisplayName, mailSettings.Email));
-
-            using var smtp = new SmtpClient();
-            smtp.Connect(mailSettings.Host, mailSettings.Port, SecureSocketOptions.StartTls);
-            smtp.Authenticate(mailSettings.Email, mailSettings.Password);
-            await smtp.SendAsync(email);
-
-            smtp.Disconnect(true);
+            using (var smtpClient = new SmtpClient())
+            {
+                await smtpClient.ConnectAsync(mailSettings.Host, mailSettings.Port, SecureSocketOptions.StartTls);
+                await smtpClient.AuthenticateAsync(mailSettings.Email, mailSettings.Password);
+                await smtpClient.SendAsync(email);
+                await smtpClient.DisconnectAsync(true);
+            }
         }
     }
 }
+

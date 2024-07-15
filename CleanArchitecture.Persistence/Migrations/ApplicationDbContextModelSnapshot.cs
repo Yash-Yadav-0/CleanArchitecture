@@ -60,29 +60,29 @@ namespace CleanArchitecture.Persistence.Migrations
                         new
                         {
                             Id = 1,
-                            AddedOnDate = new DateTime(2024, 7, 12, 15, 3, 6, 245, DateTimeKind.Local).AddTicks(9551),
-                            DeletedDate = new DateTime(2024, 7, 12, 15, 3, 6, 245, DateTimeKind.Local).AddTicks(9506),
+                            AddedOnDate = new DateTime(2024, 7, 15, 4, 9, 8, 197, DateTimeKind.Utc).AddTicks(6632),
+                            DeletedDate = new DateTime(2024, 7, 15, 4, 9, 8, 197, DateTimeKind.Utc).AddTicks(6586),
                             IsDeleted = false,
-                            Name = "Toys",
-                            UpdatedDate = new DateTime(2024, 7, 12, 15, 3, 6, 245, DateTimeKind.Local).AddTicks(9505)
+                            Name = "Books",
+                            UpdatedDate = new DateTime(2024, 7, 15, 4, 9, 8, 197, DateTimeKind.Utc).AddTicks(6585)
                         },
                         new
                         {
                             Id = 2,
-                            AddedOnDate = new DateTime(2024, 7, 12, 15, 3, 6, 245, DateTimeKind.Local).AddTicks(9596),
-                            DeletedDate = new DateTime(2024, 7, 12, 15, 3, 6, 245, DateTimeKind.Local).AddTicks(9554),
+                            AddedOnDate = new DateTime(2024, 7, 15, 4, 9, 8, 197, DateTimeKind.Utc).AddTicks(6684),
+                            DeletedDate = new DateTime(2024, 7, 15, 4, 9, 8, 197, DateTimeKind.Utc).AddTicks(6634),
                             IsDeleted = true,
-                            Name = "Clothing & Shoes",
-                            UpdatedDate = new DateTime(2024, 7, 12, 15, 3, 6, 245, DateTimeKind.Local).AddTicks(9553)
+                            Name = "Movies, Jewelery & Industrial",
+                            UpdatedDate = new DateTime(2024, 7, 15, 4, 9, 8, 197, DateTimeKind.Utc).AddTicks(6634)
                         },
                         new
                         {
                             Id = 3,
-                            AddedOnDate = new DateTime(2024, 7, 12, 15, 3, 6, 245, DateTimeKind.Local).AddTicks(9615),
-                            DeletedDate = new DateTime(2024, 7, 12, 15, 3, 6, 245, DateTimeKind.Local).AddTicks(9598),
+                            AddedOnDate = new DateTime(2024, 7, 15, 4, 9, 8, 197, DateTimeKind.Utc).AddTicks(6696),
+                            DeletedDate = new DateTime(2024, 7, 15, 4, 9, 8, 197, DateTimeKind.Utc).AddTicks(6685),
                             IsDeleted = false,
-                            Name = "Electronics, Health & Outdoors",
-                            UpdatedDate = new DateTime(2024, 7, 12, 15, 3, 6, 245, DateTimeKind.Local).AddTicks(9597)
+                            Name = "Garden & Jewelery",
+                            UpdatedDate = new DateTime(2024, 7, 15, 4, 9, 8, 197, DateTimeKind.Utc).AddTicks(6685)
                         });
                 });
 
@@ -124,46 +124,46 @@ namespace CleanArchitecture.Persistence.Migrations
                         new
                         {
                             Id = 1,
-                            AddedOnDate = new DateTime(2024, 7, 12, 15, 3, 6, 247, DateTimeKind.Local).AddTicks(7815),
-                            DeletedDate = new DateTime(2024, 7, 12, 15, 3, 6, 247, DateTimeKind.Local).AddTicks(7811),
+                            AddedOnDate = new DateTime(2024, 7, 15, 4, 9, 8, 199, DateTimeKind.Utc).AddTicks(6260),
+                            DeletedDate = new DateTime(2024, 7, 15, 4, 9, 8, 199, DateTimeKind.Utc).AddTicks(6256),
                             IsDeleted = false,
                             Name = "Electric",
                             ParentId = 0,
                             Priorty = 1,
-                            UpdatedDate = new DateTime(2024, 7, 12, 15, 3, 6, 247, DateTimeKind.Local).AddTicks(7811)
+                            UpdatedDate = new DateTime(2024, 7, 15, 4, 9, 8, 199, DateTimeKind.Utc).AddTicks(6256)
                         },
                         new
                         {
                             Id = 2,
-                            AddedOnDate = new DateTime(2024, 7, 12, 15, 3, 6, 247, DateTimeKind.Local).AddTicks(7818),
-                            DeletedDate = new DateTime(2024, 7, 12, 15, 3, 6, 247, DateTimeKind.Local).AddTicks(7816),
+                            AddedOnDate = new DateTime(2024, 7, 15, 4, 9, 8, 199, DateTimeKind.Utc).AddTicks(6262),
+                            DeletedDate = new DateTime(2024, 7, 15, 4, 9, 8, 199, DateTimeKind.Utc).AddTicks(6261),
                             IsDeleted = false,
                             Name = "ElModa",
                             ParentId = 0,
                             Priorty = 2,
-                            UpdatedDate = new DateTime(2024, 7, 12, 15, 3, 6, 247, DateTimeKind.Local).AddTicks(7816)
+                            UpdatedDate = new DateTime(2024, 7, 15, 4, 9, 8, 199, DateTimeKind.Utc).AddTicks(6261)
                         },
                         new
                         {
                             Id = 3,
-                            AddedOnDate = new DateTime(2024, 7, 12, 15, 3, 6, 247, DateTimeKind.Local).AddTicks(7820),
-                            DeletedDate = new DateTime(2024, 7, 12, 15, 3, 6, 247, DateTimeKind.Local).AddTicks(7819),
+                            AddedOnDate = new DateTime(2024, 7, 15, 4, 9, 8, 199, DateTimeKind.Utc).AddTicks(6264),
+                            DeletedDate = new DateTime(2024, 7, 15, 4, 9, 8, 199, DateTimeKind.Utc).AddTicks(6263),
                             IsDeleted = false,
                             Name = "Computer",
                             ParentId = 1,
                             Priorty = 1,
-                            UpdatedDate = new DateTime(2024, 7, 12, 15, 3, 6, 247, DateTimeKind.Local).AddTicks(7818)
+                            UpdatedDate = new DateTime(2024, 7, 15, 4, 9, 8, 199, DateTimeKind.Utc).AddTicks(6263)
                         },
                         new
                         {
                             Id = 4,
-                            AddedOnDate = new DateTime(2024, 7, 12, 15, 3, 6, 247, DateTimeKind.Local).AddTicks(7822),
-                            DeletedDate = new DateTime(2024, 7, 12, 15, 3, 6, 247, DateTimeKind.Local).AddTicks(7821),
+                            AddedOnDate = new DateTime(2024, 7, 15, 4, 9, 8, 199, DateTimeKind.Utc).AddTicks(6266),
+                            DeletedDate = new DateTime(2024, 7, 15, 4, 9, 8, 199, DateTimeKind.Utc).AddTicks(6265),
                             IsDeleted = false,
                             Name = "Women",
                             ParentId = 2,
                             Priorty = 1,
-                            UpdatedDate = new DateTime(2024, 7, 12, 15, 3, 6, 247, DateTimeKind.Local).AddTicks(7821)
+                            UpdatedDate = new DateTime(2024, 7, 15, 4, 9, 8, 199, DateTimeKind.Utc).AddTicks(6265)
                         });
                 });
 
@@ -208,35 +208,35 @@ namespace CleanArchitecture.Persistence.Migrations
                         new
                         {
                             Id = 1,
-                            AddedOnDate = new DateTime(2024, 7, 12, 15, 3, 6, 249, DateTimeKind.Local).AddTicks(5193),
+                            AddedOnDate = new DateTime(2024, 7, 15, 4, 9, 8, 201, DateTimeKind.Utc).AddTicks(5790),
                             CategoryId = 1,
-                            DeletedDate = new DateTime(2024, 7, 12, 15, 3, 6, 249, DateTimeKind.Local).AddTicks(5085),
-                            Description = "Neque ut iure itaque ullam.",
+                            DeletedDate = new DateTime(2024, 7, 15, 4, 9, 8, 201, DateTimeKind.Utc).AddTicks(5655),
+                            Description = "Enim sed et debitis voluptatibus.",
                             IsDeleted = false,
-                            Title = "Magnam.",
-                            UpdatedDate = new DateTime(2024, 7, 12, 15, 3, 6, 249, DateTimeKind.Local).AddTicks(5085)
+                            Title = "Dolore.",
+                            UpdatedDate = new DateTime(2024, 7, 15, 4, 9, 8, 201, DateTimeKind.Utc).AddTicks(5654)
                         },
                         new
                         {
                             Id = 2,
-                            AddedOnDate = new DateTime(2024, 7, 12, 15, 3, 6, 249, DateTimeKind.Local).AddTicks(5226),
+                            AddedOnDate = new DateTime(2024, 7, 15, 4, 9, 8, 201, DateTimeKind.Utc).AddTicks(5868),
                             CategoryId = 3,
-                            DeletedDate = new DateTime(2024, 7, 12, 15, 3, 6, 249, DateTimeKind.Local).AddTicks(5196),
-                            Description = "Quis dicta omnis libero eligendi.",
+                            DeletedDate = new DateTime(2024, 7, 15, 4, 9, 8, 201, DateTimeKind.Utc).AddTicks(5792),
+                            Description = "Quis veritatis et iusto perferendis.",
                             IsDeleted = true,
-                            Title = "Praesentium dolorum.",
-                            UpdatedDate = new DateTime(2024, 7, 12, 15, 3, 6, 249, DateTimeKind.Local).AddTicks(5196)
+                            Title = "Illo earum.",
+                            UpdatedDate = new DateTime(2024, 7, 15, 4, 9, 8, 201, DateTimeKind.Utc).AddTicks(5792)
                         },
                         new
                         {
                             Id = 3,
-                            AddedOnDate = new DateTime(2024, 7, 12, 15, 3, 6, 249, DateTimeKind.Local).AddTicks(5252),
+                            AddedOnDate = new DateTime(2024, 7, 15, 4, 9, 8, 201, DateTimeKind.Utc).AddTicks(5896),
                             CategoryId = 4,
-                            DeletedDate = new DateTime(2024, 7, 12, 15, 3, 6, 249, DateTimeKind.Local).AddTicks(5227),
-                            Description = "Aut et sapiente itaque consequatur.",
+                            DeletedDate = new DateTime(2024, 7, 15, 4, 9, 8, 201, DateTimeKind.Utc).AddTicks(5869),
+                            Description = "Eius mollitia labore architecto incidunt.",
                             IsDeleted = false,
-                            Title = "Porro.",
-                            UpdatedDate = new DateTime(2024, 7, 12, 15, 3, 6, 249, DateTimeKind.Local).AddTicks(5227)
+                            Title = "Aut.",
+                            UpdatedDate = new DateTime(2024, 7, 15, 4, 9, 8, 201, DateTimeKind.Utc).AddTicks(5869)
                         });
                 });
 
@@ -390,41 +390,41 @@ namespace CleanArchitecture.Persistence.Migrations
                         new
                         {
                             Id = 1,
-                            AddedOnDate = new DateTime(2024, 7, 12, 15, 3, 6, 251, DateTimeKind.Local).AddTicks(3474),
+                            AddedOnDate = new DateTime(2024, 7, 15, 4, 9, 8, 204, DateTimeKind.Utc).AddTicks(1905),
                             BrandId = 1,
-                            DeletedDate = new DateTime(2024, 7, 12, 15, 3, 6, 251, DateTimeKind.Local).AddTicks(3354),
-                            Description = "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016",
-                            Discount = 29.996417299287680m,
+                            DeletedDate = new DateTime(2024, 7, 15, 4, 9, 8, 204, DateTimeKind.Utc).AddTicks(1765),
+                            Description = "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
+                            Discount = 40.421912349796320m,
                             IsDeleted = false,
-                            Price = 1973.37m,
-                            Title = "Unbranded Concrete Salad",
-                            UpdatedDate = new DateTime(2024, 7, 12, 15, 3, 6, 251, DateTimeKind.Local).AddTicks(3353)
+                            Price = 1982.15m,
+                            Title = "Ergonomic Granite Keyboard",
+                            UpdatedDate = new DateTime(2024, 7, 15, 4, 9, 8, 204, DateTimeKind.Utc).AddTicks(1765)
                         },
                         new
                         {
                             Id = 2,
-                            AddedOnDate = new DateTime(2024, 7, 12, 15, 3, 6, 251, DateTimeKind.Local).AddTicks(3498),
+                            AddedOnDate = new DateTime(2024, 7, 15, 4, 9, 8, 204, DateTimeKind.Utc).AddTicks(1932),
                             BrandId = 1,
-                            DeletedDate = new DateTime(2024, 7, 12, 15, 3, 6, 251, DateTimeKind.Local).AddTicks(3476),
+                            DeletedDate = new DateTime(2024, 7, 15, 4, 9, 8, 204, DateTimeKind.Utc).AddTicks(1908),
                             Description = "The Football Is Good For Training And Recreational Purposes",
-                            Discount = 15.429767683295960m,
+                            Discount = 40.879096004844680m,
                             IsDeleted = false,
-                            Price = 676.27m,
-                            Title = "Ergonomic Fresh Chips",
-                            UpdatedDate = new DateTime(2024, 7, 12, 15, 3, 6, 251, DateTimeKind.Local).AddTicks(3476)
+                            Price = 1389.95m,
+                            Title = "Gorgeous Metal Chicken",
+                            UpdatedDate = new DateTime(2024, 7, 15, 4, 9, 8, 204, DateTimeKind.Utc).AddTicks(1907)
                         },
                         new
                         {
                             Id = 3,
-                            AddedOnDate = new DateTime(2024, 7, 12, 15, 3, 6, 251, DateTimeKind.Local).AddTicks(3523),
+                            AddedOnDate = new DateTime(2024, 7, 15, 4, 9, 8, 204, DateTimeKind.Utc).AddTicks(1950),
                             BrandId = 3,
-                            DeletedDate = new DateTime(2024, 7, 12, 15, 3, 6, 251, DateTimeKind.Local).AddTicks(3500),
-                            Description = "Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support",
-                            Discount = 36.757328322690240m,
+                            DeletedDate = new DateTime(2024, 7, 15, 4, 9, 8, 204, DateTimeKind.Utc).AddTicks(1933),
+                            Description = "The Football Is Good For Training And Recreational Purposes",
+                            Discount = 12.3628725804131680m,
                             IsDeleted = true,
-                            Price = 944.12m,
-                            Title = "Incredible Rubber Fish",
-                            UpdatedDate = new DateTime(2024, 7, 12, 15, 3, 6, 251, DateTimeKind.Local).AddTicks(3499)
+                            Price = 1993.91m,
+                            Title = "Incredible Steel Cheese",
+                            UpdatedDate = new DateTime(2024, 7, 15, 4, 9, 8, 204, DateTimeKind.Utc).AddTicks(1933)
                         });
                 });
 
@@ -440,7 +440,7 @@ namespace CleanArchitecture.Persistence.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("ProductsCategories");
+                    b.ToTable("productsCategories");
                 });
 
             modelBuilder.Entity("CleanArchitecture.Domain.Entities.ProductsOrders", b =>
@@ -521,15 +521,15 @@ namespace CleanArchitecture.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("dcee95f0-adc4-4d2f-b11f-4e8746cfbcad"),
-                            ConcurrencyStamp = "13aaef8a-f9a1-4a05-9334-56fd3a59bb2b",
+                            Id = new Guid("ea4d7a20-bd4f-43cb-8377-9127308e8bac"),
+                            ConcurrencyStamp = "d5238fdd-42e5-4ee6-9c28-7d5895b7e529",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = new Guid("6bc46fb9-4bfc-43b7-bb67-33d826b256da"),
-                            ConcurrencyStamp = "3cb3de80-cb6c-4f7c-8487-7db48167ad4a",
+                            Id = new Guid("fe7df93a-d50c-4920-a4eb-21d1d2b3f437"),
+                            ConcurrencyStamp = "0726768a-dbba-4606-98a7-398028b11953",
                             Name = "User",
                             NormalizedName = "USER"
                         });

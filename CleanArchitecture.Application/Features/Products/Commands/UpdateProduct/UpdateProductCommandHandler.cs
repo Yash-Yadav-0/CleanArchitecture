@@ -22,7 +22,7 @@ namespace CleanArchitecture.Application.Features.Products.Commands.UpdateProduct
 
             Product mapping = Mapper.Map<Product, UpdateProductCommandRequest>(request);
 
-            mapping.UpdatedDate = DateTime.Now;
+            mapping.UpdatedDate = DateTime.UtcNow;
             mapping.AddedOnDate = product.AddedOnDate;
 
             await UnitOfWork.writeRepository<ProductsCategories>().DeleteRangeAsync(_productsCategory);
