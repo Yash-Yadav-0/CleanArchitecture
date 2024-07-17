@@ -60,29 +60,29 @@ namespace CleanArchitecture.Persistence.Migrations
                         new
                         {
                             Id = 1,
-                            AddedOnDate = new DateTime(2024, 7, 15, 4, 9, 8, 197, DateTimeKind.Utc).AddTicks(6632),
-                            DeletedDate = new DateTime(2024, 7, 15, 4, 9, 8, 197, DateTimeKind.Utc).AddTicks(6586),
+                            AddedOnDate = new DateTime(2024, 7, 17, 4, 1, 7, 184, DateTimeKind.Utc).AddTicks(4004),
+                            DeletedDate = new DateTime(2024, 7, 17, 4, 1, 7, 184, DateTimeKind.Utc).AddTicks(3921),
                             IsDeleted = false,
-                            Name = "Books",
-                            UpdatedDate = new DateTime(2024, 7, 15, 4, 9, 8, 197, DateTimeKind.Utc).AddTicks(6585)
+                            Name = "Home & Automotive",
+                            UpdatedDate = new DateTime(2024, 7, 17, 4, 1, 7, 184, DateTimeKind.Utc).AddTicks(3921)
                         },
                         new
                         {
                             Id = 2,
-                            AddedOnDate = new DateTime(2024, 7, 15, 4, 9, 8, 197, DateTimeKind.Utc).AddTicks(6684),
-                            DeletedDate = new DateTime(2024, 7, 15, 4, 9, 8, 197, DateTimeKind.Utc).AddTicks(6634),
+                            AddedOnDate = new DateTime(2024, 7, 17, 4, 1, 7, 184, DateTimeKind.Utc).AddTicks(4011),
+                            DeletedDate = new DateTime(2024, 7, 17, 4, 1, 7, 184, DateTimeKind.Utc).AddTicks(4006),
                             IsDeleted = true,
-                            Name = "Movies, Jewelery & Industrial",
-                            UpdatedDate = new DateTime(2024, 7, 15, 4, 9, 8, 197, DateTimeKind.Utc).AddTicks(6634)
+                            Name = "Baby",
+                            UpdatedDate = new DateTime(2024, 7, 17, 4, 1, 7, 184, DateTimeKind.Utc).AddTicks(4006)
                         },
                         new
                         {
                             Id = 3,
-                            AddedOnDate = new DateTime(2024, 7, 15, 4, 9, 8, 197, DateTimeKind.Utc).AddTicks(6696),
-                            DeletedDate = new DateTime(2024, 7, 15, 4, 9, 8, 197, DateTimeKind.Utc).AddTicks(6685),
+                            AddedOnDate = new DateTime(2024, 7, 17, 4, 1, 7, 184, DateTimeKind.Utc).AddTicks(4028),
+                            DeletedDate = new DateTime(2024, 7, 17, 4, 1, 7, 184, DateTimeKind.Utc).AddTicks(4012),
                             IsDeleted = false,
-                            Name = "Garden & Jewelery",
-                            UpdatedDate = new DateTime(2024, 7, 15, 4, 9, 8, 197, DateTimeKind.Utc).AddTicks(6685)
+                            Name = "Health, Beauty & Sports",
+                            UpdatedDate = new DateTime(2024, 7, 17, 4, 1, 7, 184, DateTimeKind.Utc).AddTicks(4012)
                         });
                 });
 
@@ -124,46 +124,46 @@ namespace CleanArchitecture.Persistence.Migrations
                         new
                         {
                             Id = 1,
-                            AddedOnDate = new DateTime(2024, 7, 15, 4, 9, 8, 199, DateTimeKind.Utc).AddTicks(6260),
-                            DeletedDate = new DateTime(2024, 7, 15, 4, 9, 8, 199, DateTimeKind.Utc).AddTicks(6256),
+                            AddedOnDate = new DateTime(2024, 7, 17, 4, 1, 7, 186, DateTimeKind.Utc).AddTicks(3856),
+                            DeletedDate = new DateTime(2024, 7, 17, 4, 1, 7, 186, DateTimeKind.Utc).AddTicks(3849),
                             IsDeleted = false,
                             Name = "Electric",
                             ParentId = 0,
                             Priorty = 1,
-                            UpdatedDate = new DateTime(2024, 7, 15, 4, 9, 8, 199, DateTimeKind.Utc).AddTicks(6256)
+                            UpdatedDate = new DateTime(2024, 7, 17, 4, 1, 7, 186, DateTimeKind.Utc).AddTicks(3849)
                         },
                         new
                         {
                             Id = 2,
-                            AddedOnDate = new DateTime(2024, 7, 15, 4, 9, 8, 199, DateTimeKind.Utc).AddTicks(6262),
-                            DeletedDate = new DateTime(2024, 7, 15, 4, 9, 8, 199, DateTimeKind.Utc).AddTicks(6261),
+                            AddedOnDate = new DateTime(2024, 7, 17, 4, 1, 7, 186, DateTimeKind.Utc).AddTicks(3858),
+                            DeletedDate = new DateTime(2024, 7, 17, 4, 1, 7, 186, DateTimeKind.Utc).AddTicks(3857),
                             IsDeleted = false,
                             Name = "ElModa",
                             ParentId = 0,
                             Priorty = 2,
-                            UpdatedDate = new DateTime(2024, 7, 15, 4, 9, 8, 199, DateTimeKind.Utc).AddTicks(6261)
+                            UpdatedDate = new DateTime(2024, 7, 17, 4, 1, 7, 186, DateTimeKind.Utc).AddTicks(3857)
                         },
                         new
                         {
                             Id = 3,
-                            AddedOnDate = new DateTime(2024, 7, 15, 4, 9, 8, 199, DateTimeKind.Utc).AddTicks(6264),
-                            DeletedDate = new DateTime(2024, 7, 15, 4, 9, 8, 199, DateTimeKind.Utc).AddTicks(6263),
+                            AddedOnDate = new DateTime(2024, 7, 17, 4, 1, 7, 186, DateTimeKind.Utc).AddTicks(3860),
+                            DeletedDate = new DateTime(2024, 7, 17, 4, 1, 7, 186, DateTimeKind.Utc).AddTicks(3859),
                             IsDeleted = false,
                             Name = "Computer",
                             ParentId = 1,
                             Priorty = 1,
-                            UpdatedDate = new DateTime(2024, 7, 15, 4, 9, 8, 199, DateTimeKind.Utc).AddTicks(6263)
+                            UpdatedDate = new DateTime(2024, 7, 17, 4, 1, 7, 186, DateTimeKind.Utc).AddTicks(3859)
                         },
                         new
                         {
                             Id = 4,
-                            AddedOnDate = new DateTime(2024, 7, 15, 4, 9, 8, 199, DateTimeKind.Utc).AddTicks(6266),
-                            DeletedDate = new DateTime(2024, 7, 15, 4, 9, 8, 199, DateTimeKind.Utc).AddTicks(6265),
+                            AddedOnDate = new DateTime(2024, 7, 17, 4, 1, 7, 186, DateTimeKind.Utc).AddTicks(3862),
+                            DeletedDate = new DateTime(2024, 7, 17, 4, 1, 7, 186, DateTimeKind.Utc).AddTicks(3861),
                             IsDeleted = false,
                             Name = "Women",
                             ParentId = 2,
                             Priorty = 1,
-                            UpdatedDate = new DateTime(2024, 7, 15, 4, 9, 8, 199, DateTimeKind.Utc).AddTicks(6265)
+                            UpdatedDate = new DateTime(2024, 7, 17, 4, 1, 7, 186, DateTimeKind.Utc).AddTicks(3861)
                         });
                 });
 
@@ -208,35 +208,35 @@ namespace CleanArchitecture.Persistence.Migrations
                         new
                         {
                             Id = 1,
-                            AddedOnDate = new DateTime(2024, 7, 15, 4, 9, 8, 201, DateTimeKind.Utc).AddTicks(5790),
+                            AddedOnDate = new DateTime(2024, 7, 17, 4, 1, 7, 188, DateTimeKind.Utc).AddTicks(2324),
                             CategoryId = 1,
-                            DeletedDate = new DateTime(2024, 7, 15, 4, 9, 8, 201, DateTimeKind.Utc).AddTicks(5655),
-                            Description = "Enim sed et debitis voluptatibus.",
+                            DeletedDate = new DateTime(2024, 7, 17, 4, 1, 7, 188, DateTimeKind.Utc).AddTicks(2204),
+                            Description = "Assumenda rerum doloremque quis incidunt.",
                             IsDeleted = false,
-                            Title = "Dolore.",
-                            UpdatedDate = new DateTime(2024, 7, 15, 4, 9, 8, 201, DateTimeKind.Utc).AddTicks(5654)
+                            Title = "Dolorem.",
+                            UpdatedDate = new DateTime(2024, 7, 17, 4, 1, 7, 188, DateTimeKind.Utc).AddTicks(2204)
                         },
                         new
                         {
                             Id = 2,
-                            AddedOnDate = new DateTime(2024, 7, 15, 4, 9, 8, 201, DateTimeKind.Utc).AddTicks(5868),
+                            AddedOnDate = new DateTime(2024, 7, 17, 4, 1, 7, 188, DateTimeKind.Utc).AddTicks(2356),
                             CategoryId = 3,
-                            DeletedDate = new DateTime(2024, 7, 15, 4, 9, 8, 201, DateTimeKind.Utc).AddTicks(5792),
-                            Description = "Quis veritatis et iusto perferendis.",
+                            DeletedDate = new DateTime(2024, 7, 17, 4, 1, 7, 188, DateTimeKind.Utc).AddTicks(2326),
+                            Description = "Quia excepturi est laborum non.",
                             IsDeleted = true,
-                            Title = "Illo earum.",
-                            UpdatedDate = new DateTime(2024, 7, 15, 4, 9, 8, 201, DateTimeKind.Utc).AddTicks(5792)
+                            Title = "Exercitationem quod.",
+                            UpdatedDate = new DateTime(2024, 7, 17, 4, 1, 7, 188, DateTimeKind.Utc).AddTicks(2326)
                         },
                         new
                         {
                             Id = 3,
-                            AddedOnDate = new DateTime(2024, 7, 15, 4, 9, 8, 201, DateTimeKind.Utc).AddTicks(5896),
+                            AddedOnDate = new DateTime(2024, 7, 17, 4, 1, 7, 188, DateTimeKind.Utc).AddTicks(2381),
                             CategoryId = 4,
-                            DeletedDate = new DateTime(2024, 7, 15, 4, 9, 8, 201, DateTimeKind.Utc).AddTicks(5869),
-                            Description = "Eius mollitia labore architecto incidunt.",
+                            DeletedDate = new DateTime(2024, 7, 17, 4, 1, 7, 188, DateTimeKind.Utc).AddTicks(2358),
+                            Description = "Sint magnam omnis architecto maiores.",
                             IsDeleted = false,
-                            Title = "Aut.",
-                            UpdatedDate = new DateTime(2024, 7, 15, 4, 9, 8, 201, DateTimeKind.Utc).AddTicks(5869)
+                            Title = "Architecto.",
+                            UpdatedDate = new DateTime(2024, 7, 17, 4, 1, 7, 188, DateTimeKind.Utc).AddTicks(2357)
                         });
                 });
 
@@ -390,41 +390,41 @@ namespace CleanArchitecture.Persistence.Migrations
                         new
                         {
                             Id = 1,
-                            AddedOnDate = new DateTime(2024, 7, 15, 4, 9, 8, 204, DateTimeKind.Utc).AddTicks(1905),
+                            AddedOnDate = new DateTime(2024, 7, 17, 4, 1, 7, 190, DateTimeKind.Utc).AddTicks(1754),
                             BrandId = 1,
-                            DeletedDate = new DateTime(2024, 7, 15, 4, 9, 8, 204, DateTimeKind.Utc).AddTicks(1765),
-                            Description = "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
-                            Discount = 40.421912349796320m,
+                            DeletedDate = new DateTime(2024, 7, 17, 4, 1, 7, 190, DateTimeKind.Utc).AddTicks(1553),
+                            Description = "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design",
+                            Discount = 18.083372607392840m,
                             IsDeleted = false,
-                            Price = 1982.15m,
-                            Title = "Ergonomic Granite Keyboard",
-                            UpdatedDate = new DateTime(2024, 7, 15, 4, 9, 8, 204, DateTimeKind.Utc).AddTicks(1765)
+                            Price = 97.99m,
+                            Title = "Fantastic Frozen Pizza",
+                            UpdatedDate = new DateTime(2024, 7, 17, 4, 1, 7, 190, DateTimeKind.Utc).AddTicks(1553)
                         },
                         new
                         {
                             Id = 2,
-                            AddedOnDate = new DateTime(2024, 7, 15, 4, 9, 8, 204, DateTimeKind.Utc).AddTicks(1932),
+                            AddedOnDate = new DateTime(2024, 7, 17, 4, 1, 7, 190, DateTimeKind.Utc).AddTicks(1782),
                             BrandId = 1,
-                            DeletedDate = new DateTime(2024, 7, 15, 4, 9, 8, 204, DateTimeKind.Utc).AddTicks(1908),
-                            Description = "The Football Is Good For Training And Recreational Purposes",
-                            Discount = 40.879096004844680m,
+                            DeletedDate = new DateTime(2024, 7, 17, 4, 1, 7, 190, DateTimeKind.Utc).AddTicks(1756),
+                            Description = "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
+                            Discount = 36.173927615778600m,
                             IsDeleted = false,
-                            Price = 1389.95m,
-                            Title = "Gorgeous Metal Chicken",
-                            UpdatedDate = new DateTime(2024, 7, 15, 4, 9, 8, 204, DateTimeKind.Utc).AddTicks(1907)
+                            Price = 372.78m,
+                            Title = "Practical Rubber Towels",
+                            UpdatedDate = new DateTime(2024, 7, 17, 4, 1, 7, 190, DateTimeKind.Utc).AddTicks(1756)
                         },
                         new
                         {
                             Id = 3,
-                            AddedOnDate = new DateTime(2024, 7, 15, 4, 9, 8, 204, DateTimeKind.Utc).AddTicks(1950),
+                            AddedOnDate = new DateTime(2024, 7, 17, 4, 1, 7, 190, DateTimeKind.Utc).AddTicks(1803),
                             BrandId = 3,
-                            DeletedDate = new DateTime(2024, 7, 15, 4, 9, 8, 204, DateTimeKind.Utc).AddTicks(1933),
-                            Description = "The Football Is Good For Training And Recreational Purposes",
-                            Discount = 12.3628725804131680m,
+                            DeletedDate = new DateTime(2024, 7, 17, 4, 1, 7, 190, DateTimeKind.Utc).AddTicks(1783),
+                            Description = "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
+                            Discount = 19.899471559961680m,
                             IsDeleted = true,
-                            Price = 1993.91m,
-                            Title = "Incredible Steel Cheese",
-                            UpdatedDate = new DateTime(2024, 7, 15, 4, 9, 8, 204, DateTimeKind.Utc).AddTicks(1933)
+                            Price = 216.63m,
+                            Title = "Licensed Steel Gloves",
+                            UpdatedDate = new DateTime(2024, 7, 17, 4, 1, 7, 190, DateTimeKind.Utc).AddTicks(1783)
                         });
                 });
 
@@ -521,17 +521,24 @@ namespace CleanArchitecture.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("ea4d7a20-bd4f-43cb-8377-9127308e8bac"),
-                            ConcurrencyStamp = "d5238fdd-42e5-4ee6-9c28-7d5895b7e529",
+                            Id = new Guid("8ce510d6-6ae5-4571-b6a8-983c73016004"),
+                            ConcurrencyStamp = "6b2e6023-1201-497f-96a4-0db6000e8955",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = new Guid("fe7df93a-d50c-4920-a4eb-21d1d2b3f437"),
-                            ConcurrencyStamp = "0726768a-dbba-4606-98a7-398028b11953",
+                            Id = new Guid("e8787a4e-1e10-42ba-b34b-c3ee297a03b4"),
+                            ConcurrencyStamp = "075f38ae-c5fa-4ef6-ab85-d9bff844e015",
                             Name = "User",
                             NormalizedName = "USER"
+                        },
+                        new
+                        {
+                            Id = new Guid("2048c126-5303-46a3-9092-b6a3522dc89f"),
+                            ConcurrencyStamp = "325b5ce1-7e0c-40e6-b1be-638264d496c7",
+                            Name = "Vendor",
+                            NormalizedName = "VENDOR"
                         });
                 });
 
@@ -550,6 +557,11 @@ namespace CleanArchitecture.Persistence.Migrations
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("text");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasMaxLength(8)
+                        .HasColumnType("character varying(8)");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256)
@@ -620,6 +632,10 @@ namespace CleanArchitecture.Persistence.Migrations
                         .HasDatabaseName("UserNameIndex");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasDiscriminator().HasValue("User");
+
+                    b.UseTphMappingStrategy();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
@@ -723,6 +739,13 @@ namespace CleanArchitecture.Persistence.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("CleanArchitecture.Domain.Entities.Vendor", b =>
+                {
+                    b.HasBaseType("CleanArchitecture.Domain.Entities.User");
+
+                    b.HasDiscriminator().HasValue("Vendor");
                 });
 
             modelBuilder.Entity("CleanArchitecture.Domain.Entities.Details", b =>

@@ -1,58 +1,83 @@
-﻿using MailKit.Security;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Options;
-using MimeKit;
-using MailKit.Net.Smtp;
-using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using System.Net.Mail;
+using System.Net;
+using Microsoft.Extensions.Configuration;
+using Serilog;
 
 namespace CleanArchitecture.Infrastructure.Mail
 {
     public class MailService : Application.Interfaces.Mail.IMailService
     {
-        private readonly MailSettings mailSettings;
-        public MailService(IOptions<MailSettings> configuration)
-        {
-            mailSettings = configuration.Value;
-        }
-        public async Task SendMessageAsync(string to, string subject, string body, IFormFileCollection? files = null)
-        {
-            await SendMessageAsync(new List<string> { to }, subject, body, files);
-        }
-        public async Task SendMessageAsync(IList<string> tos, string subject, string body, IFormFileCollection? files = null)
-        {
-            MimeMessage email = new MimeMessage();
-            email.From.Add(MailboxAddress.Parse(mailSettings.Email));
-            foreach (var emailTo in tos)
-            {
-                email.To.Add(MailboxAddress.Parse(emailTo));
-            }
-            email.Subject = subject;
+        private readonly string _email;
+        private readonly string _password;
 
-            BodyBuilder bodyBuilder = new BodyBuilder();
-            bodyBuilder.HtmlBody = body;
-
-            if (files?.Count > 0)
+        public MailService(IConfiguration config)
+        {
+            _email = config["EmailCredentials:username"];
+            _password = config["EmailCredentials:password"];
+        }
+        public MailService()
+        {
+        }
+        public async Task SendMailAsync(string to, string subject, string body, IFormFileCollection? attachments = null)
+        {
+            try
             {
-                foreach (var file in files)
+                using (var client = new System.Net.Mail.SmtpClient("smtp.gmail.com", 587))
                 {
-                    using (var memoryStream = new MemoryStream())
+                    client.EnableSsl = true;
+                    client.Credentials = new NetworkCredential(_email, _password);
+                    client.UseDefaultCredentials = false;
+
+                    var mailMessage = new MailMessage(_email, to, subject, body);
+                    if (attachments != null)
                     {
-                        await file.CopyToAsync(memoryStream);
-                        bodyBuilder.Attachments.Add(file.FileName, memoryStream.ToArray(), ContentType.Parse(file.ContentType));
+                        foreach (var file in attachments)
+                        {
+                            using (var stream = file.OpenReadStream())
+                            {
+                                var attachment = new Attachment(stream, file.FileName);
+                                mailMessage.Attachments.Add(attachment);
+                            }
+                        }
                     }
+
+                    await client.SendMailAsync(mailMessage);
                 }
             }
-
-            email.Body = bodyBuilder.ToMessageBody();
-
-            using (var smtpClient = new SmtpClient())
+            catch (Exception ex)
             {
-                await smtpClient.ConnectAsync(mailSettings.Host, mailSettings.Port, SecureSocketOptions.StartTls);
-                await smtpClient.AuthenticateAsync(mailSettings.Email, mailSettings.Password);
-                await smtpClient.SendAsync(email);
-                await smtpClient.DisconnectAsync(true);
+                Log.Error("An error occurred while sending mail: {@Message}", ex.Message);
             }
+        }
+
+        public async Task SendMailAsync(IList<string> tos, string subject, string body, IFormFileCollection? attachments = null)
+        {
+            foreach (var to in tos)
+            {
+                await SendMailAsync(to, subject, body, attachments);
+            }
+        }
+
+        public async Task UserRegisteredEmailAsync(string email)
+        {
+            string subject = "Welcome to BuyNinja";
+            string body = "User has been registered successfully to BuyNinja!";
+            await SendMailAsync(email, subject, body);
+        }
+
+        public async Task UnAuthenticatedUserTriedToLoggInAsync(string email)
+        {
+            string subject = "Unauthenticated user login detected";
+            string body = "Unknown person trying to login to BuyNinja!";
+            await SendMailAsync(email, subject, body);
+        }
+
+        public async Task UserLoggedInEmailAsync(string email)
+        {
+            string subject = "Signed In to BuyNinja";
+            string body = "New Login to BuyNinja! Try resetting the password if it was not you.";
+            await SendMailAsync(email, subject, body);
         }
     }
 }

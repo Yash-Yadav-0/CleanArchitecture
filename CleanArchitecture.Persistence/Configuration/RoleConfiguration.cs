@@ -29,7 +29,7 @@ namespace CleanArchitecture.Persistence.Configuration
                 NormalizedName = "VENDOR",
                 ConcurrencyStamp = Guid.NewGuid().ToString()
             };
-            builder.HasData(Admin, USER);
+            builder.HasData(Admin, USER, Vendor);
         }
     }
 }

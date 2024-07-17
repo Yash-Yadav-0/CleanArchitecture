@@ -6,6 +6,8 @@ using CleanArchitecture.Application.Interfaces.UnitOfWorks;
 using CleanArchitecture.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
 
 namespace CleanArchitecture.Application.Features.Products.Commands.CreateProduct
 {
@@ -16,12 +18,15 @@ namespace CleanArchitecture.Application.Features.Products.Commands.CreateProduct
         private readonly IMapper mapper;
         private readonly IHttpContextAccessor httpContextAccessor;
         private readonly ILocalStorage localStorage;
+        private readonly UserManager<User> userManager;
 
         public CreateProductCommandHandler(IUnitOfWork unitOfWork,
                                            ProductRules productRules,
                                            IMapper mapper,
                                            IHttpContextAccessor httpContextAccessor,
+                                           UserManager<User> userManager,
                                            ILocalStorage localStorage
+
                                            )
             : base(unitOfWork, mapper, httpContextAccessor)
         {
@@ -29,10 +34,25 @@ namespace CleanArchitecture.Application.Features.Products.Commands.CreateProduct
             this.productRules = productRules;
             this.mapper = mapper;
             this.httpContextAccessor = httpContextAccessor;
+            this.userManager = userManager;
             this.localStorage = localStorage;
         }
         public async Task<Unit> Handle(CreateProductCommandRequest request, CancellationToken cancellationToken)
         {
+            var userId = httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            if (userId == null)
+            {
+                throw new UnauthorizedAccessException("User is not authenticated.");
+            }
+
+            // Find the user and check if they are in the Admin role
+            var user = await userManager.FindByIdAsync(userId);
+            if (user == null || !(await userManager.IsInRoleAsync(user, "ADMIN")))
+            {
+                throw new UnauthorizedAccessException("User does not have the required Admin role.");
+            }
+
             IList<Product> products = await UnitOfWork.readRepository<Product>().GetAllAsync();
 
             await this.productRules.ProductsTitleMustNotBeTheSame(products, request.Title);

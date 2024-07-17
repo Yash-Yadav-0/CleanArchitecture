@@ -1,9 +1,7 @@
 ﻿using CleanArchitecture.Application.Interfaces.Mail;
-using CleanArchitecture.Application.Interfaces.RedisCache;
 using CleanArchitecture.Application.Interfaces.Storage;
 using CleanArchitecture.Application.Interfaces.Tokens;
 using CleanArchitecture.Infrastructure.Mail;
-using CleanArchitecture.Infrastructure.RedisCache;
 using CleanArchitecture.Infrastructure.Storage;
 using CleanArchitecture.Infrastructure.Tokens;
 using Hangfire;
@@ -23,11 +21,7 @@ namespace CleanArchitecture.Infrastructure
             services.Configure<TokenSettings>(configuration.GetSection("JWT"));
             services.AddTransient<ITokenService, TokenService>();
 
-            services.Configure<MailSettings>(configuration.GetSection("SmtpSettings"));
             services.AddScoped<IMailService, MailService>();
-
-            services.Configure<RedisCacheSettings>(configuration.GetSection("RedisCacheSettings"));
-            services.AddTransient<IRedisCacheService, RedisCacheService>();
 
             services.AddScoped<ILocalStorage, LocalStorage>();
 

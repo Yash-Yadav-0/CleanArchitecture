@@ -1,6 +1,7 @@
 ﻿using CleanArchitecture.Api.Controllers._BaseController;
 using CleanArchitecture.Application.Features.Auth.Commands.Login;
 using CleanArchitecture.Application.Features.Auth.Commands.RefreshToken;
+using CleanArchitecture.Application.Features.Auth.Commands.ResetPassword.ConfirmResetPassword;
 using CleanArchitecture.Application.Features.Auth.Commands.ResetPassword.ISCodeForResetPassword;
 using CleanArchitecture.Application.Features.Auth.Commands.ResetPassword.SendForResetPassword;
 using CleanArchitecture.Application.Features.Auth.Commands.Revoke.RevokeForAllUsers;
@@ -43,7 +44,7 @@ namespace CleanArchitecture.Api.Controllers
         }
 
         [HttpPut("ResetPassword")]
-        public async Task<IActionResult> ResetPassword(ISCodeForResetPasswordCommandRequest request)
+        public async Task<IActionResult> ResetPassword(ConfirmResetPasswordCommandRequest request)
         {
             return Ok(await mediator.Send(request));
         }

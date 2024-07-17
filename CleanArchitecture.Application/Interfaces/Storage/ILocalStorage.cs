@@ -6,7 +6,7 @@ namespace CleanArchitecture.Application.Interfaces.Storage
     {
         Task<(string FileName, string Path)> UploadAsync(int id, string folderName, IFormFile file);
         Task<IList<(string FilesName, string Path)>> UploadManyAsync(int id, string folderName, IFormFileCollection files);
-        Task DeleteAsync(string Path, string fileName);
-        IList<string> GetFile(string Path);
+        Task DeleteAsync(string path, string fileName);
+        IList<string> GetFile(string path);
     }
 }

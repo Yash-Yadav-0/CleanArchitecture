@@ -1,9 +1,8 @@
-﻿using CleanArchitecture.Application.Interfaces.RedisCache;
-using MediatR;
+﻿using MediatR;
 
 namespace CleanArchitecture.Application.Features.Orders.Queries.GetAllOrders
 {
-    public class GetAllOrdersQueryRequest : IRequest<IList<GetAllOrdersQueryResponse>>, ICacheableQuery
+    public class GetAllOrdersQueryRequest : IRequest<IList<GetAllOrdersQueryResponse>>
     {
         public string CacheKey => "GetAllOrders";
         public double CacheTime => 6;

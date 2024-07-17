@@ -8,6 +8,7 @@ using CleanArchitecture.Application.Middlewares.ExceptionMiddleware;
 using CleanArchitecture.Domain.Entities;
 using FluentValidation;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc.Routing;
@@ -30,11 +31,12 @@ namespace CleanArchitecture.Application
             ValidatorOptions.Global.LanguageManager.Culture = new CultureInfo("en-US");
 
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(FluentValidationBehaviors<,>));
-            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RedisCacheBehaviors<,>));
 
             // Register URL helpers
             services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
-            services.AddSingleton<IUrlHelperFactory, UrlHelperFactory>();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddHttpContextAccessor();
+            services.AddSingleton<LinkGeneratorHelper>();
             services.AddHttpContextAccessor();
 
             services.AddSingleton<EmailConfirmationCommandRequest>();

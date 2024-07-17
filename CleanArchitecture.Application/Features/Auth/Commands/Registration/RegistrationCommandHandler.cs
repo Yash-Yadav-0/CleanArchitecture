@@ -8,6 +8,7 @@ using CleanArchitecture.Application.Interfaces.Mail;
 using CleanArchitecture.Application.Interfaces.Storage;
 using CleanArchitecture.Application.Interfaces.UnitOfWorks;
 using CleanArchitecture.Domain.Entities;
+using DocumentFormat.OpenXml.Wordprocessing;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -15,13 +16,14 @@ using Microsoft.AspNetCore.Mvc;
 
 public class RegistrationCommandHandler : BaseHandler, IRequestHandler<RegistrationCommandRequest, Unit>
 {
-    private readonly IUnitOfWork unitOfWork;
-    private readonly IMapper mapper;
-    private readonly IHttpContextAccessor httpContextAccessor;
-    private readonly IMailService mailService;
-    private readonly UrlFactoryHelper urlFactoryHelper;
-    private readonly EmailConfirmationCommandRequest emailConfirmationCommandRequest;
-    private readonly ILocalStorage localStorage;
+    private readonly IUnitOfWork _unitOfWork;
+    private readonly IMapper _mapper;
+    private readonly IHttpContextAccessor _httpContextAccessor;
+    private readonly IMailService _mailService;
+    private readonly LinkGeneratorHelper _linkGeneratorHelper;
+    private readonly EmailConfirmationCommandRequest _emailConfirmationCommandRequest;
+    private readonly ILocalStorage _localStorage;
+    private readonly IUrlHelper urlHelper;
 
     public UserManager<User> UserManager { get; }
     public RoleManager<Role> RoleManager { get; }
@@ -34,21 +36,21 @@ public class RegistrationCommandHandler : BaseHandler, IRequestHandler<Registrat
                                       RoleManager<Role> roleManager,
                                       AuthRules authRules,
                                       IMailService mailService,
-                                      UrlFactoryHelper urlFactoryHelper,
+                                      LinkGeneratorHelper linkGeneratorHelper,
                                       EmailConfirmationCommandRequest emailConfirmationCommandRequest,
                                       ILocalStorage localStorage)
         : base(unitOfWork, mapper, httpContextAccessor)
     {
-        this.unitOfWork = unitOfWork;
-        this.mapper = mapper;
-        this.httpContextAccessor = httpContextAccessor;
+        _unitOfWork = unitOfWork;
+        _mapper = mapper;
+        _httpContextAccessor = httpContextAccessor;
         UserManager = userManager;
         RoleManager = roleManager;
         AuthRules = authRules;
-        this.mailService = mailService;
-        this.urlFactoryHelper = urlFactoryHelper;
-        this.emailConfirmationCommandRequest = emailConfirmationCommandRequest;
-        this.localStorage = localStorage;
+        _mailService = mailService;
+        _linkGeneratorHelper = linkGeneratorHelper;
+        _emailConfirmationCommandRequest = emailConfirmationCommandRequest;
+        _localStorage = localStorage;
     }
 
     public async Task<Unit> Handle(RegistrationCommandRequest request, CancellationToken cancellationToken)
@@ -58,16 +60,18 @@ public class RegistrationCommandHandler : BaseHandler, IRequestHandler<Registrat
         user.UserName = request.Email;
         user.SecurityStamp = Guid.NewGuid().ToString();
         IdentityResult result = await UserManager.CreateAsync(user, request.Password);
-        bool isSent = await EmailConfirmationDTOAsync(user);
+
+
+        /*bool isSent = await EmailConfirmationDTOAsync(user);
         if (!isSent)
         {
             await UserManager.DeleteAsync(user);
             await UserManager.UpdateAsync(user);
             await AuthRules.NoMistakeShouldHappenWhileEmailConfirmationAsync(isSent);
-        }
+        }*/
         if (result.Succeeded)
         {
-            if (!await RoleManager.RoleExistsAsync("user"))
+            if (await RoleManager.RoleExistsAsync("USER"))
             {
                 await RoleManager.CreateAsync(new Role
                 {
@@ -77,54 +81,33 @@ public class RegistrationCommandHandler : BaseHandler, IRequestHandler<Registrat
                     ConcurrencyStamp = Guid.NewGuid().ToString(),
                 });
             }
+            await UserManager.AddToRoleAsync(user, "USER");
             if (request.Image is not null)
             {
-                var photo = await localStorage.UploadAsync(1, "Users", request.Image);
+                var photo = await _localStorage.UploadAsync(1, "Users", request.Image);
                 user.Picture = photo.Path;
                 await UserManager.UpdateAsync(user);
             }
         }
+        string emailBody = GenerateEmailBody(user.UserName);
+        await _mailService.SendMailAsync(user.Email,"Success Registering",emailBody);
 
         return Unit.Value;
     }
-
-    private async Task<bool> EmailConfirmationDTOAsync(User user)
+    static string GenerateEmailBody(string userName)
     {
-        var token = await UserManager.GenerateEmailConfirmationTokenAsync(user);
-        var encodedToken = EncoderHelper.UrlEncoder(token);
-
-        emailConfirmationCommandRequest.Email = user.Email;
-        emailConfirmationCommandRequest.Token = encodedToken;
-
-        var request = httpContextAccessor.HttpContext.Request;
-        IUrlHelper? urlHelper = urlFactoryHelper.CreateUrlHelper();
-
-        // For debugging: Log or inspect the URL components
-        Console.WriteLine($"Scheme: {request.Scheme}, Host: {request.Host}");
-
-        // Simplified URL generation for testing
-        var confirmationLink = urlHelper.Action(
-            "EmailConfirmation",
-            "Auth",
-            new { email = emailConfirmationCommandRequest.Email, token = emailConfirmationCommandRequest.Token },
-            request.Scheme,
-            request.Host.ToString()
-        );
-        Console.WriteLine($"Confirmation Link: {confirmationLink}");
-
-        if (string.IsNullOrEmpty(confirmationLink))
-        {
-            return false;
-        }
-
-        // Html body
-        string emailBody = Message(user.FullName, confirmationLink);
-
-        await mailService.SendMessageAsync(user.Email, "Email Activation", emailBody);
-        return true;
+        return $@"
+        <html>
+        <body>
+            <p>Dear {userName},</p>
+            <p>You have registered on Our Website : CleanArchitecture</p>
+            <p>Thank you!!</p>
+        </body>
+        </html>";
     }
 
-    private string Message(string name, string confirmationLink)
+
+    private string MessageBody(string name, string confirmationLink)
     {
         string emailBody = $@"
 <html>
@@ -152,4 +135,3 @@ public class RegistrationCommandHandler : BaseHandler, IRequestHandler<Registrat
         return emailBody;
     }
 }
-

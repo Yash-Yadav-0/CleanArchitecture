@@ -41,7 +41,7 @@ namespace CleanArchitecture.Application.Features.Auth.Commands.ResetPassword.Sen
             #region Html body
             string emailBody = GenerateEmailBody(user.CodeForResetPassword, user.FullName);
             #endregion
-            await mailService.SendMessageAsync(user.Email, "Code For Reset Password", emailBody);
+            await mailService.SendMailAsync(user.Email, "Code For Reset Password", emailBody);
             return Unit.Value;
 
         }
@@ -55,7 +55,7 @@ namespace CleanArchitecture.Application.Features.Auth.Commands.ResetPassword.Sen
             <p>We received a request to reset your password. Please use the following code to reset your password:</p>
             <h3>{resetCode}</h3>
             <p>If you did not request a password reset, please ignore this email.</p>
-            <p>Thank you,<br>Mosaad Ahmed [Owner]</p>
+            <p>Thank you !!</p>
         </body>
         </html>";
         }

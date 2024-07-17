@@ -32,6 +32,7 @@ namespace CleanArchitecture.Application.Features.Auth.Commands.ResetPassword.Con
                 await userManager.AddPasswordAsync(user, request.Password);
                 await userManager.UpdateAsync(user);
             }
+            user.IsCodeOfResetPasswordTrue = false;
             return Unit.Value;
         }
     }

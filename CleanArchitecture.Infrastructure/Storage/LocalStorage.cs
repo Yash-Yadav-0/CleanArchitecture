@@ -13,72 +13,104 @@ namespace CleanArchitecture.Infrastructure.Storage
     {
         private readonly IWebHostEnvironment webHost;
         private readonly string _wwwroot;
-        private readonly string FolderPath = "images";
+        private readonly string _folderPath = "images";
+        private readonly string[] _allowedFileExtensions = { ".jpg", ".jpeg", ".png", ".webp", ".svg", ".jfif" };
+        private const long _allowedFileSize = 1 * 1024 * 1024; // 1 Mb
+
+
         public LocalStorage(IWebHostEnvironment webHost)
         {
             this.webHost = webHost;
             _wwwroot = webHost.WebRootPath;
         }
-        public Task DeleteAsync(string path, string fileName)
-        {
-            path = FolderPath;
-            string FileForDelete = Path.Combine($"{_wwwroot}/{path}", fileName);
-            if (File.Exists(FileForDelete))
-                    File.Delete(FileForDelete);
-            return Task.CompletedTask;
-        }
-
-        public IList<string> GetFile(string Path)
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task<(string FileName, string Path)> UploadAsync(int id, string folderName, IFormFile file)
         {
-            if (!Directory.Exists($"{_wwwroot}/{FolderPath}/{folderName}"))
-                Directory.CreateDirectory($"{_wwwroot}/{FolderPath}/{folderName}");
-            DateTime DateOfCreation = DateTime.UtcNow;
+            if (file == null)
+            {
+                throw new ArgumentNullException(nameof(file), "File is null.");
+            }
 
-            string FileExtention = Path.GetExtension(file.FileName);
+            if (file.Length > _allowedFileSize)
+            {
+                throw new ArgumentException("File size exceeds 1 Mb", nameof(file));
+            }
 
-            string NewFileName = $"{file.FileName.Replace(FileExtention, $"_{id}").ToLower()}_{DateOfCreation.Date:dd_MM_yyyy}{FileExtention}";
+            string extension = Path.GetExtension(file.FileName);
+            if (!_allowedFileExtensions.Contains(extension))
+            {
+                throw new ArgumentException($"Not an allowed file format. Must be in format {string.Join(", ", _allowedFileExtensions)}", nameof(file));
+            }
 
-            string path = Path.Combine($"{_wwwroot}/{FolderPath}/{folderName}", NewFileName);
+            string folderPath = Path.Combine(_wwwroot, _folderPath, folderName);
+            if (!Directory.Exists(folderPath))
+            {
+                Directory.CreateDirectory(folderPath);
+            }
 
-            await using var stream = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.None, (1024 * 1024), false);
+            string newFileName = $"{file.FileName.Replace(extension, $"_{id}").ToLower()}_{DateTime.UtcNow:dd_MM_yyyy}{extension}";
+            string path = Path.Combine(folderPath, newFileName);
 
+            using var stream = new FileStream(path, FileMode.CreateNew);
             await file.CopyToAsync(stream);
-            await stream.FlushAsync();
 
-            return ((NewFileName, path));
+            return (newFileName, path);
         }
 
         public async Task<IList<(string FilesName, string Path)>> UploadManyAsync(int id, string folderName, IFormFileCollection files)
         {
-            if (!Directory.Exists($"{_wwwroot}/{FolderPath}/{folderName}"))
-                Directory.CreateDirectory($"{_wwwroot}/{FolderPath}/{folderName}");
-            DateTime DateOfCreation = DateTime.UtcNow;
+            if (files == null || files.Count == 0)
+            {
+                throw new ArgumentException("No files to upload.", nameof(files));
+            }
 
-            List<(string FilesName, string Path)> ListOfImages = new();
+            string folderPath = Path.Combine(_wwwroot, _folderPath, folderName);
+            if (!Directory.Exists(folderPath))
+            {
+                Directory.CreateDirectory(folderPath);
+            }
+
+            List<(string FilesName, string Path)> uploadedFiles = new List<(string FilesName, string Path)>();
 
             foreach (IFormFile file in files)
             {
-                string FileExtention = Path.GetExtension(file.FileName);
+                if (file.Length > _allowedFileSize)
+                {
+                    throw new ArgumentException("File size exceeds 1 Mb", nameof(file));
+                }
 
-                string NewFileName = $"{file.FileName.Replace(FileExtention, $"_{id}").ToLower()}_{DateOfCreation.Date:dd_MM_yyyy}.{FileExtention}";
+                string extension = Path.GetExtension(file.FileName);
+                if (!_allowedFileExtensions.Contains(extension))
+                {
+                    throw new ArgumentException($"Not an allowed file format. Must be in format {string.Join(", ", _allowedFileExtensions)}", nameof(file));
+                }
 
-                string path = Path.Combine($"{_wwwroot}/{FolderPath}/{folderName}", NewFileName);
+                string newFileName = $"{file.FileName.Replace(extension, $"_{id}").ToLower()}_{DateTime.UtcNow:dd_MM_yyyy}{extension}";
+                string path = Path.Combine(folderPath, newFileName);
 
-                await using var stream = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.None, (1024 * 1024), false);
-
+                using var stream = new FileStream(path, FileMode.CreateNew);
                 await file.CopyToAsync(stream);
-                await stream.FlushAsync();
 
-                ListOfImages.Add((NewFileName, path));
-
+                uploadedFiles.Add((newFileName, path));
             }
-            return ListOfImages;
 
+            return uploadedFiles;
+        }
+
+        public Task DeleteAsync(string path, string fileName)
+        {
+            string filePath = Path.Combine(_wwwroot, _folderPath, path, fileName);
+            if (!File.Exists(filePath))
+            {
+                throw new FileNotFoundException($"File '{fileName}' not found.", fileName);
+            }
+
+            File.Delete(filePath);
+            return Task.CompletedTask;
+        }
+
+        public IList<string> GetFile(string path)
+        {
+            throw new NotImplementedException();
         }
     }
 }

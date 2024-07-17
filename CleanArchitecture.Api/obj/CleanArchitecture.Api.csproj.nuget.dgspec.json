@@ -206,6 +206,10 @@
               "target": "Package",
               "version": "[8.0.7, )"
             },
+            "Microsoft.AspNetCore.Http": {
+              "target": "Package",
+              "version": "[2.2.2, )"
+            },
             "Microsoft.AspNetCore.Http.Abstractions": {
               "target": "Package",
               "version": "[2.2.0, )"
@@ -217,6 +221,10 @@
             "SendGrid": {
               "target": "Package",
               "version": "[9.29.3, )"
+            },
+            "Serilog": {
+              "target": "Package",
+              "version": "[4.0.0, )"
             },
             "System.ComponentModel.Annotations": {
               "target": "Package",
@@ -422,6 +430,10 @@
             "Quartz.Extensions.DependencyInjection": {
               "target": "Package",
               "version": "[3.11.0, )"
+            },
+            "Serilog": {
+              "target": "Package",
+              "version": "[4.0.0, )"
             },
             "StackExchange.Redis": {
               "target": "Package",

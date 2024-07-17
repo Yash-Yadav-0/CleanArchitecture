@@ -1,6 +1,8 @@
 ﻿using CleanArchitecture.Api.Controllers._BaseController;
 using CleanArchitecture.Application.Features.Auth.Commands.Registration;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CleanArchitecture.Api.Controllers

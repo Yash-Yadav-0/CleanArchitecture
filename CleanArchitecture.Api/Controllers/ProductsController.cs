@@ -7,6 +7,8 @@ using CleanArchitecture.Application.Features.Products.Queries.GetProductById;
 using CleanArchitecture.Application.Features.Products.Queries.GetProductsFiltration;
 using CleanArchitecture.Application.Features.Products.Queries.PutProductInExcel;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CleanArchitecture.Api.Controllers

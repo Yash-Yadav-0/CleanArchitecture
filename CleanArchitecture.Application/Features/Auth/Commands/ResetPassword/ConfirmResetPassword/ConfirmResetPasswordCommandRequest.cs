@@ -5,9 +5,7 @@ namespace CleanArchitecture.Application.Features.Auth.Commands.ResetPassword.Con
     public class ConfirmResetPasswordCommandRequest : IRequest<Unit>
     {
         public string Email { get; set; }
-
         public string Password { get; set; }
-
         public string ConfirmPassword { get; set; }
     }
 }

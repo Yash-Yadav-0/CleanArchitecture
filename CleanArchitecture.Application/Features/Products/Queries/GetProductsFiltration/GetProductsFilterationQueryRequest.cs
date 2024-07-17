@@ -1,5 +1,4 @@
-﻿using CleanArchitecture.Application.Interfaces.RedisCache;
-using MediatR;
+﻿using MediatR;
 using System.ComponentModel;
 using System.Runtime.Serialization;
 
@@ -19,7 +18,7 @@ namespace CleanArchitecture.Application.Features.Products.Queries.GetProductsFil
         [EnumMember(Value = "Rank")]
         Rank = 5
     }
-    public class GetProductsFilterationQueryRequest : IRequest<List<GetProductsFilterationQueryResponse>>, ICacheableQuery
+    public class GetProductsFilterationQueryRequest : IRequest<List<GetProductsFilterationQueryResponse>>
     {
         public string CacheKey => "GetProductsFilteration";
         public double CacheTime => 6;

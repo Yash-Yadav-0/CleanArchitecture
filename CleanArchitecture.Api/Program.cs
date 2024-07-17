@@ -45,8 +45,8 @@ namespace CleanArchitecture.Api
             builder.Services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
             builder.Services.AddSingleton<IUrlHelperFactory, UrlHelperFactory>();
 
-            // Register UrlFactoryHelper
-            builder.Services.AddScoped<UrlFactoryHelper>();
+            // Register LinkGenerator.
+            builder.Services.AddScoped<LinkGeneratorHelper>();
 
             builder.Services.AddControllers()
                 .AddJsonOptions(config =>

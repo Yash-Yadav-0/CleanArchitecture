@@ -10,7 +10,6 @@ namespace CleanArchitecture.Persistence.Repositories
     public class ReadRepository<T> : IReadRepository<T> where T : class, IEntityBase, new()
     {
         public ApplicationDbContext DbContext { get; }
-
         public ReadRepository(ApplicationDbContext dbContext)
         {
             DbContext = dbContext;
