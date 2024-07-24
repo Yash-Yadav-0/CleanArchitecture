@@ -44,6 +44,7 @@ namespace CleanArchitecture.Api
             builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             builder.Services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
             builder.Services.AddSingleton<IUrlHelperFactory, UrlHelperFactory>();
+            //for authorize
 
             // Register LinkGenerator.
             builder.Services.AddScoped<LinkGeneratorHelper>();

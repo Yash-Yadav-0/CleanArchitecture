@@ -65,14 +65,13 @@ namespace CleanArchitecture.Infrastructure
             });
             #endregion
 
-            #region Redis
+            /*#region Redis
             services.AddStackExchangeRedisCache(opt =>
             {
                 opt.Configuration = configuration["RedisCacheSettings:ConnectionString"];
                 opt.InstanceName = configuration["RedisCacheSettings:InstanceName"];
-            });
+            });*/
 
-            #endregion
         }
     }
 }
