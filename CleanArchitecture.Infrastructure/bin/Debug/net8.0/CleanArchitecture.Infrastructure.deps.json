@@ -1612,6 +1612,7 @@
           "Microsoft.AspNetCore.Http": "2.2.2",
           "Microsoft.AspNetCore.Http.Abstractions": "2.2.0",
           "Microsoft.EntityFrameworkCore": "8.0.7",
+          "Npgsql": "8.0.3",
           "SendGrid": "9.29.3",
           "Serilog": "4.0.0",
           "System.ComponentModel.Annotations": "5.0.0"

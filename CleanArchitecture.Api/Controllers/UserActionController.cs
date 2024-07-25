@@ -1,4 +1,5 @@
 ﻿using CleanArchitecture.Api.Controllers._BaseController;
+using CleanArchitecture.Application.Features.Auth.Queries.GetAllUsers;
 using CleanArchitecture.Application.Features.UserFeature.Commands.ChangeToMember;
 using CleanArchitecture.Application.Features.UserFeature.Commands.ChangeToVendor;
 using MediatR;
@@ -23,6 +24,12 @@ namespace CleanArchitecture.Api.Controllers
         {
             await mediator.Send(request);
             return Ok();
+        }
+        [HttpGet("GetAllUsers")]
+        public async Task<IActionResult> GetAllUsers(CancellationToken cancellationToken)
+        {
+            var result = await mediator.Send(new GetAllUsersQueryRequest(), cancellationToken);
+            return Ok(result);
         }
     }
 }

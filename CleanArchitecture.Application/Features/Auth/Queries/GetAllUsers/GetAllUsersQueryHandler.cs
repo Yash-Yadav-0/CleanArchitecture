@@ -1,28 +1,30 @@
-﻿using CleanArchitecture.Domain.Entities;
+﻿using CleanArchitecture.Application.Helpers;
 using MediatR;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace CleanArchitecture.Application.Features.Auth.Queries.GetAllUsers
 {
-    public class GetAllUsersQueryHandler : IRequestHandler<GetAllUsersQueryRequest, IList<GetAllUsersQueryResponse>>
+    public class GetAllUsersQueryHandler : 
+            SqlFunctionHandler<GetAllUsersQueryRequest, GetAllUsersQueryResponse>,
+            IRequestHandler<GetAllUsersQueryRequest, IList<GetAllUsersQueryResponse>>
     {
-        private readonly UserManager<User> userManager;
-        public GetAllUsersQueryHandler(UserManager<User> userManager)
+        public GetAllUsersQueryHandler(IConfiguration configuration) : base(configuration)
         {
-            this.userManager = userManager;
         }
+
         public async Task<IList<GetAllUsersQueryResponse>> Handle(GetAllUsersQueryRequest request, CancellationToken cancellationToken)
         {
-            IList<User> users = await userManager.Users.ToListAsync(cancellationToken);
-
-            IList<GetAllUsersQueryResponse> getAllUsers = users.Select(x => new GetAllUsersQueryResponse
-            {
-                Email = x.Email,
-                TimeOfCodeExpiration = x.TimeOfCodeExpiration,
-                UserId = x.Id
-            }).ToList();
-            return getAllUsers;
+            return await HandleAsync(
+                request,
+                "get_all_users",
+                reader => new GetAllUsersQueryResponse
+                {
+                    UserId = reader.GetGuid(0),
+                    Email = reader.GetString(1),
+                    TimeOfCodeExpiration = reader.IsDBNull(2) ? (DateTime?)null : reader.GetDateTime(2)
+                },
+                cancellationToken
+            );
         }
     }
 }
