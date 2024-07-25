@@ -10,7 +10,7 @@ using System;
 namespace CleanArchitecture.Application.Helpers
 {
     public abstract class SqlFunctionHandler<TRequest, TResponse>
-where TRequest : IRequest<IList<TResponse>>
+                where TRequest : IRequest<IList<TResponse>>
     {
         protected readonly IConfiguration configuration;
         protected SqlFunctionHandler(IConfiguration configuration)
@@ -53,7 +53,7 @@ where TRequest : IRequest<IList<TResponse>>
             {
                 results.Add(mapRow(reader));
             }
-
+            await connection.CloseAsync();
             return results;
         }
 

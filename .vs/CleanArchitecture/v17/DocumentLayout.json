@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\Yash\\source\\repos\\CleanArchitecture\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A26D5458-564D-46AC-B5E4-BBDB749A471E}|CleanArchitecture.Application\\CleanArchitecture.Application.csproj|c:\\users\\yash\\source\\repos\\cleanarchitecture\\cleanarchitecture.application\\features\\orders\\queries\\getallordersforcurrentuser\\getallordersforcurrentuserqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A26D5458-564D-46AC-B5E4-BBDB749A471E}|CleanArchitecture.Application\\CleanArchitecture.Application.csproj|solutionrelative:cleanarchitecture.application\\features\\orders\\queries\\getallordersforcurrentuser\\getallordersforcurrentuserqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{A26D5458-564D-46AC-B5E4-BBDB749A471E}|CleanArchitecture.Application\\CleanArchitecture.Application.csproj|c:\\users\\yash\\source\\repos\\cleanarchitecture\\cleanarchitecture.application\\helpers\\sqlfunctionhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A26D5458-564D-46AC-B5E4-BBDB749A471E}|CleanArchitecture.Application\\CleanArchitecture.Application.csproj|solutionrelative:cleanarchitecture.application\\helpers\\sqlfunctionhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26D5458-564D-46AC-B5E4-BBDB749A471E}|CleanArchitecture.Application\\CleanArchitecture.Application.csproj|c:\\users\\yash\\source\\repos\\cleanarchitecture\\cleanarchitecture.application\\features\\orders\\queries\\getallordersforcurrentuser\\getallordersforcurrentuserqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A26D5458-564D-46AC-B5E4-BBDB749A471E}|CleanArchitecture.Application\\CleanArchitecture.Application.csproj|solutionrelative:cleanarchitecture.application\\features\\orders\\queries\\getallordersforcurrentuser\\getallordersforcurrentuserqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A26D5458-564D-46AC-B5E4-BBDB749A471E}|CleanArchitecture.Application\\CleanArchitecture.Application.csproj|c:\\users\\yash\\source\\repos\\cleanarchitecture\\cleanarchitecture.application\\features\\orders\\queries\\getallorders\\getallordersqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -78,7 +78,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 334,
-          "SelectedChildIndex": 14,
+          "SelectedChildIndex": 17,
           "Children": [
             {
               "$type": "Bookmark",
@@ -255,13 +255,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "GetAllOrdersForCurrentUserQueryHandler.cs",
               "DocumentMoniker": "C:\\Users\\Yash\\source\\repos\\CleanArchitecture\\CleanArchitecture.Application\\Features\\Orders\\Queries\\GetAllOrdersForCurrentUser\\GetAllOrdersForCurrentUserQueryHandler.cs",
               "RelativeDocumentMoniker": "CleanArchitecture.Application\\Features\\Orders\\Queries\\GetAllOrdersForCurrentUser\\GetAllOrdersForCurrentUserQueryHandler.cs",
               "ToolTip": "C:\\Users\\Yash\\source\\repos\\CleanArchitecture\\CleanArchitecture.Application\\Features\\Orders\\Queries\\GetAllOrdersForCurrentUser\\GetAllOrdersForCurrentUserQueryHandler.cs",
               "RelativeToolTip": "CleanArchitecture.Application\\Features\\Orders\\Queries\\GetAllOrdersForCurrentUser\\GetAllOrdersForCurrentUserQueryHandler.cs",
-              "ViewState": "AQIAAA0AAAAAAAAAAAAiwBoAAAANAAAA",
+              "ViewState": "AQIAAA8AAAAAAAAAAAA6wB4AAAAkAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-07-25T06:34:16.217Z",
               "EditorCaption": ""
@@ -294,13 +294,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "SqlFunctionHandler.cs",
               "DocumentMoniker": "C:\\Users\\Yash\\source\\repos\\CleanArchitecture\\CleanArchitecture.Application\\Helpers\\SqlFunctionHandler.cs",
               "RelativeDocumentMoniker": "CleanArchitecture.Application\\Helpers\\SqlFunctionHandler.cs",
               "ToolTip": "C:\\Users\\Yash\\source\\repos\\CleanArchitecture\\CleanArchitecture.Application\\Helpers\\SqlFunctionHandler.cs",
               "RelativeToolTip": "CleanArchitecture.Application\\Helpers\\SqlFunctionHandler.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAEIAAAAfAAAA",
+              "ViewState": "AQIAABIAAAAAAAAAAAAUwCIAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-07-25T06:12:41.143Z",
               "EditorCaption": ""
