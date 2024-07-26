@@ -1,4 +1,5 @@
 ﻿using CleanArchitecture.Application.Dtos;
+using System.Collections.Generic;
 
 namespace CleanArchitecture.Application.Features.Products.Queries.GetProductById
 {

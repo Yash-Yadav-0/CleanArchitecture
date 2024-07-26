@@ -2,10 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Npgsql;
 using System.Data;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Collections.Generic;
-using System;
+
 
 namespace CleanArchitecture.Application.Helpers
 {
@@ -13,14 +10,16 @@ namespace CleanArchitecture.Application.Helpers
                 where TRequest : IRequest<IList<TResponse>>
     {
         protected readonly IConfiguration configuration;
+
         protected SqlFunctionHandler(IConfiguration configuration)
         {
             this.configuration = configuration;
         }
+
         public async Task<IList<TResponse>> HandleAsync(
             TRequest request,
             string functionName,
-            Func<IDataReader, TResponse> mapRow,
+            Func<NpgsqlDataReader, TResponse> mapRow,
             CancellationToken cancellationToken,
             Dictionary<string, object> parameters = null)
         {
@@ -51,7 +50,7 @@ namespace CleanArchitecture.Application.Helpers
 
             while (await reader.ReadAsync(cancellationToken))
             {
-                results.Add(mapRow(reader));
+                results.Add(mapRow((NpgsqlDataReader)reader));
             }
             await connection.CloseAsync();
             return results;
@@ -68,5 +67,4 @@ namespace CleanArchitecture.Application.Helpers
             return $"SELECT * FROM {functionName}({parameterString})";
         }
     }
-
 }

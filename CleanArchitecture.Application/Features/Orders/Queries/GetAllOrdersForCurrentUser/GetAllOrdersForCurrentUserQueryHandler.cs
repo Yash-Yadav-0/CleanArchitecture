@@ -4,12 +4,13 @@ using MediatR;
 using Microsoft.Extensions.Configuration;
 using CleanArchitecture.Application.Helpers;
 using CleanArchitecture.Domain.Enums;
-using CleanArchitecture.Domain.Entities;
 using System.Security.Claims;
 
 namespace CleanArchitecture.Application.Features.Orders.Queries.GetAllOrdersForCurrentUser
 {
-    public class GetAllOrdersForCurrentUserQueryHandler : SqlFunctionHandler<GetAllOrdersForCurrentUserQueryRequest, GetAllOrdersForCurrentUserQueryResponse>, IRequestHandler<GetAllOrdersForCurrentUserQueryRequest, IList<GetAllOrdersForCurrentUserQueryResponse>>
+    public class GetAllOrdersForCurrentUserQueryHandler :  
+            SqlFunctionHandler<GetAllOrdersForCurrentUserQueryRequest, GetAllOrdersForCurrentUserQueryResponse>,
+            IRequestHandler<GetAllOrdersForCurrentUserQueryRequest, IList<GetAllOrdersForCurrentUserQueryResponse>>
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
 
@@ -25,7 +26,7 @@ namespace CleanArchitecture.Application.Features.Orders.Queries.GetAllOrdersForC
             var functionName = "get_all_orders_for_current_user";
             var parameters = new Dictionary<string, object>
             {
-                { "user_id", userId }
+                { "user_id",userId }
             };
 
             return await HandleAsync(

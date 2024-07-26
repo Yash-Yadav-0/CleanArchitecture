@@ -1,33 +1,46 @@
 ﻿using CleanArchitecture.Application.Bases;
 using CleanArchitecture.Application.Dtos;
-using CleanArchitecture.Application.Interfaces.AutoMapper;
-using CleanArchitecture.Application.Interfaces.UnitOfWorks;
-using CleanArchitecture.Domain.Entities;
+using CleanArchitecture.Application.Features.Orders.Queries.GetAllOrdersForCurrentUser;
+using CleanArchitecture.Application.Helpers;
+using CleanArchitecture.Domain.Enums;
 using MediatR;
-using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 
 namespace CleanArchitecture.Application.Features.Orders.Queries.GetOrderById
 {
-    public class GetOrderByIdQueryHandler : BaseHandler, IRequestHandler<GetOrderByIdQueryRequest, GetOrderByIdQueryResponse>
+    public class GetOrderByIdQueryHandler : 
+            SqlFunctionHandler<GetOrderByIdQueryRequest,GetOrderByIdQueryResponse>, 
+            IRequestHandler<GetOrderByIdQueryRequest, IList<GetOrderByIdQueryResponse>>
     {
-        public GetOrderByIdQueryHandler(IUnitOfWork unitOfWork, IMapper mapper, IHttpContextAccessor httpContextAccessor)
-            : base(unitOfWork, mapper, httpContextAccessor)
+        private readonly IConfiguration configuration;
+        public GetOrderByIdQueryHandler(IConfiguration configuration)
+            : base(configuration)
         {
         }
-        public async Task<GetOrderByIdQueryResponse> Handle(GetOrderByIdQueryRequest request, CancellationToken cancellationToken)
+        public async Task<IList<GetOrderByIdQueryResponse>> Handle(GetOrderByIdQueryRequest request, CancellationToken cancellationToken)
         {
-            var order = await UnitOfWork.readRepository<Order>().GetAsync(predicate: x => x.Id == request.OrderId);
+            var functionName = "get_order_by_id";
+            var parameters = new Dictionary<string, object>
+            {
+                { "order_id", request.OrderId }
+            };
 
-            var queryResponse = Mapper.Map<GetOrderByIdQueryResponse, Order>(order);
-
-            var productsData = (from ProductsOrders in order.ProductsOrders
-            join products in order.ProductsOrders.Select(x => x.product)
-                                on ProductsOrders.OrderId equals products.Id
-                                where ProductsOrders.OrderId == order.Id
-                                select products);
-
-            queryResponse.ProductsDTOs = productsData.Select(x => new ProductsDTO() { Name = x.Title }).ToList();
-            return queryResponse;
+            return await HandleAsync(
+                request,
+                functionName,
+                reader => new GetOrderByIdQueryResponse
+                {
+                    Id = reader.GetInt32(0),
+                    TotalAmount = reader.GetDecimal(1),
+                    OrderType = (OrderType)reader.GetInt16(2),
+                    UserId = reader.GetGuid(3),
+                    ProductsDTOs = reader.IsDBNull(4)
+                        ? new List<ProductsDTO>()
+                        : reader.GetString(4).Split(',').Select(title => new ProductsDTO { Name = title }).ToList()
+                },
+                cancellationToken,
+                parameters
+            );
         }
     }
 }

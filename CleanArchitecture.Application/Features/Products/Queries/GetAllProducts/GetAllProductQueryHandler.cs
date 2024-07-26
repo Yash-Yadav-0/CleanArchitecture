@@ -1,43 +1,47 @@
 ﻿using CleanArchitecture.Application.Dtos;
-using CleanArchitecture.Application.Interfaces.AutoMapper;
-using CleanArchitecture.Application.Interfaces.UnitOfWorks;
-using CleanArchitecture.Domain.Entities;
+using CleanArchitecture.Application.Helpers;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace CleanArchitecture.Application.Features.Products.Queries.GetAllProducts
 {
-    public class GetAllProductQueryHandler : IRequestHandler<GetAllProductQueryRequest, IList<GetAllProductQueryResponse>>
-    {
-        private readonly IUnitOfWork unitOfWork;
-        private readonly IMapper mapper;
-
-        public GetAllProductQueryHandler(IUnitOfWork unitOfWork, IMapper mapper)
+    public class GetAllProductQueryHandler : 
+            SqlFunctionHandler<GetAllProductQueryRequest,GetAllProductQueryResponse>,
+            IRequestHandler<GetAllProductQueryRequest, IList<GetAllProductQueryResponse>>
+    { 
+        public GetAllProductQueryHandler(IConfiguration configuration)
+            : base(configuration)
         {
-            this.unitOfWork = unitOfWork;
-            this.mapper = mapper;
         }
         public async Task<IList<GetAllProductQueryResponse>> Handle(GetAllProductQueryRequest request, CancellationToken cancellationToken)
         {
+            var functionName = "get_all_products";
+            var parameters = new Dictionary<string, object>();
 
-            var Products = await unitOfWork.readRepository<Product>().GetAllAsync(include: x => x.Include(x => x.Brand).Include(x => x.images).Include(x => x.ProductsCategory).ThenInclude(x => x.Category));//
-
-            mapper.Map<BrandDTO, Brand>(Products.Select(x => x.Brand).ToList());
-            mapper.Map<ImageDTO, Image>(Products.SelectMany(x => x.images).ToList());
-
-            var productsDemo = mapper.Map<GetAllProductQueryResponse, Product>(Products);
-
-            foreach (var item in productsDemo)
-            {
-                var x = Products.SelectMany(x => x.ProductsCategory.Where(y => y.ProductId == item.Id)).Select(q => q.Category.Name).ToList();
-                item.CategoriesOfProducts = x.Select(x => new CategoriesOfProductsDTO() { Name = x }).ToList();
-            }
-
-            foreach (var item in productsDemo)
-                item.Price -= (item.Price * (item.Discount / 100));
-
-            return productsDemo;
-
+            return await HandleAsync(
+                request,
+                functionName,
+                reader => new GetAllProductQueryResponse
+                {
+                    Id = reader.GetInt32(0),
+                    Title = reader.GetString(1),
+                    Price = reader.GetDecimal(2),
+                    Discount= reader.GetDecimal(3),
+                    Brand = new BrandDTO
+                    {
+                        Id = reader.GetInt32(4),
+                        Name = reader.GetString(5),
+                    },
+                    Images = reader.IsDBNull(6)
+                        ? new List<ImageDTO>()
+                        : reader.GetFieldValue<string[]>(6).Select(id => new ImageDTO { FileName = id }).ToList(),
+                    CategoriesOfProducts = reader.IsDBNull(7)
+                        ? new List<CategoriesOfProductsDTO>()
+                        : reader.GetFieldValue<string[]>(7).Select(name => new CategoriesOfProductsDTO { Name = name }).ToList(),
+                },
+                cancellationToken,
+                parameters
+             );
         }
     }
 }

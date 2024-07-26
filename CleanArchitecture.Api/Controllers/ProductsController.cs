@@ -36,7 +36,7 @@ namespace CleanArchitecture.Api.Controllers
             => await mediator.Send(request);
 
         [HttpGet("GetProductById{id:int}")]
-        public async Task<GetProductByIdQueryResponse> GetProductById(int id)
+        public async Task<IList<GetProductByIdQueryResponse>> GetProductById(int id)
         {
             return await mediator.Send(new GetProductByIdQueryRequest() { ProductId = id });
         }

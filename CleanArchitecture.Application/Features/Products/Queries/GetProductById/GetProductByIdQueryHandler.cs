@@ -1,38 +1,51 @@
 ﻿using CleanArchitecture.Application.Dtos;
-using CleanArchitecture.Application.Interfaces.AutoMapper;
-using CleanArchitecture.Application.Interfaces.UnitOfWorks;
-using CleanArchitecture.Domain.Entities;
+using CleanArchitecture.Application.Helpers;
 using MediatR;
+using Microsoft.Extensions.Configuration;
 
 namespace CleanArchitecture.Application.Features.Products.Queries.GetProductById
 {
-    public class GetProductByIdQueryHandler : IRequestHandler<GetProductByIdQueryRequest, GetProductByIdQueryResponse>
+    public class GetProductByIdQueryHandler :
+        SqlFunctionHandler<GetProductByIdQueryRequest, GetProductByIdQueryResponse>,
+        IRequestHandler<GetProductByIdQueryRequest, IList<GetProductByIdQueryResponse>>
     {
-        private readonly IUnitOfWork UnitOfWork;
-        private readonly IMapper Mapper;
-        public GetProductByIdQueryHandler(IUnitOfWork unitOfWork, IMapper mapper)
+        public GetProductByIdQueryHandler(IConfiguration configuration)
+            : base(configuration) { }
 
+        public async Task<IList<GetProductByIdQueryResponse>> Handle(GetProductByIdQueryRequest request, CancellationToken cancellationToken)
         {
-            this.UnitOfWork = unitOfWork;
-            this.Mapper = mapper;
-        }
-        async Task<GetProductByIdQueryResponse> IRequestHandler<GetProductByIdQueryRequest, GetProductByIdQueryResponse>.Handle(GetProductByIdQueryRequest request, CancellationToken cancellationToken)
-        {
+            var functionName = "get_product_by_id";
+            var parameters = new Dictionary<string, object>
+            {
+                { "productId", request.ProductId }
+            };
 
-            Product product = await UnitOfWork.readRepository<Product>()
-                    .GetAsync(predicate: x => x.Id == request.ProductId);
-                        //include: x => x.Include(x => x.Brand).Include(x => x.images).Include(x => x.ProductsCategory).ThenInclude(x => x.Category)
-            Mapper.Map<ImageDTO, Image>(product.images.Where(x => x.ProductId == request.ProductId).ToList());
-            Mapper.Map<BrandDTO, Brand>(product.Brand);
-
-            //product.ProductsCategory.Select(x => x.Category).Where(obj => product.ProductsCategory.Any(x => x.ProductId == request.ProductId)).Select(X=>X.Name).ToList()  ;
-            var ProcessedData = Mapper.Map<CategoriesOfProductsDTO, Category>(product.ProductsCategory.Select(x => x.Category).Where(obj => product.ProductsCategory.Any(x => x.ProductId == request.ProductId)).ToList());
-
-            GetProductByIdQueryResponse queryResponse = Mapper.Map<GetProductByIdQueryResponse, Product>(product);
-
-            queryResponse.CategoriesOfProducts = ProcessedData.ToList();
-
-            return queryResponse;
+            // Fetch the result using SqlFunctionHandler
+            return await HandleAsync(
+                request,
+                functionName,
+                reader => new GetProductByIdQueryResponse
+                {
+                    Id = reader.GetInt32(0),
+                    Title = reader.GetString(1),
+                    Description = reader.GetString(2),
+                    Price = reader.GetDecimal(3),
+                    Discount = reader.GetDecimal(4),
+                    Brand = new BrandDTO
+                    {
+                        Id = reader.GetInt32(5),
+                        Name = reader.GetString(6),
+                    },
+                    Images = reader.IsDBNull(7)
+                        ? new List<ImageDTO>()
+                        : reader.GetFieldValue<string[]>(7).Select(fileName => new ImageDTO { FileName = fileName }).ToList(),
+                    CategoriesOfProducts = reader.IsDBNull(8)
+                        ? new List<CategoriesOfProductsDTO>()
+                        : reader.GetFieldValue<string[]>(8).Select(name => new CategoriesOfProductsDTO { Name = name }).ToList(),
+                },
+                cancellationToken,
+                parameters
+            );
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using CleanArchitecture.Application.Features.Auth.Queries.GetAllUsers;
+using CleanArchitecture.Application.Interfaces;
 using CleanArchitecture.Domain.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;

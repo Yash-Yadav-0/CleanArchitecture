@@ -5,6 +5,8 @@ using CleanArchitecture.Application.Features.Orders.Comments.MakeOrder;
 using CleanArchitecture.Application.Features.Orders.Queries.GetAllOrders;
 using CleanArchitecture.Application.Features.Orders.Queries.GetAllOrdersForCurrentUser;
 using CleanArchitecture.Application.Features.Orders.Queries.GetOrderById;
+using CleanArchitecture.Application.Features.Products.Queries.GetProductById;
+using DocumentFormat.OpenXml.Office2010.Excel;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -26,11 +28,10 @@ namespace CleanArchitecture.Api.Controllers
         //[HttpGet("GetOrderById")]
         //public async Task<IActionResult> GetOrderById(GetOrderByIdQueryRequest request) => Ok(await mediator.Send(request));
 
-        [HttpGet("GetOrderById")]
-        public async Task<IActionResult> GetOrderById([FromForm] GetOrderByIdQueryRequest request)
+        [HttpGet("GetOrderById{id:int}")]
+        public async Task<IList<GetOrderByIdQueryResponse>> GetOrderById(int id)
         {
-            var x = await mediator.Send(request);
-            return Ok(x);
+            return await mediator.Send(new GetOrderByIdQueryRequest() { OrderId = id});
         }
 
         [Authorize]
