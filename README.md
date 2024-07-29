@@ -81,12 +81,10 @@ The Presentation layer contains the API project, which exposes the application's
 - Microsoft.AspNetCore.Authentication.JwtBearer
 - Microsoft.AspNetCore.Identity.EntityFrameworkCore
 - FluentValidation
-- MediatR
 - Npgsql
 - Serilog
 - Hangfire
 - Hangfire.PostgreSql
-- AutoMapper
 - ...
 ## Getting Started
 
