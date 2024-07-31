@@ -73,6 +73,19 @@ The Presentation layer contains the API project, which exposes the application's
      - wwwroot
      - appsettings.json
      - Program.cs
+    
+# Package References
+
+- AutoMapper
+- MediatR
+- Microsoft.AspNetCore.Authentication.JwtBearer
+- Microsoft.AspNetCore.Identity.EntityFrameworkCore
+- FluentValidation
+- Npgsql
+- Serilog
+- Hangfire
+- Hangfire.PostgreSql
+- ...
 ## Getting Started
 
 ### Prerequisites
