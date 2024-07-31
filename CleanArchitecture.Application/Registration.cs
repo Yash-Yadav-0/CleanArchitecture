@@ -11,8 +11,10 @@ using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
-using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.Extensions.DependencyInjection;
+using OpenTelemetry.Metrics;
+using OpenTelemetry.Resources;
+using OpenTelemetry.Trace;
 using System.Globalization;
 using System.Reflection;
 
@@ -44,6 +46,32 @@ namespace CleanArchitecture.Application
             services.AddTransient<OrderRules>();
             services.AddTransient<SignInManager<User>>();
             services.AddRulesFromAssemblyContaining(assembly, typeof(BaseRule));
+
+            //Opentelemetry configuration
+            services.AddOpenTelemetry()
+                .ConfigureResource(resource => resource.AddService("CleanArchitectureService"))
+                .WithMetrics(metrics =>
+                {
+                    metrics
+                        .AddAspNetCoreInstrumentation()
+                        .AddHttpClientInstrumentation()
+                        .AddMeter("CleanArchitectureMeter")
+                        .AddOtlpExporter();
+                })
+                .WithTracing(tracing =>
+                {
+                    tracing
+                        .AddAspNetCoreInstrumentation()
+                        .AddHttpClientInstrumentation()
+                        .AddEntityFrameworkCoreInstrumentation()
+                        .AddOtlpExporter();
+                });
+            //Serilog Configuration
+            services.AddSingleton<Logger>(provider =>
+            {
+                Logger.LoggerMethod();
+                return new Logger();
+            });
         }
         public static IServiceCollection AddRulesFromAssemblyContaining(this IServiceCollection services, Assembly assembly, Type type)
         {

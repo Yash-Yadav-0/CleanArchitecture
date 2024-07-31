@@ -1,5 +1,6 @@
 ﻿using CleanArchitecture.Application.Bases;
 using CleanArchitecture.Application.Features.Auth.Rules;
+using CleanArchitecture.Application.Helpers;
 using CleanArchitecture.Application.Interfaces.AutoMapper;
 using CleanArchitecture.Application.Interfaces.Tokens;
 using CleanArchitecture.Application.Interfaces.UnitOfWorks;
@@ -39,8 +40,15 @@ namespace CleanArchitecture.Application.Features.Auth.Commands.Login
 
         public async Task<LoginCommandResponse> Handle(LoginCommandRequest request, CancellationToken cancellationToken)
         {
+            LoggerHelper.LogInformation("Handling LogingCommand for Email:{Email}",request.Email);
+
             User? user = await userManager.FindByEmailAsync(request.Email);
             bool CheckPassword = await userManager.CheckPasswordAsync(user, request.Password);
+            if (!CheckPassword)
+            {
+                LoggerHelper.LogWarning("Invalid password attempt for Email: {Email}", request.Email);
+                throw new Exception("Invalid password");
+            }
 
             await AuthRules.EmailOrPasswordShouldnotbeInvalidAsync(user, CheckPassword);
             IList<string> Roles = await userManager.GetRolesAsync(user);
@@ -59,6 +67,8 @@ namespace CleanArchitecture.Application.Features.Auth.Commands.Login
             string Token = new JwtSecurityTokenHandler().WriteToken(securityToken);
 
             await userManager.SetAuthenticationTokenAsync(user, "Default", "AccessToken", Token);
+
+            LoggerHelper.LogInformation("Login successful for Email: {Email}", request.Email);
 
             return new()
             {

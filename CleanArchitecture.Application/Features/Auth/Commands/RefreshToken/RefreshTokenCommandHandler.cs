@@ -1,5 +1,6 @@
 ﻿using CleanArchitecture.Application.Bases;
 using CleanArchitecture.Application.Features.Auth.Rules;
+using CleanArchitecture.Application.Helpers;
 using CleanArchitecture.Application.Interfaces.AutoMapper;
 using CleanArchitecture.Application.Interfaces.Tokens;
 using CleanArchitecture.Application.Interfaces.UnitOfWorks;
@@ -29,11 +30,27 @@ namespace CleanArchitecture.Application.Features.Auth.Commands.RefreshToken
 
         public async Task<RefreshTokenCommandResponse> Handle(RefreshTokenCommandRequest request, CancellationToken cancellationToken)
         {
+            LoggerHelper.LogInformation("Handling RefreshTokencommand for AccessToken: {AccessToken}",request.AccessToken);
             ClaimsPrincipal? principal = tokenService.GetClaimsPrincipalFromExpiredToken(request.AccessToken);
 
+            if (principal == null)
+            {
+                LoggerHelper.LogError("Failed to get ClaimsPrincipal from expired token for AccessToken: {AccessToken}", new Exception("Invalid access token"), request.AccessToken);
+                throw new Exception("Invalid access token");
+            }
             string? email = principal?.FindFirstValue(ClaimTypes.Email);
+            if (email == null)
+            {
+                LoggerHelper.LogError("No email found in ClaimsPrincipal for AccessToken: {AccessToken}", new Exception("Email claim missing"), request.AccessToken);
+                throw new Exception("Email claim missing");
+            }
 
             User? user = await userManager.FindByEmailAsync(email);
+            if (user == null)
+            {
+                LoggerHelper.LogError("User not found for Email: {Email}", new Exception("User not found"), email);
+                throw new Exception("User not found");
+            }
 
             IList<string> roles = await userManager.GetRolesAsync(user);
 
@@ -47,14 +64,13 @@ namespace CleanArchitecture.Application.Features.Auth.Commands.RefreshToken
 
             await userManager.UpdateAsync(user);
 
+            LoggerHelper.LogInformation("Successfully refreshed token for Email: {Email}", email);
+
             return new()
             {
                 RefreshToken = newRefreshToken,
                 AccessToken = new JwtSecurityTokenHandler().WriteToken(newSecurityToken)
             };
-
-
-
         }
     }
 }

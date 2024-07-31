@@ -13,6 +13,7 @@ using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Logging;
 
 public class RegistrationCommandHandler : BaseHandler, IRequestHandler<RegistrationCommandRequest, Unit>
 {
@@ -55,42 +56,45 @@ public class RegistrationCommandHandler : BaseHandler, IRequestHandler<Registrat
 
     public async Task<Unit> Handle(RegistrationCommandRequest request, CancellationToken cancellationToken)
     {
+        LogHelper.LogInformation("Handling Registration for Email: {Email}", request.Email);
         await AuthRules.UserShouldnotBeExistsAsync(await UserManager.FindByEmailAsync(request.Email));
         User user = Mapper.Map<User, RegistrationCommandRequest>(request);
         user.UserName = request.Email;
         user.SecurityStamp = Guid.NewGuid().ToString();
         IdentityResult result = await UserManager.CreateAsync(user, request.Password);
 
-
-        /*bool isSent = await EmailConfirmationDTOAsync(user);
-        if (!isSent)
+        if (!result.Succeeded)
         {
-            await UserManager.DeleteAsync(user);
-            await UserManager.UpdateAsync(user);
-            await AuthRules.NoMistakeShouldHappenWhileEmailConfirmationAsync(isSent);
-        }*/
-        if (result.Succeeded)
-        {
-            if (await RoleManager.RoleExistsAsync("USER"))
-            {
-                await RoleManager.CreateAsync(new Role
-                {
-                    Id = Guid.NewGuid(),
-                    Name = "user",
-                    NormalizedName = "USER",
-                    ConcurrencyStamp = Guid.NewGuid().ToString(),
-                });
-            }
-            await UserManager.AddToRoleAsync(user, "USER");
-            if (request.Image is not null)
-            {
-                var photo = await _localStorage.UploadAsync(1, "Users", request.Image);
-                user.Picture = photo.Path;
-                await UserManager.UpdateAsync(user);
-            }
+            LoggerHelper.LogError("User creation failed for Email: {Email}", new Exception("User creation failed for Email:{Email}"), request.Email);
+            throw new InvalidOperationException("User creation failed");
         }
+
+        LoggerHelper.LogInformation("User created successfully for Email: {Email}", request.Email);
+
+        if (await RoleManager.RoleExistsAsync("USER"))
+        {
+            await RoleManager.CreateAsync(new Role
+            {
+                Id = Guid.NewGuid(),
+                Name = "user",
+                NormalizedName = "USER",
+                ConcurrencyStamp = Guid.NewGuid().ToString(),
+            });
+        }
+
+        await UserManager.AddToRoleAsync(user, "USER");
+
+        if (request.Image != null)
+        {
+            var photo = await _localStorage.UploadAsync(1, "Users", request.Image);
+            user.Picture = photo.Path;
+            await UserManager.UpdateAsync(user);
+            LoggerHelper.LogInformation("User profile picture added for Email: {Email}", request.Email);
+        }
+
         string emailBody = GenerateEmailBody(user.UserName);
-        await _mailService.SendMailAsync(user.Email,"Success Registering",emailBody);
+        await _mailService.SendMailAsync(user.Email, "Success Registering", emailBody);
+        LoggerHelper.LogInformation("Email sent successfully to Email: {Email}", user.Email);
 
         return Unit.Value;
     }
