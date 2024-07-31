@@ -24,7 +24,6 @@ namespace CleanArchitecture.Persistence.Context
         public virtual DbSet<ProductsCategories> productsCategories { get; set; }
         public virtual DbSet<ProductsOrders> orderProducts { get; set; }
         public virtual DbSet<Order> orders { get; set; }
-        public virtual DbSet<DeviceInfo> deviceInfo { get; set; }
         public virtual DbSet<Vendor> Vendors { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
