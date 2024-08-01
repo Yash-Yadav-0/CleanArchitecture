@@ -96,7 +96,7 @@
             },
             "OpenTelemetry.Instrumentation.AspNetCore": {
               "target": "Package",
-              "version": "[1.9.0, )"
+              "version": "(, )"
             },
             "OpenTelemetry.Instrumentation.EntityFrameworkCore": {
               "target": "Package",

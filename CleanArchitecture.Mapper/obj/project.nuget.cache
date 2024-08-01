@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "xtDX9Xn6kfQ=",
+  "dgSpecHash": "o6OCilzP69w=",
   "success": true,
   "projectFilePath": "C:\\Users\\Yash\\source\\repos\\CleanArchitecture\\CleanArchitecture.Mapper\\CleanArchitecture.Mapper.csproj",
   "expectedPackageFiles": [
@@ -70,7 +70,7 @@
     "C:\\Users\\Yash\\.nuget\\packages\\opentelemetry.api.providerbuilderextensions\\1.9.0\\opentelemetry.api.providerbuilderextensions.1.9.0.nupkg.sha512",
     "C:\\Users\\Yash\\.nuget\\packages\\opentelemetry.exporter.opentelemetryprotocol\\1.9.0\\opentelemetry.exporter.opentelemetryprotocol.1.9.0.nupkg.sha512",
     "C:\\Users\\Yash\\.nuget\\packages\\opentelemetry.extensions.hosting\\1.9.0\\opentelemetry.extensions.hosting.1.9.0.nupkg.sha512",
-    "C:\\Users\\Yash\\.nuget\\packages\\opentelemetry.instrumentation.aspnetcore\\1.9.0\\opentelemetry.instrumentation.aspnetcore.1.9.0.nupkg.sha512",
+    "C:\\Users\\Yash\\.nuget\\packages\\opentelemetry.instrumentation.aspnetcore\\1.6.0\\opentelemetry.instrumentation.aspnetcore.1.6.0.nupkg.sha512",
     "C:\\Users\\Yash\\.nuget\\packages\\opentelemetry.instrumentation.entityframeworkcore\\1.0.0-beta.10\\opentelemetry.instrumentation.entityframeworkcore.1.0.0-beta.10.nupkg.sha512",
     "C:\\Users\\Yash\\.nuget\\packages\\opentelemetry.instrumentation.http\\1.9.0\\opentelemetry.instrumentation.http.1.9.0.nupkg.sha512",
     "C:\\Users\\Yash\\.nuget\\packages\\runtime.debian.8-x64.runtime.native.system.security.cryptography.openssl\\4.3.2\\runtime.debian.8-x64.runtime.native.system.security.cryptography.openssl.4.3.2.nupkg.sha512",
@@ -163,5 +163,16 @@
     "C:\\Users\\Yash\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
     "C:\\Users\\Yash\\.nuget\\packages\\xlparser\\1.5.2\\xlparser.1.5.2.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1602",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "CleanArchitecture.Application does not provide an inclusive lower bound for dependency OpenTelemetry.Instrumentation.AspNetCore. An approximate best match of OpenTelemetry.Instrumentation.AspNetCore 1.6.0 was resolved.",
+      "libraryId": "OpenTelemetry.Instrumentation.AspNetCore",
+      "targetGraphs": [
+        "net8.0"
+      ]
+    }
+  ]
 }

@@ -1141,10 +1141,10 @@
           }
         }
       },
-      "OpenTelemetry.Instrumentation.AspNetCore/1.9.0": {
+      "OpenTelemetry.Instrumentation.AspNetCore/1.6.0": {
         "type": "package",
         "dependencies": {
-          "OpenTelemetry.Api.ProviderBuilderExtensions": "[1.9.0, 2.0.0)"
+          "OpenTelemetry.Api.ProviderBuilderExtensions": "1.6.0"
         },
         "compile": {
           "lib/net8.0/OpenTelemetry.Instrumentation.AspNetCore.dll": {
@@ -2718,7 +2718,7 @@
           "Npgsql": "8.0.3",
           "OpenTelemetry.Exporter.OpenTelemetryProtocol": "1.9.0",
           "OpenTelemetry.Extensions.Hosting": "1.9.0",
-          "OpenTelemetry.Instrumentation.AspNetCore": "1.9.0",
+          "OpenTelemetry.Instrumentation.AspNetCore": "(, )",
           "OpenTelemetry.Instrumentation.EntityFrameworkCore": "1.0.0-beta.10",
           "OpenTelemetry.Instrumentation.Http": "1.9.0",
           "SendGrid": "9.29.3",
@@ -4329,10 +4329,10 @@
         "opentelemetry.extensions.hosting.nuspec"
       ]
     },
-    "OpenTelemetry.Instrumentation.AspNetCore/1.9.0": {
-      "sha512": "x4HuWBw1rbWZUh5j8/GpXz3xa7JnrTuKne+ACmBqvcoO/rNGkG7HayRruwoQ7gf52xpMtRGr4gxlhLW8eU0EiQ==",
+    "OpenTelemetry.Instrumentation.AspNetCore/1.6.0": {
+      "sha512": "NGgMVcW57jI5OGFuCXqTtkNwgtsPJ5GPuUyrfw5fg2tbBwQZQyzfuquw7wvEimVOhD65vT6EX3+8HZUWDBe2ug==",
       "type": "package",
-      "path": "opentelemetry.instrumentation.aspnetcore/1.9.0",
+      "path": "opentelemetry.instrumentation.aspnetcore/1.6.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -4345,7 +4345,7 @@
         "lib/netstandard2.0/OpenTelemetry.Instrumentation.AspNetCore.dll",
         "lib/netstandard2.0/OpenTelemetry.Instrumentation.AspNetCore.xml",
         "opentelemetry-icon-color.png",
-        "opentelemetry.instrumentation.aspnetcore.1.9.0.nupkg.sha512",
+        "opentelemetry.instrumentation.aspnetcore.1.6.0.nupkg.sha512",
         "opentelemetry.instrumentation.aspnetcore.nuspec"
       ]
     },
@@ -8265,5 +8265,17 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303/PortableRuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1602",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "CleanArchitecture.Application does not provide an inclusive lower bound for dependency OpenTelemetry.Instrumentation.AspNetCore. An approximate best match of OpenTelemetry.Instrumentation.AspNetCore 1.6.0 was resolved.",
+      "libraryId": "OpenTelemetry.Instrumentation.AspNetCore",
+      "targetGraphs": [
+        "net8.0"
+      ]
+    }
+  ]
 }
