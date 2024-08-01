@@ -1,4 +1,5 @@
 ﻿using CleanArchitecture.Application.Dtos;
+using CleanArchitecture.Application.Helpers;
 using CleanArchitecture.Application.Interfaces.AutoMapper;
 using CleanArchitecture.Application.Interfaces.UnitOfWorks;
 using CleanArchitecture.Domain.Entities;
@@ -19,7 +20,13 @@ namespace CleanArchitecture.Application.Features.Products.Queries.GetProductsFil
         }
         public async Task<List<GetProductsFilterationQueryResponse>> Handle(GetProductsFilterationQueryRequest request, CancellationToken cancellationToken)
         {
-            var Products = await unitOfWork.readRepository<Product>().GetAllAsync(include: x => x.Include(x => x.Brand).Include(x => x.images).Include(x => x.ProductsCategory).ThenInclude(x => x.Category));//
+            LoggerHelper.LogInformation("Handling GetProductsFilterationQueryRequest with search input: {SearchInput}", request.SearchInput);
+
+            var Products = await unitOfWork.readRepository<Product>()
+                .GetAllAsync(include: x => x.Include(x => x.Brand)
+                .Include(x => x.images)
+                .Include(x => x.ProductsCategory)
+                .ThenInclude(x => x.Category));//
 
             mapper.Map<BrandDTO, Brand>(Products.Select(x => x.Brand).ToList());
             mapper.Map<ImageDTO, Image>(Products.SelectMany(x => x.images).ToList());
@@ -52,6 +59,8 @@ namespace CleanArchitecture.Application.Features.Products.Queries.GetProductsFil
                     TempData = TempData;
                     break;
             }
+            LoggerHelper.LogInformation("Successfully handled GetProductsFilterationQueryRequest. Filtered products count: {Count}", TempData.Count);
+
             return TempData;
         }
     }

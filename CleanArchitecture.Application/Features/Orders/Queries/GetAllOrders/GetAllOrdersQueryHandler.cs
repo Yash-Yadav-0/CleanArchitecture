@@ -19,19 +19,33 @@ namespace CleanArchitecture.Application.Features.Orders.Queries.GetAllOrders
 
         public async Task<IList<GetAllOrdersQueryResponse>> Handle(GetAllOrdersQueryRequest request, CancellationToken cancellationToken)
         {
-            var functionName = "get_all_orders";
-            return await HandleAsync(
-                request,
-                functionName,
-                reader => new GetAllOrdersQueryResponse
-                {
-                    Id = reader.GetInt32(0),
-                    TotalAmount = reader.GetDecimal(1),
-                    OrderType = (OrderType)reader.GetInt32(2),
-                    UserId = reader.GetGuid(3)
-                },
-                cancellationToken
-            );
+            LoggerHelper.LogInformation("Handling GetAllOrdersQueryRequest");
+
+            IList<GetAllOrdersQueryResponse> orders;
+            try
+            {
+                orders = await HandleAsync(
+                    request,
+                    "get_all_orders",
+                    reader => new GetAllOrdersQueryResponse
+                    {
+                        Id = reader.GetInt32(0),
+                        TotalAmount = reader.GetDecimal(1),
+                        OrderType = (OrderType)reader.GetInt32(2),
+                        UserId = reader.GetGuid(3)
+                    },
+                    cancellationToken
+                );
+
+                LoggerHelper.LogInformation("Successfully retrieved {OrderCount} orders", orders.Count);
+            }
+            catch (Exception ex)
+            {
+                LoggerHelper.LogError("Error occurred while handling GetAllOrdersQueryRequest", ex);
+                throw; // Re-throw the exception after logging it
+            }
+
+            return orders;
         }
     }
 }

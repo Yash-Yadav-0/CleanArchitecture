@@ -3,6 +3,8 @@ using System.Net.Mail;
 using System.Net;
 using Microsoft.Extensions.Configuration;
 using Serilog;
+using Microsoft.IdentityModel.Logging;
+using CleanArchitecture.Application.Helpers;
 
 namespace CleanArchitecture.Infrastructure.Mail
 {
@@ -47,6 +49,7 @@ namespace CleanArchitecture.Infrastructure.Mail
             }
             catch (Exception ex)
             {
+                LoggerHelper.LogError("An error occurred while sending mail:{mailstring}", new Exception("An error occurred while sending mail:"), to);
                 Log.Error("An error occurred while sending mail: {@Message}", ex.Message);
             }
         }

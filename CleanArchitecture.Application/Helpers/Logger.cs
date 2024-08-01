@@ -28,7 +28,6 @@ namespace CleanArchitecture.Application.Helpers
                         .WriteTo.File($"Logs/Informations/Information.txt", rollingInterval: RollingInterval.Day)
                 )
                 .WriteTo.File($"Logs/All/All-log.txt", rollingInterval: RollingInterval.Day)
-                .WriteTo.Console()
                 .CreateLogger();
         }
     }

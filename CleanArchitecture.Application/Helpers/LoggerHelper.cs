@@ -12,10 +12,10 @@ namespace CleanArchitecture.Application.Helpers
             Log.Information(message, args);
 
             // Log to OpenTelemetry
-            var activity = new Activity("LogInformation");
+            /*var activity = new Activity("LogInformation");
             activity.Start();
             activity.SetTag("Message", string.Format(message, args));
-            activity.Stop();
+            activity.Stop();*/
         }
 
         public static void LogWarning(string message, params object[] args)
@@ -24,10 +24,10 @@ namespace CleanArchitecture.Application.Helpers
             Log.Warning(message, args);
 
             // Log to OpenTelemetry
-            var activity = new Activity("LogWarning");
+            /*var activity = new Activity("LogWarning");
             activity.Start();
             activity.SetTag("Message", string.Format(message, args));
-            activity.Stop();
+            activity.Stop();*/
         }
 
         public static void LogError(string message, Exception ex, params object[] args)
@@ -36,12 +36,12 @@ namespace CleanArchitecture.Application.Helpers
             Log.Error(ex, message, args);
 
             // Log to OpenTelemetry
-            var activity = new Activity("LogError");
+            /*var activity = new Activity("LogError");
             activity.Start();
             activity.SetTag("Message", string.Format(message, args));
             activity.SetTag("Exception", ex.ToString());
             activity.SetStatus(ActivityStatusCode.Error, ex.Message);
-            activity.Stop();
+            activity.Stop();*/
         }
     }
 }

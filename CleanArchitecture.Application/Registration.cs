@@ -67,11 +67,12 @@ namespace CleanArchitecture.Application
                         .AddOtlpExporter();
                 });
             //Serilog Configuration
-            services.AddSingleton<Logger>(provider =>
+            /*services.AddSingleton<Logger>(provider =>
             {
                 Logger.LoggerMethod();
                 return new Logger();
-            });
+            });*/
+            Logger.LoggerMethod();
         }
         public static IServiceCollection AddRulesFromAssemblyContaining(this IServiceCollection services, Assembly assembly, Type type)
         {

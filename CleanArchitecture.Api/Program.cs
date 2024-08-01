@@ -106,14 +106,14 @@ namespace CleanArchitecture.Api
 
             app.UseCors(policy => policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
             app.MapControllers();
-
+            /*
             using (var scope = app.Services.CreateScope())
             {
                 var recurringJobManager = scope.ServiceProvider.GetRequiredService<IRecurringJobManager>();
                 recurringJobManager.AddOrUpdate<CheckTimeOfSendingUsersCodeScheduleService>(
                     "CheckUserCodesJob",
                     service => service.CheckTimeOfSendingUsersAsync(),
-                    "*/5 * * * *",
+                    "*_/5 * * * *",
                     new RecurringJobOptions
                     {
                         TimeZone = TimeZoneInfo.Local,
@@ -121,6 +121,8 @@ namespace CleanArchitecture.Api
                     }
                 );
             }
+            */
+            app.UseHangfireDashboard();
 
             app.ExceptionHandleConfiguration();
             app.Run();

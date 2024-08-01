@@ -109,33 +109,4 @@ public class RegistrationCommandHandler : BaseHandler, IRequestHandler<Registrat
         </body>
         </html>";
     }
-
-
-    private string MessageBody(string name, string confirmationLink)
-    {
-        string emailBody = $@"
-<html>
-<body style='font-family: Arial, sans-serif; color: #333;'>
-    <div style='max-width: 600px; margin: auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px;'>
-        <div style='text-align: center;'>
-            <img src='https://yourcompanylogo.com/logo.png' alt='Your Company' style='width: 150px; margin-bottom: 20px;'/>
-        </div>
-        <h2 style='color: #007BFF;'>Hello {name},</h2>
-        <p>Thank you for registering with us! Please confirm your email address by clicking the button below:</p>
-        <div style='text-align: center; margin: 30px 0;'>
-            <a href='{confirmationLink}' style='background-color: #007BFF; color: #fff; padding: 10px 20px; text-decoration: none; border-radius: 5px;'>Confirm Email</a>
-        </div>
-        <p>If the button above does not work, copy and paste the following link into your browser:</p>
-        <p><a href='{confirmationLink}' style='color: #007BFF;'>{confirmationLink}</a></p>
-        <p>If you did not create an account, no further action is required.</p>
-        <p>Best regards,<br/>The Your Company Team</p>
-        <div style='text-align: center; margin-top: 20px;'>
-            <a href='https://www.yourcompany.com' style='color: #007BFF;'>Visit our website</a> | 
-            <a href='https://www.yourcompany.com/contact' style='color: #007BFF;'>Contact Support</a>
-        </div>
-    </div>
-</body>
-</html>";
-        return emailBody;
-    }
 }

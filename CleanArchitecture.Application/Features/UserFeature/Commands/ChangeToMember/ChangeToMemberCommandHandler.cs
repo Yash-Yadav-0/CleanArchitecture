@@ -1,5 +1,6 @@
 ﻿using CleanArchitecture.Application.Bases;
 using CleanArchitecture.Application.Features.UserFeature.Rules;
+using CleanArchitecture.Application.Helpers;
 using CleanArchitecture.Application.Interfaces.AutoMapper;
 using CleanArchitecture.Application.Interfaces.UnitOfWorks;
 using CleanArchitecture.Domain.Entities;
@@ -38,10 +39,14 @@ namespace CleanArchitecture.Application.Features.UserFeature.Commands.ChangeToMe
 
         public async Task<ChangeToMemberCommandResponse> Handle(ChangeToMemberCommandRequest request, CancellationToken cancellationToken)
         {
+            LoggerHelper.LogInformation("Handling ChangeToMemberCommandRequest for Email: {Email}", request.Email);
+
             var userId = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             if (userId == null)
             {
+                LoggerHelper.LogError("User is not authenticated.", 
+                    new UnauthorizedAccessException("User is not authenticated."));
                 throw new UnauthorizedAccessException("User is not authenticated.");
             }
 
@@ -49,6 +54,8 @@ namespace CleanArchitecture.Application.Features.UserFeature.Commands.ChangeToMe
             var userAdmin = await userManager.FindByIdAsync(userId);
             if (userAdmin == null || !(await userManager.IsInRoleAsync(userAdmin, "ADMIN")))
             {
+                LoggerHelper.LogError("User does not have the required Admin role.",
+                    new UnauthorizedAccessException("User does not have the required Admin role."));
                 throw new UnauthorizedAccessException("User does not have the required Admin role.");
             }
             //await userRules.UserShouldnotBeExistsAsync(await userManager.FindByEmailAsync(request.Email));
@@ -56,20 +63,39 @@ namespace CleanArchitecture.Application.Features.UserFeature.Commands.ChangeToMe
 
             if (user == null)
             {
-                Log.Error("Unable to find User {@Id}", request.Email);
+                LoggerHelper.LogError("Unable to find User with Email: {Email}", 
+                    new Exception("User with specified Email does not exist"), request.Email);
                 throw new Exception("User with specified Id does not exist");
             }
-            if (!await roleManager.RoleExistsAsync("Vendor"))
+            try
             {
-                await roleManager.CreateAsync(new Role
+                if (!await roleManager.RoleExistsAsync("USER"))
                 {
-                    Id = Guid.NewGuid(),
-                    Name = "user",
-                    NormalizedName = "USER",
-                    ConcurrencyStamp = Guid.NewGuid().ToString(),
-                });
+                    await roleManager.CreateAsync(new Role
+                    {
+                        Id = Guid.NewGuid(),
+                        Name = "USER",
+                        NormalizedName = "USER",
+                        ConcurrencyStamp = Guid.NewGuid().ToString(),
+                    });
+                }
+
+                // Remove any existing role if necessary before adding new one
+                var currentRoles = await userManager.GetRolesAsync(user);
+                foreach (var role in currentRoles)
+                {
+                    await userManager.RemoveFromRoleAsync(user, role);
+                }
+
                 await userManager.AddToRoleAsync(user, "USER");
                 await userManager.UpdateAsync(user);
+
+                LoggerHelper.LogInformation("User with Email: {Email} successfully changed to User role.", request.Email);
+            }
+            catch (Exception ex)
+            {
+                LoggerHelper.LogError("Error occurred while changing user to User role for Email: {Email}", ex, request.Email);
+                throw; // Re-throw the exception after logging
             }
             return new()
             {

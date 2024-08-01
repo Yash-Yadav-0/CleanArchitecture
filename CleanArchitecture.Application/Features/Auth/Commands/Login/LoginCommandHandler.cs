@@ -2,6 +2,7 @@
 using CleanArchitecture.Application.Features.Auth.Rules;
 using CleanArchitecture.Application.Helpers;
 using CleanArchitecture.Application.Interfaces.AutoMapper;
+using CleanArchitecture.Application.Interfaces.Mail;
 using CleanArchitecture.Application.Interfaces.Tokens;
 using CleanArchitecture.Application.Interfaces.UnitOfWorks;
 using CleanArchitecture.Domain.Entities;
@@ -20,6 +21,7 @@ namespace CleanArchitecture.Application.Features.Auth.Commands.Login
         private readonly ITokenService tokenService;
         private readonly AuthRules AuthRules;
         private readonly IConfiguration configuration;
+        private readonly IMailService mailService;
 
         public LoginCommandHandler(IMapper mapper,
                                    IUnitOfWork unitOfWork,
@@ -27,7 +29,8 @@ namespace CleanArchitecture.Application.Features.Auth.Commands.Login
                                    UserManager<User> userManager,
                                    ITokenService tokenService,
                                    AuthRules AuthRules,
-                                   IConfiguration configuration
+                                   IConfiguration configuration,
+                                   IMailService mailService
                                   )
 
             : base(unitOfWork, mapper, httpContextAccessor)
@@ -36,6 +39,7 @@ namespace CleanArchitecture.Application.Features.Auth.Commands.Login
             this.tokenService = tokenService;
             this.AuthRules = AuthRules;
             this.configuration = configuration;
+            this.mailService = mailService;
         }
 
         public async Task<LoginCommandResponse> Handle(LoginCommandRequest request, CancellationToken cancellationToken)
@@ -46,7 +50,8 @@ namespace CleanArchitecture.Application.Features.Auth.Commands.Login
             bool CheckPassword = await userManager.CheckPasswordAsync(user, request.Password);
             if (!CheckPassword)
             {
-                LoggerHelper.LogWarning("Invalid password attempt for Email: {Email}", request.Email);
+                await mailService.SendMailAsync(request.Email, "Invalid password attempt", $"{user.FullName} 's login attempt in clean architecture: [password wrong]" );
+                LoggerHelper.LogWarning("Invalid password attempt for Email: {Email} and email sent.", request.Email);
                 throw new Exception("Invalid password");
             }
 
