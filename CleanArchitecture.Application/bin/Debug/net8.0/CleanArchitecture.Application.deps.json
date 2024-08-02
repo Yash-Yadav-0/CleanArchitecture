@@ -19,7 +19,7 @@
           "Npgsql": "8.0.3",
           "OpenTelemetry.Exporter.OpenTelemetryProtocol": "1.9.0",
           "OpenTelemetry.Extensions.Hosting": "1.9.0",
-          "OpenTelemetry.Instrumentation.AspNetCore": "1.9.0",
+          "OpenTelemetry.Instrumentation.AspNetCore": "1.6.0",
           "OpenTelemetry.Instrumentation.EntityFrameworkCore": "1.0.0-beta.10",
           "OpenTelemetry.Instrumentation.Http": "1.9.0",
           "SendGrid": "9.29.3",
@@ -647,14 +647,14 @@
           }
         }
       },
-      "OpenTelemetry.Instrumentation.AspNetCore/1.9.0": {
+      "OpenTelemetry.Instrumentation.AspNetCore/1.6.0": {
         "dependencies": {
           "OpenTelemetry.Api.ProviderBuilderExtensions": "1.9.0"
         },
         "runtime": {
           "lib/net8.0/OpenTelemetry.Instrumentation.AspNetCore.dll": {
-            "assemblyVersion": "1.9.0.42",
-            "fileVersion": "1.9.0.42"
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.6.0.1113"
           }
         }
       },
@@ -1933,12 +1933,12 @@
       "path": "opentelemetry.extensions.hosting/1.9.0",
       "hashPath": "opentelemetry.extensions.hosting.1.9.0.nupkg.sha512"
     },
-    "OpenTelemetry.Instrumentation.AspNetCore/1.9.0": {
+    "OpenTelemetry.Instrumentation.AspNetCore/1.6.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-x4HuWBw1rbWZUh5j8/GpXz3xa7JnrTuKne+ACmBqvcoO/rNGkG7HayRruwoQ7gf52xpMtRGr4gxlhLW8eU0EiQ==",
-      "path": "opentelemetry.instrumentation.aspnetcore/1.9.0",
-      "hashPath": "opentelemetry.instrumentation.aspnetcore.1.9.0.nupkg.sha512"
+      "sha512": "sha512-NGgMVcW57jI5OGFuCXqTtkNwgtsPJ5GPuUyrfw5fg2tbBwQZQyzfuquw7wvEimVOhD65vT6EX3+8HZUWDBe2ug==",
+      "path": "opentelemetry.instrumentation.aspnetcore/1.6.0",
+      "hashPath": "opentelemetry.instrumentation.aspnetcore.1.6.0.nupkg.sha512"
     },
     "OpenTelemetry.Instrumentation.EntityFrameworkCore/1.0.0-beta.10": {
       "type": "package",

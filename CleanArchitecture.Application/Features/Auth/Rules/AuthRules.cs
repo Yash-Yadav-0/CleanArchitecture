@@ -14,7 +14,7 @@ namespace CleanArchitecture.Application.Features.Auth.Rules
                 throw new UserAlreadyExistsException("This User has registered before, use another Values");
             return Task.CompletedTask;
         }
-        public Task EmailOrPasswordShouldnotbeInvalidAsync(User user, bool checkPassword)
+        public virtual Task EmailOrPasswordShouldnotbeInvalidAsync(User user, bool checkPassword)
         {
             if (user is null || !checkPassword)
                 throw new EmailOrPasswordShouldnotbeInvalidException("Password invalid or wrong Password, Or user not found.");

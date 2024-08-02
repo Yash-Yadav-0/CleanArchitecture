@@ -21,7 +21,7 @@ public class RegistrationCommandHandler : BaseHandler, IRequestHandler<Registrat
     private readonly IMapper _mapper;
     private readonly IHttpContextAccessor _httpContextAccessor;
     private readonly IMailService _mailService;
-    private readonly LinkGeneratorHelper _linkGeneratorHelper;
+    private readonly ILinkGeneratorHelper _linkGeneratorHelper;
     private readonly EmailConfirmationCommandRequest _emailConfirmationCommandRequest;
     private readonly ILocalStorage _localStorage;
     private readonly IUrlHelper urlHelper;
@@ -37,7 +37,7 @@ public class RegistrationCommandHandler : BaseHandler, IRequestHandler<Registrat
                                       RoleManager<Role> roleManager,
                                       AuthRules authRules,
                                       IMailService mailService,
-                                      LinkGeneratorHelper linkGeneratorHelper,
+                                      ILinkGeneratorHelper linkGeneratorHelper,
                                       EmailConfirmationCommandRequest emailConfirmationCommandRequest,
                                       ILocalStorage localStorage)
         : base(unitOfWork, mapper, httpContextAccessor)

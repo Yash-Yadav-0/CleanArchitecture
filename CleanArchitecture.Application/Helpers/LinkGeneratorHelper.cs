@@ -10,7 +10,11 @@ using System.Threading.Tasks;
 
 namespace CleanArchitecture.Application.Helpers
 {
-    public class LinkGeneratorHelper
+    public interface ILinkGeneratorHelper
+    {
+        string GenerateLink(string action, string controller, object values);
+    }
+    public class LinkGeneratorHelper : ILinkGeneratorHelper
     {
         private readonly LinkGenerator _linkGenerator;
         private readonly IHttpContextAccessor _httpContextAccessor;

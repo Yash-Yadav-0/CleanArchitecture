@@ -45,8 +45,7 @@ namespace CleanArchitecture.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateOrder(MakeOrderCommandRequest request)
         {
-            await mediator.Send(request);
-            return Created();
+            return Ok(await mediator.Send(request));
         }
 
         [Authorize]

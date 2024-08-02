@@ -38,7 +38,8 @@ namespace CleanArchitecture.Application
             services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddHttpContextAccessor();
-            services.AddSingleton<LinkGeneratorHelper>();
+            services.AddScoped<ILinkGeneratorHelper, LinkGeneratorHelper>();
+
             services.AddHttpContextAccessor();
 
             services.AddSingleton<EmailConfirmationCommandRequest>();
