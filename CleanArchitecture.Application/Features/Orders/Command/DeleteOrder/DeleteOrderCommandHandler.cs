@@ -9,11 +9,11 @@ using Microsoft.AspNetCore.Http;
 
 namespace CleanArchitecture.Application.Features.Orders.Comments.DeleteOrder
 {
-    public class DeleteOrderCommendHandler : BaseHandler, IRequestHandler<DeleteOrderCommandRequest, Unit>
+    public class DeleteOrderCommandHandler : BaseHandler, IRequestHandler<DeleteOrderCommandRequest, Unit>
     {
-        private readonly OrderRules orderRules;
+        private readonly IOrderRules orderRules;
 
-        public DeleteOrderCommendHandler(IUnitOfWork unitOfWork, IMapper mapper, IHttpContextAccessor httpContextAccessor, OrderRules orderRules)
+        public DeleteOrderCommandHandler(IUnitOfWork unitOfWork, IMapper mapper, IHttpContextAccessor httpContextAccessor, IOrderRules orderRules)
             : base(unitOfWork, mapper, httpContextAccessor)
         {
             this.orderRules = orderRules;

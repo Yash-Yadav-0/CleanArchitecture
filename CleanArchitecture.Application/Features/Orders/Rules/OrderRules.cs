@@ -3,18 +3,24 @@ using CleanArchitecture.Domain.Entities;
 
 namespace CleanArchitecture.Application.Features.Orders.Rules
 {
-    public class OrderRules
+    public interface IOrderRules
     {
-        public Task TheSameUserForTheSameOrder(Guid firstGuid, Guid secondGuid)
+        Task TheSameUserForTheSameOrder(Guid currentUserID, Guid orderUserID);
+        Task TheOrderShouldBeExist(Order? order);
+    }
+    public class OrderRules : IOrderRules
+    {
+        public Task TheSameUserForTheSameOrder(Guid currentUserId, Guid orderUserId)
         {
-            if (!firstGuid.Equals(secondGuid))
+            if (!currentUserId.Equals(orderUserId))
                 throw new TheSameUserForTheSameOrderException("The Same User should be For The Same Order");
             return Task.CompletedTask;
         }
+
         public Task TheOrderShouldBeExist(Order? order)
         {
             if (order is null)
-                throw new TheOrderShouldBeExistException("this order is not exist in your records");
+                throw new TheOrderShouldBeExistException("This order does not exist in your records");
             return Task.CompletedTask;
         }
     }

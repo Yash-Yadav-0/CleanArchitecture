@@ -7,15 +7,16 @@ using Microsoft.AspNetCore.Http;
 using MediatR;
 using CleanArchitecture.Application.Helpers;
 using System.Security.Claims;
+using Microsoft.EntityFrameworkCore;
 
 namespace CleanArchitecture.Application.Features.Orders.Command.UpdateOrder
 {
     public class UpdateOrderCommentHandler : BaseHandler, IRequestHandler<UpdateOrderCommandRequest, Unit>
     {
-        private readonly OrderRules _orderRules;
+        private readonly IOrderRules _orderRules;
         private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public UpdateOrderCommentHandler(IUnitOfWork unitOfWork, IMapper mapper, IHttpContextAccessor httpContextAccessor, OrderRules orderRules)
+        public UpdateOrderCommentHandler(IUnitOfWork unitOfWork, IMapper mapper, IHttpContextAccessor httpContextAccessor, IOrderRules orderRules)
             : base(unitOfWork, mapper, httpContextAccessor)
         {
             _orderRules = orderRules;
@@ -34,9 +35,17 @@ namespace CleanArchitecture.Application.Features.Orders.Command.UpdateOrder
                 LoggerHelper.LogWarning("Order with Id: {OrderId} does not exist", request.Id);
                 throw new Exception("Order not found");
             }
+
             var userId = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (userId == null)
+            {
+                LoggerHelper.LogWarning("User is not authenticated");
+                throw new Exception("User is not authenticated");
+            }
+
+            var currentUserID = Guid.Parse(userId);
             await _orderRules.TheOrderShouldBeExist(oldOrder);
-            await _orderRules.TheSameUserForTheSameOrder(Guid.Parse(userId), oldOrder.UserId);
+            await _orderRules.TheSameUserForTheSameOrder(currentUserID, oldOrder.UserId);
 
             var productsOrders = await UnitOfWork.readRepository<ProductsOrders>()
                                                  .GetAllAsync(predicate: x => x.OrderId == oldOrder.Id);
@@ -59,6 +68,13 @@ namespace CleanArchitecture.Application.Features.Orders.Command.UpdateOrder
 
                 totalPrice.Add(product.Price * tempOrder.ProductCount);
                 LoggerHelper.LogInformation("ProductId: {ProductId} added to order with Quantity: {Quantity}", tempOrder.ProductId, tempOrder.ProductCount);
+
+                // Add valid products
+                await UnitOfWork.writeRepository<ProductsOrders>().AddAsync(new ProductsOrders
+                {
+                    OrderId = oldOrder.Id,
+                    ProductId = tempOrder.ProductId
+                });
             }
 
             var newOrder = new Order
@@ -71,16 +87,7 @@ namespace CleanArchitecture.Application.Features.Orders.Command.UpdateOrder
                 UpdatedDate = DateTime.UtcNow
             };
 
-            foreach (var tempOrder in request.makeOrderDTOs)
-            {
-                await UnitOfWork.writeRepository<ProductsOrders>().AddAsync(new ProductsOrders
-                {
-                    OrderId = newOrder.Id,
-                    ProductId = tempOrder.ProductId
-                });
-                LoggerHelper.LogInformation("ProductId: {ProductId} added to OrderId: {OrderId}", tempOrder.ProductId, newOrder.Id);
-            }
-
+            // Update the new order
             await UnitOfWork.writeRepository<Order>().UpdateAsync(newOrder.Id, newOrder);
 
             if (await UnitOfWork.SaveChangeAsync() > 0)
@@ -91,9 +98,7 @@ namespace CleanArchitecture.Application.Features.Orders.Command.UpdateOrder
             {
                 LoggerHelper.LogWarning("Failed to update OrderId: {OrderId}", newOrder.Id);
             }
-
             return Unit.Value;
         }
     }
-
 }

@@ -1,6 +1,7 @@
 ﻿using CleanArchitecture.Application.Bases;
 using CleanArchitecture.Application.Behaviors;
 using CleanArchitecture.Application.Features.Auth.Commands.EmailConfirmation;
+using CleanArchitecture.Application.Features.Orders.Comments.DeleteOrder;
 using CleanArchitecture.Application.Features.Orders.Rules;
 using CleanArchitecture.Application.Features.Products.Rules;
 using CleanArchitecture.Application.Helpers;
@@ -44,7 +45,8 @@ namespace CleanArchitecture.Application
 
             services.AddSingleton<EmailConfirmationCommandRequest>();
             services.AddTransient<ProductRules>();
-            services.AddTransient<OrderRules>();
+            services.AddTransient<IOrderRules,OrderRules>();
+            services.AddTransient<IRequestHandler<DeleteOrderCommandRequest, Unit>, DeleteOrderCommandHandler>();
             services.AddTransient<SignInManager<User>>();
             services.AddRulesFromAssemblyContaining(assembly, typeof(BaseRule));
 

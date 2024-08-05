@@ -28,7 +28,6 @@
     <Folder Include="Authentication.Tests\Queries.Tests\" />
     <Folder Include="DummyClass\" />
     <Folder Include="Orders.Tests\Queries.Tests\" />
-    <Folder Include="Products.Tests\Command.Tests\" />
     <Folder Include="Products.Tests\Queries.Tests\" />
     <Folder Include="UserFeature.Tests\Command.Tests\" />
     <Folder Include="UserFeature.Tests\Queries.Tests\" />
