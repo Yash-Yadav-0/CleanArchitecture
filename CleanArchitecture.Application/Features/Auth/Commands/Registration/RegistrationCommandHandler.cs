@@ -17,8 +17,6 @@ using Microsoft.IdentityModel.Logging;
 
 public class RegistrationCommandHandler : BaseHandler, IRequestHandler<RegistrationCommandRequest, Unit>
 {
-    private readonly IUnitOfWork _unitOfWork;
-    private readonly IMapper _mapper;
     private readonly IHttpContextAccessor _httpContextAccessor;
     private readonly IMailService _mailService;
     private readonly ILinkGeneratorHelper _linkGeneratorHelper;
@@ -42,8 +40,6 @@ public class RegistrationCommandHandler : BaseHandler, IRequestHandler<Registrat
                                       ILocalStorage localStorage)
         : base(unitOfWork, mapper, httpContextAccessor)
     {
-        _unitOfWork = unitOfWork;
-        _mapper = mapper;
         _httpContextAccessor = httpContextAccessor;
         UserManager = userManager;
         RoleManager = roleManager;

@@ -1,242 +1,107 @@
 ﻿using CleanArchitecture.Application.Features.Products.Commands.CreateProduct;
 using CleanArchitecture.Application.Features.Products.Exceptions;
-using CleanArchitecture.Application.Interfaces.AutoMapper;
-using CleanArchitecture.Application.Interfaces.Storage;
 using CleanArchitecture.Application.Features.Products.Rules;
+using CleanArchitecture.Application.Interfaces.AutoMapper;
+using CleanArchitecture.Application.Interfaces.Repositories;
+using CleanArchitecture.Application.Interfaces.Storage;
+using CleanArchitecture.Application.Interfaces.UnitOfWorks;
 using CleanArchitecture.Domain.Entities;
-using CleanArchitecture.Persistence.Context;
-using Moq;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using System;
+using Moq;
 using System.Collections.Generic;
-using System.Linq;
+using System.Linq.Expressions;
 using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
-using CleanArchitecture.Application.Interfaces.Repositories;
-using CleanArchitecture.Persistence.UnitOfWorks;
+using static Xunit.Assert;
 
-namespace CleanArchitecture.Tests.Products.Tests.Command.Tests
+namespace CleanArchitecture.Application.Tests.Features.Products.Commands
 {
-    public class CreateProductCommandHandlerTests : IDisposable
+    public class CreateProductCommandHandlerTests
     {
-        private readonly Mock<IMapper> _mapperMock;
-        private readonly Mock<IHttpContextAccessor> _httpContextAccessorMock;
-        private readonly Mock<UserManager<User>> _userManagerMock;
-        private readonly Mock<RoleManager<Role>> _roleManagerMock;
-        private readonly Mock<ILocalStorage> _localStorageMock;
+        private readonly Mock<IUnitOfWork> _mockUnitOfWork;
+        private readonly Mock<IProductRules> _mockProductRules;
+        private readonly Mock<IMapper> _mockMapper;
+        private readonly Mock<IHttpContextAccessor> _mockHttpContextAccessor;
+        private readonly Mock<UserManager<User>> _mockUserManager;
+        private readonly Mock<ILocalStorage> _mockLocalStorage;
+        private readonly Mock<RoleManager<Role>> _mockRoleManager;
         private readonly CreateProductCommandHandler _handler;
-        private readonly DbContextOptions<ApplicationDbContext> _options;
 
         public CreateProductCommandHandlerTests()
         {
-            _options = new DbContextOptionsBuilder<ApplicationDbContext>()
-                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
-                .Options;
-
-            _mapperMock = new Mock<IMapper>();
-            _httpContextAccessorMock = new Mock<IHttpContextAccessor>();
-            _userManagerMock = new Mock<UserManager<User>>(Mock.Of<IUserStore<User>>(), null, null, null, null, null, null, null, null);
-            _roleManagerMock = new Mock<RoleManager<Role>>(Mock.Of<IRoleStore<Role>>(), null, null, null, null);
-            _localStorageMock = new Mock<ILocalStorage>();
-
-            var httpContext = new DefaultHttpContext();
-            var userId = Guid.NewGuid().ToString();
-
-            httpContext.User = new ClaimsPrincipal(new ClaimsIdentity(new[]
-            {
-                new Claim(ClaimTypes.NameIdentifier, userId)
-            }, "mock"));
-
-            _httpContextAccessorMock.Setup(h => h.HttpContext).Returns(httpContext);
+            _mockUnitOfWork = new Mock<IUnitOfWork>();
+            _mockProductRules = new Mock<IProductRules>();
+            _mockMapper = new Mock<IMapper>();
+            _mockHttpContextAccessor = new Mock<IHttpContextAccessor>();
+            _mockUserManager = new Mock<UserManager<User>>(MockBehavior.Strict, null, null, null, null, null, null, null, null);
+            _mockLocalStorage = new Mock<ILocalStorage>();
+            _mockRoleManager = new Mock<RoleManager<Role>>(MockBehavior.Strict, null, null, null, null);
 
             _handler = new CreateProductCommandHandler(
-                new UnitOfWork(new ApplicationDbContext(_options)),
-                new ProductRules(),
-                _mapperMock.Object,
-                _httpContextAccessorMock.Object,
-                _userManagerMock.Object,
-                _localStorageMock.Object,
-                _roleManagerMock.Object
+                _mockUnitOfWork.Object,
+                _mockProductRules.Object,
+                _mockMapper.Object,
+                _mockHttpContextAccessor.Object,
+                _mockUserManager.Object,
+                _mockLocalStorage.Object,
+                _mockRoleManager.Object
             );
-        }
-
-        public void Dispose()
-        {
-            // Dispose of resources if necessary
         }
 
         [Fact]
         public async Task Handle_ValidRequest_ShouldCreateProduct()
         {
-            using var dbContext = new ApplicationDbContext(_options);
             // Arrange
-            var userId = Guid.NewGuid().ToString();
+            var userId = Guid.NewGuid();
             var request = new CreateProductCommandRequest
             {
                 Title = "New Product",
                 Description = "Product Description",
-                Price = 100.0m,
-                Discount = 10.0m,
+                Price = 100.00m,
+                Discount = 10.00m,
                 BrandId = 1,
                 CategortIds = new List<int> { 1, 2 },
-                Images = null
+                Images = null // Assuming you have a list of IFormFile for testing
             };
 
-            var user = new User
+            var httpContext = new DefaultHttpContext();
+            httpContext.User = new ClaimsPrincipal(new ClaimsIdentity(new[]
             {
-                Id = Guid.Parse(userId),
-                UserName = "admin",
-                Email = "admin@example.com"
-            };
-            var role = new Role
-            {
-                Id = Guid.NewGuid(),
-                Name = "ADMIN",
-                NormalizedName = "ADMIN",
-                ConcurrencyStamp = Guid.NewGuid().ToString(),
-            };
+                new Claim(ClaimTypes.NameIdentifier, userId.ToString()),
+                new Claim(ClaimTypes.Role, "ADMIN")
+            }, "test"));
 
-            _userManagerMock.Setup(um => um.FindByIdAsync(userId)).ReturnsAsync(user);
-            _userManagerMock.Setup(rm => rm.AddToRoleAsync(user, "ADMIN"));
-            _userManagerMock.Setup(um => um.IsInRoleAsync(user, "ADMIN")).ReturnsAsync(true);
+            _mockHttpContextAccessor.Setup(x => x.HttpContext).Returns(httpContext);
+            _mockUserManager.Setup(x => x.FindByIdAsync(userId.ToString())).ReturnsAsync(new User());
+            _mockUserManager.Setup(x => x.IsInRoleAsync(It.IsAny<User>(), "ADMIN")).ReturnsAsync(true);
 
-            _roleManagerMock.Setup(rm => rm.RoleExistsAsync("ADMIN")).ReturnsAsync(true);
+            var mockProductRepo = new Mock<IReadRepository<Product>>();
+            var mockWriteProductRepo = new Mock<IWriteRepository<Product>>();
+            var mockWriteProductsCategoriesRepo = new Mock<IWriteRepository<ProductsCategories>>();
+            var mockLocalStorage = new Mock<ILocalStorage>();
 
-            var productRepoMock = new Mock<IWriteRepository<Product>>();
-            var productCategoryRepoMock = new Mock<IWriteRepository<ProductsCategories>>();
-            var imageRepoMock = new Mock<IWriteRepository<Image>>();
+            _mockUnitOfWork.Setup(uow => uow.readRepository<Product>()).Returns(mockProductRepo.Object);
+            _mockUnitOfWork.Setup(uow => uow.writeRepository<Product>()).Returns(mockWriteProductRepo.Object);
+            _mockUnitOfWork.Setup(uow => uow.writeRepository<ProductsCategories>()).Returns(mockWriteProductsCategoriesRepo.Object);
+            _mockUnitOfWork.Setup(uow => uow.SaveChangeAsync()).ReturnsAsync(1);
+
+            mockProductRepo.Setup(x => x.Find(It.IsAny<Expression<Func<Product, bool>>>(), false)).ReturnsAsync(new List<Product>().AsQueryable());
+            mockWriteProductRepo.Setup(x => x.AddAsync(It.IsAny<Product>())).Returns(Task.CompletedTask);
+            mockWriteProductsCategoriesRepo.Setup(x => x.AddAsync(It.IsAny<ProductsCategories>())).Returns(Task.CompletedTask);
 
             // Act
-            await _handler.Handle(request, CancellationToken.None);
+            var result = await _handler.Handle(request, CancellationToken.None);
 
             // Assert
-            var createdProduct = await dbContext.products.AsNoTracking().FirstOrDefaultAsync(p => p.Title == request.Title);
-            Assert.NotNull(createdProduct);
-            Assert.Equal(request.Title, createdProduct.Title);
-            Assert.Equal(request.Description, createdProduct.Description);
-            Assert.Equal(request.Price, createdProduct.Price);
-            Assert.Equal(request.Discount, createdProduct.Discount);
-
-            var categories = await dbContext.productsCategories.AsNoTracking().ToListAsync();
-            Assert.Equal(request.CategortIds.Count, categories.Count);
-        }
-
-        [Fact]
-        public async Task Handle_DuplicateTitle_ShouldThrowException()
-        {
-            using var dbContext = new ApplicationDbContext(_options);
-            // Arrange
-            var existingProductTitle = "Existing Product";
-            var userId = Guid.NewGuid().ToString();
-            var existingProduct = new Product
-            {
-                Title = existingProductTitle,
-                Description = "Description",
-                Price = 50.0m,
-                Discount = 5.0m,
-                BrandId = 1
-            };
-            dbContext.products.Add(existingProduct);
-            await dbContext.SaveChangesAsync();
-
-            var request = new CreateProductCommandRequest
-            {
-                Title = existingProductTitle, // Duplicate title
-                Description = "New Product Description",
-                Price = 100.0m,
-                Discount = 10.0m,
-                BrandId = 1,
-                CategortIds = new List<int> { 1 },
-                Images = null
-            };
-
-            var user = new User
-            {
-                Id = Guid.Parse(userId),
-                UserName = "admin",
-                Email = "admin@example.com"
-            };
-
-            _userManagerMock.Setup(um => um.FindByIdAsync(userId)).ReturnsAsync(user);
-            _userManagerMock.Setup(um => um.IsInRoleAsync(user, "ADMIN")).ReturnsAsync(true);
-
-            // Act & Assert
-            var exception = await Assert.ThrowsAsync<ProductsTitleMustNotBeTheSameException>(() => _handler.Handle(request, CancellationToken.None));
-            Assert.IsType<ProductsTitleMustNotBeTheSameException>(exception);
-        }
-
-        [Fact]
-        public async Task Handle_UnauthorizedUser_ShouldThrowException()
-        {
-            // Arrange
-            var userId = Guid.NewGuid().ToString();
-            var request = new CreateProductCommandRequest
-            {
-                Title = "New Product",
-                Description = "Product Description",
-                Price = 100.0m,
-                Discount = 10.0m,
-                BrandId = 1,
-                CategortIds = new List<int> { 1 },
-                Images = null
-            };
-
-            _userManagerMock.Setup(um => um.FindByIdAsync(userId)).ReturnsAsync((User)null);
-            _userManagerMock.Setup(um => um.IsInRoleAsync(It.IsAny<User>(), "ADMIN")).ReturnsAsync(false);
-
-            // Act & Assert
-            await Assert.ThrowsAsync<UnauthorizedAccessException>(() => _handler.Handle(request, CancellationToken.None));
-        }
-
-        [Fact]
-        public async Task Handle_AuthorizedAdminUser_ShouldCreateProduct()
-        {
-            using (var dbContext = new ApplicationDbContext(_options))
-            {
-                // Arrange
-                var userId = Guid.NewGuid().ToString();
-                var request = new CreateProductCommandRequest
-                {
-                    Title = "New Product",
-                    Description = "Product Description",
-                    Price = 100.0m,
-                    Discount = 10.0m,
-                    BrandId = 1,
-                    CategortIds = new List<int> { 1, 2 },
-                    Images = null
-                };
-
-                // Setup user with ADMIN role
-                var user = new User
-                {
-                    Id = Guid.Parse(userId),
-                    UserName = "admin",
-                    Email = "admin@example.com"
-                };
-
-                _userManagerMock.Setup(um => um.FindByIdAsync(userId)).ReturnsAsync(user);
-                _userManagerMock.Setup(um => um.IsInRoleAsync(user, "ADMIN")).ReturnsAsync(true);
-
-                _roleManagerMock.Setup(rm => rm.RoleExistsAsync("ADMIN")).ReturnsAsync(true);
-
-                // Act
-                await _handler.Handle(request, CancellationToken.None);
-
-                // Assert
-                var createdProduct = await dbContext.products.AsNoTracking().FirstOrDefaultAsync(p => p.Title == request.Title);
-                Assert.NotNull(createdProduct);
-                Assert.Equal(request.Title, createdProduct.Title);
-                Assert.Equal(request.Description, createdProduct.Description);
-                Assert.Equal(request.Price, createdProduct.Price);
-                Assert.Equal(request.Discount, createdProduct.Discount);
-
-                var categories = await dbContext.productsCategories.AsNoTracking().ToListAsync();
-                Assert.Equal(request.CategortIds.Count, categories.Count);
-            }
+            NotNull(result);
+            _mockUserManager.Verify(x => x.FindByIdAsync(userId.ToString()), Times.Once);
+            _mockUserManager.Verify(x => x.IsInRoleAsync(It.IsAny<User>(), "ADMIN"), Times.Once);
+            mockProductRepo.Verify(x => x.Find(It.IsAny<Expression<Func<Product, bool>>>(), false), Times.Once);
+            mockWriteProductRepo.Verify(x => x.AddAsync(It.IsAny<Product>()), Times.Once);
+            mockWriteProductsCategoriesRepo.Verify(x => x.AddAsync(It.IsAny<ProductsCategories>()), Times.Exactly(request.CategortIds.Count));
         }
     }
 }

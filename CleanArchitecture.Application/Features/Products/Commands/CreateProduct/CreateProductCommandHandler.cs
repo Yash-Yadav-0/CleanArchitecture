@@ -16,16 +16,14 @@ namespace CleanArchitecture.Application.Features.Products.Commands.CreateProduct
 {
     public class CreateProductCommandHandler : BaseHandler, IRequestHandler<CreateProductCommandRequest, Unit>
     {
-        private readonly IUnitOfWork unitOfWork;
-        private readonly ProductRules productRules;
-        private readonly IMapper mapper;
+        private readonly IProductRules productRules;
         private readonly IHttpContextAccessor httpContextAccessor;
         private readonly ILocalStorage localStorage;
         private readonly UserManager<User> userManager;
         private readonly RoleManager<Role> roleManager;
 
         public CreateProductCommandHandler(IUnitOfWork unitOfWork,
-                                           ProductRules productRules,
+                                           IProductRules productRules,
                                            IMapper mapper,
                                            IHttpContextAccessor httpContextAccessor,
                                            UserManager<User> userManager,
@@ -35,9 +33,7 @@ namespace CleanArchitecture.Application.Features.Products.Commands.CreateProduct
                                            )
             : base(unitOfWork, mapper, httpContextAccessor)
         {
-            this.unitOfWork = unitOfWork;
             this.productRules = productRules;
-            this.mapper = mapper;
             this.httpContextAccessor = httpContextAccessor;
             this.userManager = userManager;
             this.roleManager = roleManager;
@@ -71,9 +67,9 @@ namespace CleanArchitecture.Application.Features.Products.Commands.CreateProduct
                     throw new UnauthorizedAccessException("User does not have the required `Admin` role.");
                 }
 
-                IQueryable<Product> queriedProduct = await UnitOfWork.readRepository<Product>().Find(p => p.Title == request.Title);
+                var queriedProduct = await UnitOfWork.readRepository<Product>().Find(p => p.Title == request.Title);
 
-                IList<Product> existingProducts = await queriedProduct.ToListAsync();
+                var existingProducts = await queriedProduct.ToListAsync();
 
                 if (existingProducts.Any())
                 {

@@ -4,7 +4,11 @@ using CleanArchitecture.Domain.Entities;
 
 namespace CleanArchitecture.Application.Features.Products.Rules
 {
-    public class ProductRules : BaseRule
+    public interface IProductRules 
+    {
+        public Task ProductsTitleMustNotBeTheSame(IList<Product> products, string TitleOfRequest);
+    }
+    public class ProductRules : BaseRule ,IProductRules
     {
         public Task ProductsTitleMustNotBeTheSame(IList<Product> products, string titleOfRequest)
         {
