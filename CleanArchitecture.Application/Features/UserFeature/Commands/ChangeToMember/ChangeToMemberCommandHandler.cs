@@ -52,7 +52,7 @@ namespace CleanArchitecture.Application.Features.UserFeature.Commands.ChangeToMe
 
             // Find the user and check if they are in the Admin role
             var userAdmin = await userManager.FindByIdAsync(userId);
-            if (userAdmin == null || !(await userManager.IsInRoleAsync(userAdmin, "ADMIN")))
+            if (userAdmin == null || !(await userManager.IsInRoleAsync(userAdmin, "Admin")))
             {
                 LoggerHelper.LogError("User does not have the required Admin role.",
                     new UnauthorizedAccessException("User does not have the required Admin role."));
@@ -82,6 +82,11 @@ namespace CleanArchitecture.Application.Features.UserFeature.Commands.ChangeToMe
 
                 // Remove any existing role if necessary before adding new one
                 var currentRoles = await userManager.GetRolesAsync(user);
+                if (currentRoles == null)
+                {
+                    currentRoles = new List<string>(); // Default to empty list if null
+                }
+
                 foreach (var role in currentRoles)
                 {
                     await userManager.RemoveFromRoleAsync(user, role);
@@ -99,7 +104,7 @@ namespace CleanArchitecture.Application.Features.UserFeature.Commands.ChangeToMe
             }
             return new()
             {
-                MessageToReturn = UserId.ToString(),
+                MessageToReturn = user.Id.ToString(),
             };
         }
     }

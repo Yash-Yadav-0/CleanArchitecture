@@ -54,7 +54,7 @@ namespace CleanArchitecture.Application.Features.UserFeature.Commands.ChangeToVe
 
             // Find the user and check if they are in the Admin role
             var userAdmin = await userManager.FindByIdAsync(userId);
-            if (userAdmin == null || !(await userManager.IsInRoleAsync(userAdmin, "ADMIN")))
+            if (userAdmin == null || !(await userManager.IsInRoleAsync(userAdmin, "Admin")))
             {
                 LoggerHelper.LogError("User does not have the required Admin role.", new UnauthorizedAccessException("User doesnot meet required Role."));
                 throw new UnauthorizedAccessException("User does not have the required Admin role.");
@@ -81,6 +81,21 @@ namespace CleanArchitecture.Application.Features.UserFeature.Commands.ChangeToVe
                     await userManager.AddToRoleAsync(user, "VENDOR");
                     await userManager.UpdateAsync(user);
                 }
+
+                var currentRole = await userManager.GetRolesAsync(user);
+                if (currentRole == null)
+                {
+                    currentRole = new List<string>();
+                }
+
+                foreach (var role in currentRole)
+                {
+                    await userManager.RemoveFromRoleAsync(user, role);
+                }
+
+                await userManager.AddToRoleAsync(user, "VENDOR");
+                await userManager.UpdateAsync(user);
+
                 LoggerHelper.LogInformation("User with Email: {Email} successfully changed to Vendor role.", request.Email);
             }
             catch (Exception ex)
@@ -91,7 +106,7 @@ namespace CleanArchitecture.Application.Features.UserFeature.Commands.ChangeToVe
             
             return new()
             {
-                MessageToReturn = UserId.ToString(),
+                MessageToReturn = user.Id.ToString(),
             };
         }
     }

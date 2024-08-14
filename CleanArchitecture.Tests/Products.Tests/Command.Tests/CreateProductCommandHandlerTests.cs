@@ -25,9 +25,11 @@ namespace CleanArchitecture.Application.Tests.Features.Products.Commands
         private readonly Mock<IMapper> _mapperMock;
         private readonly ApplicationDbContext _dbContext;
         private readonly CreateProductCommandHandler _handler;
+        private readonly Guid _userID;
 
         public CreateProductCommandHandlerTests()
         {
+            _userID = Guid.NewGuid();
             var dbContextOptions = new DbContextOptionsBuilder<ApplicationDbContext>()
                 .UseInMemoryDatabase(Guid.NewGuid().ToString()) // Unique database for each test
                 .Options;
@@ -41,7 +43,7 @@ namespace CleanArchitecture.Application.Tests.Features.Products.Commands
             var httpContext = new DefaultHttpContext();
             httpContext.User = new ClaimsPrincipal(new ClaimsIdentity(new[]
             {
-                new Claim(ClaimTypes.NameIdentifier, Guid.NewGuid().ToString()),
+                new Claim(ClaimTypes.NameIdentifier, _userID.ToString()),
                 new Claim(ClaimTypes.Role, "Admin") // Set role directly in claims
             }));
             _httpContextAccessorMock.Setup(h => h.HttpContext).Returns(httpContext);
@@ -71,7 +73,7 @@ namespace CleanArchitecture.Application.Tests.Features.Products.Commands
         public async Task Handle_ValidRequest_Success()
         {
             // Arrange
-            var userId = Guid.NewGuid();
+            var userId = _userID;
             var role = new Role
             {
                 Name = "Admin",
@@ -156,5 +158,4 @@ namespace CleanArchitecture.Application.Tests.Features.Products.Commands
             await Assert.ThrowsAsync<UnauthorizedAccessException>(() => _handler.Handle(request, CancellationToken.None));
         }
     }
-
 }

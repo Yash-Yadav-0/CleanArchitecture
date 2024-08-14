@@ -52,7 +52,7 @@ namespace CleanArchitecture.Application.Features.Products.Commands.CreateProduct
                 }
 
                 var userId = httpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
-
+               
                 if (userId == null)
                 {
                     LoggerHelper.LogWarning("Unauthorized attempt to create products. UserId is null.");

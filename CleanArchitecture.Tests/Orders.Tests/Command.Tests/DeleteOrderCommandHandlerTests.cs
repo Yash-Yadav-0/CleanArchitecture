@@ -72,6 +72,8 @@ namespace CleanArchitecture.Tests.Orders.Tests.Command.Tests
             var request = new DeleteOrderCommandRequest { Id = 1 };
 
             _orderRulesMock.Setup(r => r.TheOrderShouldBeExist(It.IsAny<Order>())).Returns(Task.CompletedTask);
+
+            //_orderRulesMock.Setup(r => r.TheSameUserForTheSameOrder(It.IsAny<Guid>(), It.IsAny<Guid>())).Returns(Task.CompletedTask);
             _orderRulesMock.Setup(r => r.TheSameUserForTheSameOrder(It.IsAny<Guid>(), It.IsAny<Guid>())).Returns(Task.CompletedTask);
 
             // Act
