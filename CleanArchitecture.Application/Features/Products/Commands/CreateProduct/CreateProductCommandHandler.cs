@@ -9,8 +9,9 @@ using CleanArchitecture.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace CleanArchitecture.Application.Features.Products.Commands.CreateProduct
 {
@@ -28,9 +29,7 @@ namespace CleanArchitecture.Application.Features.Products.Commands.CreateProduct
                                            IHttpContextAccessor httpContextAccessor,
                                            UserManager<User> userManager,
                                            ILocalStorage localStorage,
-                                           RoleManager<Role> roleManager
-
-                                           )
+                                           RoleManager<Role> roleManager)
             : base(unitOfWork, mapper, httpContextAccessor)
         {
             this.productRules = productRules;
@@ -39,6 +38,7 @@ namespace CleanArchitecture.Application.Features.Products.Commands.CreateProduct
             this.roleManager = roleManager;
             this.localStorage = localStorage;
         }
+
         public async Task<Unit> Handle(CreateProductCommandRequest request, CancellationToken cancellationToken)
         {
             LoggerHelper.LogInformation("Handling CreateProductCommandRequest with Title: {Title}", request.Title);
@@ -59,55 +59,54 @@ namespace CleanArchitecture.Application.Features.Products.Commands.CreateProduct
                     throw new UnauthorizedAccessException("User is not authenticated.");
                 }
 
-                // Find the user and check if they are in the Admin role
-                var user = await userManager.FindByIdAsync(userId);
-                if (user == null || !(await userManager.IsInRoleAsync(user, "ADMIN")))
+                if (!await IsUserInRoleAsync(userId, "Admin"))
                 {
                     LoggerHelper.LogWarning("Unauthorized attempt to create product. UserId: {UserId} does not have Admin role.", userId);
                     throw new UnauthorizedAccessException("User does not have the required `Admin` role.");
                 }
 
-                var queriedProduct = await UnitOfWork.readRepository<Product>().Find(p => p.Title == request.Title);
-
-                var existingProducts = await queriedProduct.ToListAsync();
+                var existingProducts = await UnitOfWork.readRepository<Product>().Find(p => p.Title == request.Title);
 
                 if (existingProducts.Any())
                 {
                     throw new ProductsTitleMustNotBeTheSameException();
                 }
 
-                Product product = new(request.Title, request.Description, request.Price, request.Discount, request.BrandId);
+                var product = new Product(request.Title, request.Description, request.Price, request.Discount, request.BrandId);
                 await UnitOfWork.writeRepository<Product>().AddAsync(product);
-
 
                 if (await UnitOfWork.SaveChangeAsync() > 0)
                 {
-                    foreach (var categoryid in request.CategortIds)
+                    foreach (var categoryId in request.CategortIds)
                     {
                         await UnitOfWork.writeRepository<ProductsCategories>()
-                                                            .AddAsync(new ProductsCategories
-                                                            {
-                                                                CategoryId = categoryid,
-                                                                ProductId = product.Id
-                                                            });
-
+                            .AddAsync(new ProductsCategories
+                            {
+                                CategoryId = categoryId,
+                                ProductId = product.Id
+                            });
                     }
                 }
+
                 if (request.Images != null && request.Images.Any())
                 {
                     IList<(string fileName, string Path)> list = await localStorage.UploadManyAsync(product.Id, "images", request.Images);
                     if (list != null)
+                    {
                         foreach (var photo in list)
-                            product.images.Add(new Domain.Entities.Image()
+                        {
+                            product.images.Add(new Domain.Entities.Image
                             {
                                 Path = photo.Path,
                                 FileName = photo.fileName,
-                                ProductId = product.Id,
+                                ProductId = product.Id
                             });
-
+                        }
+                    }
                 }
+
                 await UnitOfWork.SaveChangeAsync();
-                LoggerHelper.LogInformation("Successfully created product with Id: {productId} ",product.Id);
+                LoggerHelper.LogInformation("Successfully created product with Id: {productId}", product.Id);
                 return Unit.Value;
             }
             catch (Exception ex)
@@ -115,6 +114,12 @@ namespace CleanArchitecture.Application.Features.Products.Commands.CreateProduct
                 LoggerHelper.LogError("Error occurred while handling CreateProductCommandRequest with Title: {Title}", ex, request.Title);
                 throw;
             }
+        }
+
+        private async Task<bool> IsUserInRoleAsync(string userId, string roleName)
+        {
+            var user = await userManager.FindByIdAsync(userId);
+            return user != null && await userManager.IsInRoleAsync(user, roleName);
         }
     }
 }

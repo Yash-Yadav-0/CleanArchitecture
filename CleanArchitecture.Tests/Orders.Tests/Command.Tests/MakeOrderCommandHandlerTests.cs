@@ -41,7 +41,7 @@ namespace CleanArchitecture.Tests.Orders.Tests.Command.Tests
             httpContext.User = new ClaimsPrincipal(new ClaimsIdentity(new[]
             {
                 new Claim(ClaimTypes.NameIdentifier, Guid.NewGuid().ToString())
-            }, "mock"));
+            }));
 
             _httpContextAccessorMock.Setup(h => h.HttpContext).Returns(httpContext);
 

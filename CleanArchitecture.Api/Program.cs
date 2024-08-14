@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.OpenApi.Models;
 using System.Text.Json.Serialization;
 using Hangfire.PostgreSql;
+using CleanArchitecture.Application.Features.Products.Rules;
 
 namespace CleanArchitecture.Api
 {
@@ -44,6 +45,7 @@ namespace CleanArchitecture.Api
             builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             builder.Services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
             builder.Services.AddSingleton<IUrlHelperFactory, UrlHelperFactory>();
+            builder.Services.AddSingleton<IProductRules, ProductRules>();
             //for authorize
 
             // Register LinkGenerator.

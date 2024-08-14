@@ -17,9 +17,7 @@ namespace CleanArchitecture.Application.Bases
             UnitOfWork = unitOfWork;
             Mapper = mapper;
             HttpContextAccessor = httpContextAccessor;
-            UserId = httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            UserId = HttpContextAccessor.HttpContext?.User.FindFirstValue(ClaimTypes.NameIdentifier);
         }
-
-
     }
 }

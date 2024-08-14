@@ -2295,7 +2295,10 @@
           "System.ComponentModel.Annotations": "5.0.0"
         },
         "runtime": {
-          "CleanArchitecture.Application.dll": {}
+          "CleanArchitecture.Application.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       },
       "CleanArchitecture.Domain/1.0.0": {
@@ -2303,7 +2306,10 @@
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "8.0.7"
         },
         "runtime": {
-          "CleanArchitecture.Domain.dll": {}
+          "CleanArchitecture.Domain.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       },
       "CleanArchitecture.Infrastructure/1.0.0": {
@@ -2329,7 +2335,10 @@
           "System.Security.Cryptography.Encoding": "4.3.0"
         },
         "runtime": {
-          "CleanArchitecture.Infrastructure.dll": {}
+          "CleanArchitecture.Infrastructure.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       },
       "CleanArchitecture.Mapper/1.0.0": {
@@ -2338,7 +2347,10 @@
           "CleanArchitecture.Application": "1.0.0"
         },
         "runtime": {
-          "CleanArchitecture.Mapper.dll": {}
+          "CleanArchitecture.Mapper.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       },
       "CleanArchitecture.Persistence/1.0.0": {
@@ -2354,7 +2366,10 @@
           "Npgsql.EntityFrameworkCore.PostgreSQL": "8.0.4"
         },
         "runtime": {
-          "CleanArchitecture.Persistence.dll": {}
+          "CleanArchitecture.Persistence.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       }
     }

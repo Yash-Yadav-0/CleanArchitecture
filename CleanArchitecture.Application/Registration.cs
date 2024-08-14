@@ -49,6 +49,7 @@ namespace CleanArchitecture.Application
             services.AddTransient<IRequestHandler<DeleteOrderCommandRequest, Unit>, DeleteOrderCommandHandler>();
             services.AddTransient<SignInManager<User>>();
             services.AddRulesFromAssemblyContaining(assembly, typeof(BaseRule));
+            services.AddSingleton<IProductRules, ProductRules>();
 
             //Opentelemetry configuration
             services.AddOpenTelemetry()

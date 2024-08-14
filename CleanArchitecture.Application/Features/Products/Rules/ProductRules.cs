@@ -8,7 +8,7 @@ namespace CleanArchitecture.Application.Features.Products.Rules
     {
         public Task ProductsTitleMustNotBeTheSame(IList<Product> products, string TitleOfRequest);
     }
-    public class ProductRules : BaseRule ,IProductRules
+    public class ProductRules : IProductRules
     {
         public Task ProductsTitleMustNotBeTheSame(IList<Product> products, string titleOfRequest)
         {

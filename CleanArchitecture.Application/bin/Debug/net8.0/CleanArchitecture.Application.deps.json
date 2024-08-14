@@ -1467,7 +1467,10 @@
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "8.0.7"
         },
         "runtime": {
-          "CleanArchitecture.Domain.dll": {}
+          "CleanArchitecture.Domain.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       }
     }
