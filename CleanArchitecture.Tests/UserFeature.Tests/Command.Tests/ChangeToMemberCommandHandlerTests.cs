@@ -19,6 +19,7 @@ using Xunit;
 
 namespace CleanArchitecture.Application.Tests.Features.UserFeature.Commands
 {
+    //Change Admin / Vendor to User (normal/customer)
     public class ChangeToMemberCommandHandlerTests
     {
         private readonly Mock<IUnitOfWork> _unitOfWorkMock;

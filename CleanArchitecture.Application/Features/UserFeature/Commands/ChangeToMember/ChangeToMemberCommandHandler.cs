@@ -12,6 +12,7 @@ using System.Security.Claims;
 
 namespace CleanArchitecture.Application.Features.UserFeature.Commands.ChangeToMember
 {
+    //Change Admin / Vendor to User (normal/customer)
     public class ChangeToMemberCommandHandler : BaseHandler, IRequestHandler<ChangeToMemberCommandRequest, ChangeToMemberCommandResponse>
     {
         private readonly IUnitOfWork _unitOfWork;

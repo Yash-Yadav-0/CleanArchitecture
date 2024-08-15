@@ -10,6 +10,6 @@ namespace CleanArchitecture.Application.Features.Products.Commands.UpdateProduct
         public decimal Price { get; set; }
         public decimal Discount { get; set; }
         public int BrandId { get; set; }
-        public IList<int> CategortIds { get; set; }
+        public IList<int>? CategortIds { get; set; }
     }
 }

@@ -14,6 +14,7 @@ using System.Security.Claims;
 
 namespace CleanArchitecture.Application.Features.UserFeature.Commands.ChangeToVendor
 {
+    //Change User to Vendor
     public class ChangeToVendorCommandHandler : BaseHandler, IRequestHandler<ChangeToVendorCommandRequest,ChangeToVendorCommandResponse>
     {
         private readonly IUnitOfWork _unitOfWork;

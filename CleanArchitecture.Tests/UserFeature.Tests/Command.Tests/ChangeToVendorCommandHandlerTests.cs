@@ -9,16 +9,12 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Moq;
-using SendGrid.Helpers.Errors.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace CleanArchitecture.Tests.UserFeature.Tests.Command.Tests
 {
+    //Change User to Vendor
     public class ChangeToVendorCommandHandlerTests
     {
         private readonly Mock<IUnitOfWork> _unitOfWorkMock;
