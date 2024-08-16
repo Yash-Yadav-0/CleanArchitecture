@@ -90,6 +90,7 @@ namespace CleanArchitecture.Application.Features.Products.Commands.CreateProduct
 
                 if (request.Images != null && request.Images.Any())
                 {
+
                     IList<(string fileName, string Path)> list = await localStorage.UploadManyAsync(product.Id, "images", request.Images);
                     if (list != null)
                     {

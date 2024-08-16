@@ -5,19 +5,18 @@ using CleanArchitecture.Application.Interfaces.UnitOfWorks;
 using CleanArchitecture.Domain.Entities;
 using CleanArchitecture.Persistence.Context;
 using CleanArchitecture.Persistence.UnitOfWorks;
-using DocumentFormat.OpenXml.Spreadsheet;
-using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Moq;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
-using System.Threading;
+using System.Text;
 using System.Threading.Tasks;
-using Xunit;
 
-namespace CleanArchitecture.Application.Tests.Features.UserFeature.Commands
+namespace CleanArchitecture.Tests.UserFeature.Tests.Command.Tests
 {
     //Change Admin / Vendor to User (normal/customer)
     public class ChangeToMemberCommandHandlerTests
@@ -66,7 +65,7 @@ namespace CleanArchitecture.Application.Tests.Features.UserFeature.Commands
                 _userManagerMock.Object,
                 _roleManagerMock.Object,
                 _mapperMock.Object,
-                _userRulesMock.Object, 
+                _userRulesMock.Object,
                 _httpContextAccessorMock.Object
             );
         }

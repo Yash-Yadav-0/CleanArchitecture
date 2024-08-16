@@ -5,15 +5,19 @@ using CleanArchitecture.Application.Interfaces.Storage;
 using CleanArchitecture.Domain.Entities;
 using CleanArchitecture.Persistence.Context;
 using CleanArchitecture.Persistence.UnitOfWorks;
+using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using System.Security.Claims;
-using MediatR;
 using Moq;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Claims;
+using System.Text;
+using System.Threading.Tasks;
 
-
-namespace CleanArchitecture.Application.Tests.Features.Products.Commands
+namespace CleanArchitecture.Tests.Products.Tests.Command.Tests
 {
     public class CreateProductCommandHandlerTests
     {
@@ -159,3 +163,4 @@ namespace CleanArchitecture.Application.Tests.Features.Products.Commands
         }
     }
 }
+

@@ -13,19 +13,27 @@ namespace CleanArchitecture.Application.Features.Products.Commands.DeleteProduct
 {
     public class DeleteProductCommandHandler : BaseHandler, IRequestHandler<DeleteProductCommandRequest, Unit>
     {
-        private readonly IHttpContextAccessor httpContextAccessor;
+        private readonly  IHttpContextAccessor httpContextAccessor;
         private readonly UserManager<User> userManager;
+        private readonly RoleManager<Role> roleManager;
 
-        public DeleteProductCommandHandler(IUnitOfWork unitOfWork, IMapper mapper, IHttpContextAccessor httpContextAccessor, UserManager<User> userManager)
+        public DeleteProductCommandHandler(IUnitOfWork unitOfWork, IMapper mapper, IHttpContextAccessor httpContextAccessor, UserManager<User> userManager, RoleManager<Role> roleManager)
         : base(unitOfWork, mapper, httpContextAccessor)
         {
             this.userManager = userManager;
+            this.httpContextAccessor = httpContextAccessor;
+            this.roleManager = roleManager;
         }
         public async Task<Unit> Handle(DeleteProductCommandRequest request, CancellationToken cancellationToken)
         {
             LoggerHelper.LogInformation("Handling DeleteProductCommandRequest for ProductId: {ProductId}", request.Id);
-
-            var userId = httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var httpContext = httpContextAccessor.HttpContext;
+            if(httpContext == null)
+            {
+                LoggerHelper.LogWarning("HttpContext is null.");
+                throw new UnauthorizedAccessException("HttpContext is not available.");
+            }
+            var userId = httpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             if (userId == null)
             {
@@ -34,7 +42,7 @@ namespace CleanArchitecture.Application.Features.Products.Commands.DeleteProduct
             }
 
             var user = await userManager.FindByIdAsync(userId);
-            if (user == null || !(await userManager.IsInRoleAsync(user, "ADMIN")))
+            if (user == null || !(await userManager.IsInRoleAsync(user, "Admin")))
             {
                 LoggerHelper.LogWarning("Unauthorized attempt to delete product. UserId: {UserId} does not have Admin role.", userId);
                 throw new UnauthorizedAccessException("User does not have the required Admin role.");
@@ -47,13 +55,11 @@ namespace CleanArchitecture.Application.Features.Products.Commands.DeleteProduct
                 LoggerHelper.LogWarning("Attempted to delete non-existing product with ProductId: {ProductId}.", request.Id);
                 throw new NotFoundException("Product not found.");
             }
-
-            product.IsDeleted = true;
-            product.UpdatedDate = DateTime.UtcNow;
-
             try
             {
                 await UnitOfWork.writeRepository<Product>().UpdateAsync(request.Id, product);
+                product.IsDeleted = true;
+                product.UpdatedDate = DateTime.UtcNow;
                 await UnitOfWork.SaveChangeAsync();
 
                 LoggerHelper.LogInformation("Product with ProductId: {ProductId} was successfully marked as deleted.", request.Id);
