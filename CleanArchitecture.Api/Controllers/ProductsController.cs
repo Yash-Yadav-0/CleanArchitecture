@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CleanArchitecture.Api.Controllers
 {
-    [Route("api/[controller]/[action]")]
+    [Route("api/[controller]/")]
     [ApiController]
     public class ProductsController : BaseController
     {
@@ -40,21 +40,21 @@ namespace CleanArchitecture.Api.Controllers
         {
             return await mediator.Send(new GetProductByIdQueryRequest() { ProductId = id });
         }
-
+        [Authorize(Roles ="Admin")]
         [HttpPost("CreateProducts")]
         public async Task<IActionResult> CreateProductsAsync([FromForm] CreateProductCommandRequest request)
         {
             await mediator.Send(request);
             return Created();
         }
-
+        [Authorize(Roles ="Admin")]
         [HttpPut("UpdateProducts")]
         public async Task<IActionResult> UpdateProductsAsync([FromForm] UpdateProductCommandRequest request)
         {
             await mediator.Send(request);
             return StatusCode(StatusCodes.Status202Accepted);
         }
-
+        [Authorize(Roles ="Admin")]
         [HttpPut("DeleteProducts")]
         public async Task DeleteProductsAsync([FromForm] DeleteProductCommandRequest request)
         {

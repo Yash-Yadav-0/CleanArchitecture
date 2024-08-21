@@ -7,11 +7,12 @@ using CleanArchitecture.Application.Features.Auth.Commands.ResetPassword.SendFor
 using CleanArchitecture.Application.Features.Auth.Commands.Revoke.RevokeForAllUsers;
 using CleanArchitecture.Application.Features.Auth.Commands.Revoke.RevokeForUser;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CleanArchitecture.Api.Controllers
 {
-    [Route("api/[controller]/[action]")]
+    [Route("api/[controller]/")]
     [ApiController]
     public class AuthenticationController : BaseController
     {
@@ -55,7 +56,7 @@ namespace CleanArchitecture.Api.Controllers
 
             return Ok(await mediator.Send(request));
         }
-
+        [Authorize(Roles ="Admin")]
         [HttpDelete("RevokeAllUser")]
         public async Task<IActionResult> RevokeAllUser(RevokeForAllUsersCommandRequest request)
         {

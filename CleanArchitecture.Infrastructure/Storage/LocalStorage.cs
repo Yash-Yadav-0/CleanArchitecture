@@ -1,6 +1,7 @@
 ﻿using CleanArchitecture.Application.Interfaces.Storage;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,25 +12,17 @@ namespace CleanArchitecture.Infrastructure.Storage
 {
     public class LocalStorage : ILocalStorage
     {
-        private readonly IWebHostEnvironment webHost;
-        private readonly string _wwwroot;
-        private readonly string _folderPath = "images";
+        private readonly IWebHostEnvironment _webHost;
         private readonly string[] _allowedFileExtensions = { ".jpg", ".jpeg", ".png", ".webp", ".svg", ".jfif" };
-        private const long _allowedFileSize = 1 * 1024 * 1024; // 1 Mb
+        private const long _allowedFileSize = 1 * 1024 * 1024; // 1 MB
 
         public LocalStorage(IWebHostEnvironment webHost)
         {
-            this.webHost = webHost ?? throw new ArgumentNullException(nameof(webHost));
-            _wwwroot = webHost.WebRootPath ?? throw new InvalidOperationException("Web root path is not set.");
+            _webHost = webHost;
         }
 
-        public async Task<(string FileName, string Path)> UploadAsync(int id, string folderName, IFormFile file)
+        public async Task<string> UploadFileAsync(string genre, IFormFile file, CancellationToken cancellationToken)
         {
-            if (string.IsNullOrEmpty(folderName))
-            {
-                throw new ArgumentException("Folder name must be provided.", nameof(folderName));
-            }
-
             if (file == null)
             {
                 throw new ArgumentNullException(nameof(file), "File is null.");
@@ -37,95 +30,101 @@ namespace CleanArchitecture.Infrastructure.Storage
 
             if (file.Length > _allowedFileSize)
             {
-                throw new ArgumentException("File size exceeds 1 Mb", nameof(file));
+                throw new ArgumentException("File size exceeds 1 MB", nameof(file));
             }
+            var contentPath = _webHost.ContentRootPath;
+            var path = Path.Combine(contentPath, "Uploads", genre);
 
-            string extension = Path.GetExtension(file.FileName);
-            if (!_allowedFileExtensions.Contains(extension, StringComparer.OrdinalIgnoreCase))
+            if (!Directory.Exists(path))
             {
-                throw new ArgumentException($"Not an allowed file format. Must be in format {string.Join(", ", _allowedFileExtensions)}", nameof(file));
+                Directory.CreateDirectory(path);
             }
-
-            string folderPath = Path.Combine(_wwwroot, _folderPath, folderName);
-            if (!Directory.Exists(folderPath))
+            var extension = Path.GetExtension(file.FileName);
+            if (!_allowedFileExtensions.Contains(extension))
             {
-                Directory.CreateDirectory(folderPath);
+                throw new ArgumentException($"Not an allowed file format, must be in format {string.Join(',', _allowedFileExtensions)}", nameof(file));
             }
+            var fileName = $"{Guid.NewGuid()}{extension}";
+            var fileNameWithPath = Path.Combine(path, fileName);
+            using var stream = new FileStream(fileNameWithPath, FileMode.CreateNew);
+            await file.CopyToAsync(stream, cancellationToken);
 
-            string newFileName = $"{file.FileName.Replace(extension, $"_{id}", StringComparison.OrdinalIgnoreCase).ToLower()}_{Guid.NewGuid():N}_{DateTime.UtcNow:dd_MM_yyyy}{extension}";
-            string path = Path.Combine(folderPath, newFileName);
-
-            using var stream = new FileStream(path, FileMode.CreateNew);
-            await file.CopyToAsync(stream);
-
-            return (newFileName, path);
+            return fileName;
         }
 
-        public async Task<IList<(string FileName, string Path)>> UploadManyAsync(int id, string folderName, IFormFileCollection files)
+        public Task DeleteAsync(string genre, string fileNameWithExtension , CancellationToken cancellationToken)
+        {
+            if (string.IsNullOrEmpty(fileNameWithExtension))
+            {
+                throw new ArgumentException("Path must be provided.", nameof(fileNameWithExtension));
+            }
+
+            var contentPath = _webHost.ContentRootPath;
+            var fileNameWithPath = Path.Combine(contentPath, "Uploads", genre, fileNameWithExtension);
+
+            if (!File.Exists(fileNameWithPath))
+            {
+                throw new FileNotFoundException($"Unable to find File{fileNameWithExtension}");
+            }
+            File.Delete(fileNameWithPath);
+            return Task.CompletedTask;
+        }
+        public string GetFileAsync(string genre, string fileNameWithExtension)
+        {
+            if (string.IsNullOrEmpty(fileNameWithExtension))
+            {
+                throw new ArgumentException("File name must be provided.", nameof(fileNameWithExtension));
+            }
+
+            var contentPath = _webHost.ContentRootPath;
+            var fileNameWithPath = Path.Combine(contentPath, "Uploads", genre, fileNameWithExtension);
+
+            if (!File.Exists(fileNameWithPath))
+            {
+                throw new FileNotFoundException($"Unable to find file {fileNameWithExtension}");
+            }
+
+            return fileNameWithPath;
+        }
+        public async Task<IList<(string FileName, string Path)>> UploadManyFilesAsync(string genre, IFormFileCollection files, CancellationToken cancellationToken)
         {
             if (files == null || files.Count == 0)
             {
-                throw new ArgumentException("No files to upload.", nameof(files));
+                throw new ArgumentNullException(nameof(files), "Files collection is null or empty.");
             }
 
-            string folderPath = Path.Combine(_wwwroot, _folderPath, folderName);
-            if (!Directory.Exists(folderPath))
+            var uploadedFiles = new List<(string FileName, string Path)>();
+
+            var contentPath = _webHost.ContentRootPath;
+            var path = Path.Combine(contentPath, "Uploads", genre);
+
+            if (!Directory.Exists(path))
             {
-                Directory.CreateDirectory(folderPath);
+                Directory.CreateDirectory(path);
             }
 
-            List<(string FileName, string Path)> uploadedFiles = new List<(string FileName, string Path)>();
-
-            foreach (IFormFile file in files)
+            foreach (var file in files)
             {
                 if (file.Length > _allowedFileSize)
                 {
-                    throw new ArgumentException("File size exceeds 1 Mb", nameof(file));
+                    throw new ArgumentException($"File {file.FileName} size exceeds 1 MB", nameof(file));
                 }
 
-                string extension = Path.GetExtension(file.FileName);
+                var extension = Path.GetExtension(file.FileName);
                 if (!_allowedFileExtensions.Contains(extension, StringComparer.OrdinalIgnoreCase))
                 {
-                    throw new ArgumentException($"Not an allowed file format. Must be in format {string.Join(", ", _allowedFileExtensions)}", nameof(file));
+                    throw new ArgumentException($"File {file.FileName} format is not allowed. Must be in format {string.Join(',', _allowedFileExtensions)}", nameof(file));
                 }
 
-                string newFileName = $"{file.FileName.Replace(extension, $"_{id}", StringComparison.OrdinalIgnoreCase).ToLower()}_{Guid.NewGuid():N}_{DateTime.UtcNow:dd_MM_yyyy}{extension}";
-                string path = Path.Combine(folderPath, newFileName);
+                var fileName = $"{Guid.NewGuid()}{extension}";
+                var fileNameWithPath = Path.Combine(path, fileName);
+                using var stream = new FileStream(fileNameWithPath, FileMode.CreateNew);
+                await file.CopyToAsync(stream, cancellationToken);
 
-                using var stream = new FileStream(path, FileMode.CreateNew);
-                await file.CopyToAsync(stream);
-
-                uploadedFiles.Add((newFileName, path));
+                uploadedFiles.Add((fileName, fileNameWithPath));
             }
 
             return uploadedFiles;
-        }
-
-        public Task DeleteAsync(string path, string fileName)
-        {
-            if (string.IsNullOrEmpty(path))
-            {
-                throw new ArgumentException("Path must be provided.", nameof(path));
-            }
-
-            if (string.IsNullOrEmpty(fileName))
-            {
-                throw new ArgumentException("File name must be provided.", nameof(fileName));
-            }
-
-            string filePath = Path.Combine(_wwwroot, _folderPath, path, fileName);
-            if (!File.Exists(filePath))
-            {
-                throw new FileNotFoundException($"File '{fileName}' not found.", fileName);
-            }
-
-            File.Delete(filePath);
-            return Task.CompletedTask;
-        }
-
-        public IList<string> GetFile(string path)
-        {
-            throw new NotImplementedException();
         }
     }
 }

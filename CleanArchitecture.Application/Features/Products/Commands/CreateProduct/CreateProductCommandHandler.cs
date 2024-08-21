@@ -91,7 +91,7 @@ namespace CleanArchitecture.Application.Features.Products.Commands.CreateProduct
 
                 if (request.Images != null && request.Images.Any())
                 {
-                    IList<(string FileName, string Path)> uploadedFiles = await localStorage.UploadManyAsync(product.Id, "productimages", request.Images);
+                    IList<(string FileName, string Path)> uploadedFiles = await localStorage.UploadManyFilesAsync("Product",request.Images,cancellationToken);
                     if (uploadedFiles.Count > 0)
                     {
                         foreach (var (FileName, Path) in uploadedFiles)

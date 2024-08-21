@@ -25,6 +25,9 @@ namespace CleanArchitecture.Api
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
 
+            // Set the web root path
+            //builder.WebHost.UseWebRoot("wwwroot");
+
             #region Custom Configuration
 
             builder.Services.AddHangfire(configuration =>

@@ -1,3 +1,10 @@
+C:\Users\Yash\source\repos\CleanArchitecture\CleanArchitecture.Api\obj\Debug\net8.0\CleanArchitecture.Api.csproj.AssemblyReference.cache
+C:\Users\Yash\source\repos\CleanArchitecture\CleanArchitecture.Api\obj\Debug\net8.0\CleanArchitecture.Api.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Yash\source\repos\CleanArchitecture\CleanArchitecture.Api\obj\Debug\net8.0\CleanArchitecture.Api.AssemblyInfoInputs.cache
+C:\Users\Yash\source\repos\CleanArchitecture\CleanArchitecture.Api\obj\Debug\net8.0\CleanArchitecture.Api.AssemblyInfo.cs
+C:\Users\Yash\source\repos\CleanArchitecture\CleanArchitecture.Api\obj\Debug\net8.0\CleanArchitecture.Api.csproj.CoreCompileInputs.cache
+C:\Users\Yash\source\repos\CleanArchitecture\CleanArchitecture.Api\obj\Debug\net8.0\CleanArchitecture.Api.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Yash\source\repos\CleanArchitecture\CleanArchitecture.Api\obj\Debug\net8.0\CleanArchitecture.Api.sourcelink.json
 C:\Users\Yash\source\repos\CleanArchitecture\CleanArchitecture.Api\bin\Debug\net8.0\appsettings.Development.json
 C:\Users\Yash\source\repos\CleanArchitecture\CleanArchitecture.Api\bin\Debug\net8.0\appsettings.json
 C:\Users\Yash\source\repos\CleanArchitecture\CleanArchitecture.Api\bin\Debug\net8.0\CleanArchitecture.Api.exe
@@ -160,14 +167,7 @@ C:\Users\Yash\source\repos\CleanArchitecture\CleanArchitecture.Api\bin\Debug\net
 C:\Users\Yash\source\repos\CleanArchitecture\CleanArchitecture.Api\bin\Debug\net8.0\CleanArchitecture.Persistence.pdb
 C:\Users\Yash\source\repos\CleanArchitecture\CleanArchitecture.Api\bin\Debug\net8.0\CleanArchitecture.Application.pdb
 C:\Users\Yash\source\repos\CleanArchitecture\CleanArchitecture.Api\bin\Debug\net8.0\CleanArchitecture.Domain.pdb
-C:\Users\Yash\source\repos\CleanArchitecture\CleanArchitecture.Api\obj\Debug\net8.0\CleanArchitecture.Api.csproj.AssemblyReference.cache
-C:\Users\Yash\source\repos\CleanArchitecture\CleanArchitecture.Api\obj\Debug\net8.0\CleanArchitecture.Api.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\Yash\source\repos\CleanArchitecture\CleanArchitecture.Api\obj\Debug\net8.0\CleanArchitecture.Api.AssemblyInfoInputs.cache
-C:\Users\Yash\source\repos\CleanArchitecture\CleanArchitecture.Api\obj\Debug\net8.0\CleanArchitecture.Api.AssemblyInfo.cs
-C:\Users\Yash\source\repos\CleanArchitecture\CleanArchitecture.Api\obj\Debug\net8.0\CleanArchitecture.Api.csproj.CoreCompileInputs.cache
 C:\Users\Yash\source\repos\CleanArchitecture\CleanArchitecture.Api\obj\Debug\net8.0\CleanArchitecture.Api.MvcApplicationPartsAssemblyInfo.cs
-C:\Users\Yash\source\repos\CleanArchitecture\CleanArchitecture.Api\obj\Debug\net8.0\CleanArchitecture.Api.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\Yash\source\repos\CleanArchitecture\CleanArchitecture.Api\obj\Debug\net8.0\CleanArchitecture.Api.sourcelink.json
 C:\Users\Yash\source\repos\CleanArchitecture\CleanArchitecture.Api\obj\Debug\net8.0\staticwebassets.build.json
 C:\Users\Yash\source\repos\CleanArchitecture\CleanArchitecture.Api\obj\Debug\net8.0\staticwebassets.development.json
 C:\Users\Yash\source\repos\CleanArchitecture\CleanArchitecture.Api\obj\Debug\net8.0\staticwebassets\msbuild.CleanArchitecture.Api.Microsoft.AspNetCore.StaticWebAssets.props

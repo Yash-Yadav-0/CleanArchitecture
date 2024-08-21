@@ -34,7 +34,7 @@ public class RegistrationCommandHandler : BaseHandler, IRequestHandler<Registrat
                                       IMailService mailService,
                                       ILinkGeneratorHelper linkGeneratorHelper,
                                       EmailConfirmationCommandRequest emailConfirmationCommandRequest,
-                                      ILocalStorage localStorage)
+                                      ILocalStorage localStorage) 
         : base(unitOfWork, mapper, httpContextAccessor)
     {
         _httpContextAccessor = httpContextAccessor;
@@ -79,8 +79,8 @@ public class RegistrationCommandHandler : BaseHandler, IRequestHandler<Registrat
 
         if (request.Image != null)
         {
-            var photo = await _localStorage.UploadAsync(1, "Users", request.Image);
-            user.Picture = photo.Path;
+            var photo = await _localStorage.UploadFileAsync("Users", request.Image, cancellationToken);
+            user.Picture = photo;
             await UserManager.UpdateAsync(user);
             LoggerHelper.LogInformation("User profile picture added for Email: {Email}", request.Email);
         }

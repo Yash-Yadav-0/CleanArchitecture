@@ -4,9 +4,9 @@ namespace CleanArchitecture.Application.Interfaces.Storage
 {
     public interface ILocalStorage
     {
-        Task<(string FileName, string Path)> UploadAsync(int id, string folderName, IFormFile file);
-        Task<IList<(string FileName, string Path)>> UploadManyAsync(int id, string folderName, IFormFileCollection files);
-        Task DeleteAsync(string path, string fileName);
-        IList<string> GetFile(string path);
+        Task<string> UploadFileAsync(string genre, IFormFile file, CancellationToken cancellationToken);
+        Task DeleteAsync(string genre, string fileNameWithExtension,CancellationToken cancellationToken);
+        string GetFileAsync(string genre, string fileNameWithExtension);
+        Task<IList<(string FileName, string Path)>> UploadManyFilesAsync(string genre, IFormFileCollection files, CancellationToken cancellationToken);
     }
 }
