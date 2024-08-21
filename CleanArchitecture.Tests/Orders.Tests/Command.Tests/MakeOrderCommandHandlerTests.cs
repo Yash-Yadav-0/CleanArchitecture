@@ -1,22 +1,14 @@
 ﻿using CleanArchitecture.Application.Dtos;
 using CleanArchitecture.Application.Features.Orders.Comments.MakeOrder;
 using CleanArchitecture.Application.Interfaces.AutoMapper;
-using CleanArchitecture.Application.Interfaces.UnitOfWorks;
 using CleanArchitecture.Domain.Entities;
 using CleanArchitecture.Persistence.Context;
 using CleanArchitecture.Persistence.UnitOfWorks;
-using DocumentFormat.OpenXml.InkML;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CleanArchitecture.Tests.Orders.Tests.Command.Tests
 {

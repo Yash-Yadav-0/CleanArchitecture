@@ -1,21 +1,11 @@
-﻿using CleanArchitecture.Application.Bases;
-using CleanArchitecture.Application.Features.Orders.Command.UpdateOrder;
+﻿using CleanArchitecture.Application.Features.Orders.Command.UpdateOrder;
 using CleanArchitecture.Application.Interfaces.AutoMapper;
-using CleanArchitecture.Application.Interfaces.UnitOfWorks;
 using CleanArchitecture.Domain.Entities;
 using CleanArchitecture.Application.Features.Orders.Rules;
 using Microsoft.AspNetCore.Http;
-using MediatR;
-using CleanArchitecture.Application.Helpers;
 using System.Security.Claims;
 using Microsoft.EntityFrameworkCore;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using Xunit;
 using CleanArchitecture.Application.Dtos;
 using CleanArchitecture.Persistence.Context;
 using CleanArchitecture.Persistence.UnitOfWorks;
@@ -242,5 +232,4 @@ namespace CleanArchitecture.Tests.Orders.Tests.Command.Tests
             }
         }
     }
-
 }

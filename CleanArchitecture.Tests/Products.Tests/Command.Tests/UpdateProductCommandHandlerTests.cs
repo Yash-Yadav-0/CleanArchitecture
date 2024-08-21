@@ -10,7 +10,6 @@ using Microsoft.EntityFrameworkCore;
 using Moq;
 using System.Security.Claims;
 
-
 namespace CleanArchitecture.Tests.Products.Tests.Command.Tests
 {
     public class UpdateProductCommandHandlerTests
@@ -98,8 +97,6 @@ namespace CleanArchitecture.Tests.Products.Tests.Command.Tests
             _dbContext.Users.Add(user);
             _dbContext.UserRoles.Add(new IdentityUserRole<Guid> { UserId = userId, RoleId = role.Id });
             await _dbContext.SaveChangesAsync();
-
-            
 
             _userManagerMock.Setup(u => u.FindByIdAsync(userId.ToString())).ReturnsAsync(user);
             _userManagerMock.Setup(u => u.IsInRoleAsync(user, "Admin")).ReturnsAsync(true);

@@ -3,24 +3,64 @@
   "WorkspaceRootPath": "C:\\Users\\Yash\\source\\repos\\CleanArchitecture\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{A26D5458-564D-46AC-B5E4-BBDB749A471E}|CleanArchitecture.Application\\CleanArchitecture.Application.csproj|c:\\users\\yash\\source\\repos\\cleanarchitecture\\cleanarchitecture.application\\features\\products\\queries\\putproductinexcel\\putproductinexcelqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A26D5458-564D-46AC-B5E4-BBDB749A471E}|CleanArchitecture.Application\\CleanArchitecture.Application.csproj|solutionrelative:cleanarchitecture.application\\features\\products\\queries\\putproductinexcel\\putproductinexcelqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{324FC80D-3E91-4218-9087-DB8D728EE8F0}|CleanArchitecture.Persistence\\CleanArchitecture.Persistence.csproj|c:\\users\\yash\\source\\repos\\cleanarchitecture\\cleanarchitecture.persistence\\repositories\\readrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{324FC80D-3E91-4218-9087-DB8D728EE8F0}|CleanArchitecture.Persistence\\CleanArchitecture.Persistence.csproj|solutionrelative:cleanarchitecture.persistence\\repositories\\readrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26D5458-564D-46AC-B5E4-BBDB749A471E}|CleanArchitecture.Application\\CleanArchitecture.Application.csproj|c:\\users\\yash\\source\\repos\\cleanarchitecture\\cleanarchitecture.application\\features\\orders\\command\\deleteorder\\deleteordercommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A26D5458-564D-46AC-B5E4-BBDB749A471E}|CleanArchitecture.Application\\CleanArchitecture.Application.csproj|solutionrelative:cleanarchitecture.application\\features\\orders\\command\\deleteorder\\deleteordercommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26D5458-564D-46AC-B5E4-BBDB749A471E}|CleanArchitecture.Application\\CleanArchitecture.Application.csproj|c:\\users\\yash\\source\\repos\\cleanarchitecture\\cleanarchitecture.application\\helpers\\encodehelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A26D5458-564D-46AC-B5E4-BBDB749A471E}|CleanArchitecture.Application\\CleanArchitecture.Application.csproj|solutionrelative:cleanarchitecture.application\\helpers\\encodehelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E7A38F15-93E7-4FD9-B37F-4401A9E62237}|CleanArchitecture.Tests\\CleanArchitecture.Tests.csproj|c:\\users\\yash\\source\\repos\\cleanarchitecture\\cleanarchitecture.tests\\userfeature.tests\\command.tests\\changetovendorcommandhandlertests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E7A38F15-93E7-4FD9-B37F-4401A9E62237}|CleanArchitecture.Tests\\CleanArchitecture.Tests.csproj|solutionrelative:cleanarchitecture.tests\\userfeature.tests\\command.tests\\changetovendorcommandhandlertests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{E7A38F15-93E7-4FD9-B37F-4401A9E62237}|CleanArchitecture.Tests\\CleanArchitecture.Tests.csproj|c:\\users\\yash\\source\\repos\\cleanarchitecture\\cleanarchitecture.tests\\userfeature.tests\\command.tests\\changetomembercommandhandlertests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E7A38F15-93E7-4FD9-B37F-4401A9E62237}|CleanArchitecture.Tests\\CleanArchitecture.Tests.csproj|solutionrelative:cleanarchitecture.tests\\userfeature.tests\\command.tests\\changetomembercommandhandlertests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E7A38F15-93E7-4FD9-B37F-4401A9E62237}|CleanArchitecture.Tests\\CleanArchitecture.Tests.csproj|c:\\users\\yash\\source\\repos\\cleanarchitecture\\cleanarchitecture.tests\\products.tests\\command.tests\\createproductcommandhandlertests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E7A38F15-93E7-4FD9-B37F-4401A9E62237}|CleanArchitecture.Tests\\CleanArchitecture.Tests.csproj|solutionrelative:cleanarchitecture.tests\\products.tests\\command.tests\\createproductcommandhandlertests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E7A38F15-93E7-4FD9-B37F-4401A9E62237}|CleanArchitecture.Tests\\CleanArchitecture.Tests.csproj|c:\\users\\yash\\source\\repos\\cleanarchitecture\\cleanarchitecture.tests\\products.tests\\command.tests\\deleteproductcommandhandlertests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E7A38F15-93E7-4FD9-B37F-4401A9E62237}|CleanArchitecture.Tests\\CleanArchitecture.Tests.csproj|solutionrelative:cleanarchitecture.tests\\products.tests\\command.tests\\deleteproductcommandhandlertests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{E7A38F15-93E7-4FD9-B37F-4401A9E62237}|CleanArchitecture.Tests\\CleanArchitecture.Tests.csproj|c:\\users\\yash\\source\\repos\\cleanarchitecture\\cleanarchitecture.tests\\products.tests\\command.tests\\updateproductcommandhandlertests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E7A38F15-93E7-4FD9-B37F-4401A9E62237}|CleanArchitecture.Tests\\CleanArchitecture.Tests.csproj|solutionrelative:cleanarchitecture.tests\\products.tests\\command.tests\\updateproductcommandhandlertests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A26D5458-564D-46AC-B5E4-BBDB749A471E}|CleanArchitecture.Application\\CleanArchitecture.Application.csproj|c:\\users\\yash\\source\\repos\\cleanarchitecture\\cleanarchitecture.application\\features\\products\\commands\\deleteproduct\\deleteproductcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A26D5458-564D-46AC-B5E4-BBDB749A471E}|CleanArchitecture.Application\\CleanArchitecture.Application.csproj|solutionrelative:cleanarchitecture.application\\features\\products\\commands\\deleteproduct\\deleteproductcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E7A38F15-93E7-4FD9-B37F-4401A9E62237}|CleanArchitecture.Tests\\CleanArchitecture.Tests.csproj|c:\\users\\yash\\source\\repos\\cleanarchitecture\\cleanarchitecture.tests\\products.tests\\command.tests\\deleteproductcommandhandlertests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E7A38F15-93E7-4FD9-B37F-4401A9E62237}|CleanArchitecture.Tests\\CleanArchitecture.Tests.csproj|solutionrelative:cleanarchitecture.tests\\products.tests\\command.tests\\deleteproductcommandhandlertests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E7A38F15-93E7-4FD9-B37F-4401A9E62237}|CleanArchitecture.Tests\\CleanArchitecture.Tests.csproj|c:\\users\\yash\\source\\repos\\cleanarchitecture\\cleanarchitecture.tests\\products.tests\\command.tests\\createproductcommandhandlertests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E7A38F15-93E7-4FD9-B37F-4401A9E62237}|CleanArchitecture.Tests\\CleanArchitecture.Tests.csproj|solutionrelative:cleanarchitecture.tests\\products.tests\\command.tests\\createproductcommandhandlertests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E7A38F15-93E7-4FD9-B37F-4401A9E62237}|CleanArchitecture.Tests\\CleanArchitecture.Tests.csproj|c:\\users\\yash\\source\\repos\\cleanarchitecture\\cleanarchitecture.tests\\orders.tests\\command.tests\\updateordercommandhandlertests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E7A38F15-93E7-4FD9-B37F-4401A9E62237}|CleanArchitecture.Tests\\CleanArchitecture.Tests.csproj|solutionrelative:cleanarchitecture.tests\\orders.tests\\command.tests\\updateordercommandhandlertests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E7A38F15-93E7-4FD9-B37F-4401A9E62237}|CleanArchitecture.Tests\\CleanArchitecture.Tests.csproj|c:\\users\\yash\\source\\repos\\cleanarchitecture\\cleanarchitecture.tests\\orders.tests\\command.tests\\makeordercommandhandlertests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E7A38F15-93E7-4FD9-B37F-4401A9E62237}|CleanArchitecture.Tests\\CleanArchitecture.Tests.csproj|solutionrelative:cleanarchitecture.tests\\orders.tests\\command.tests\\makeordercommandhandlertests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E7A38F15-93E7-4FD9-B37F-4401A9E62237}|CleanArchitecture.Tests\\CleanArchitecture.Tests.csproj|c:\\users\\yash\\source\\repos\\cleanarchitecture\\cleanarchitecture.tests\\orders.tests\\command.tests\\deleteordercommandhandlertests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E7A38F15-93E7-4FD9-B37F-4401A9E62237}|CleanArchitecture.Tests\\CleanArchitecture.Tests.csproj|solutionrelative:cleanarchitecture.tests\\orders.tests\\command.tests\\deleteordercommandhandlertests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E7A38F15-93E7-4FD9-B37F-4401A9E62237}|CleanArchitecture.Tests\\CleanArchitecture.Tests.csproj|c:\\users\\yash\\source\\repos\\cleanarchitecture\\cleanarchitecture.tests\\authentication.tests\\command.tests\\registrationcommandhandlertests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E7A38F15-93E7-4FD9-B37F-4401A9E62237}|CleanArchitecture.Tests\\CleanArchitecture.Tests.csproj|solutionrelative:cleanarchitecture.tests\\authentication.tests\\command.tests\\registrationcommandhandlertests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E7A38F15-93E7-4FD9-B37F-4401A9E62237}|CleanArchitecture.Tests\\CleanArchitecture.Tests.csproj|c:\\users\\yash\\source\\repos\\cleanarchitecture\\cleanarchitecture.tests\\authentication.tests\\command.tests\\logincommandhandlertests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E7A38F15-93E7-4FD9-B37F-4401A9E62237}|CleanArchitecture.Tests\\CleanArchitecture.Tests.csproj|solutionrelative:cleanarchitecture.tests\\authentication.tests\\command.tests\\logincommandhandlertests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26D5458-564D-46AC-B5E4-BBDB749A471E}|CleanArchitecture.Application\\CleanArchitecture.Application.csproj|c:\\users\\yash\\source\\repos\\cleanarchitecture\\cleanarchitecture.application\\features\\auth\\commands\\revoke\\revokeforallusers\\revokeforalluserscommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A26D5458-564D-46AC-B5E4-BBDB749A471E}|CleanArchitecture.Application\\CleanArchitecture.Application.csproj|solutionrelative:cleanarchitecture.application\\features\\auth\\commands\\revoke\\revokeforallusers\\revokeforalluserscommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A26D5458-564D-46AC-B5E4-BBDB749A471E}|CleanArchitecture.Application\\CleanArchitecture.Application.csproj|c:\\users\\yash\\source\\repos\\cleanarchitecture\\cleanarchitecture.application\\features\\products\\commands\\createproduct\\createproductcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -37,51 +77,207 @@
           "SelectedChildIndex": 1,
           "Children": [
             {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ReadRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Yash\\source\\repos\\CleanArchitecture\\CleanArchitecture.Persistence\\Repositories\\ReadRepository.cs",
+              "RelativeDocumentMoniker": "CleanArchitecture.Persistence\\Repositories\\ReadRepository.cs",
+              "ToolTip": "C:\\Users\\Yash\\source\\repos\\CleanArchitecture\\CleanArchitecture.Persistence\\Repositories\\ReadRepository.cs",
+              "RelativeToolTip": "CleanArchitecture.Persistence\\Repositories\\ReadRepository.cs",
+              "ViewState": "AgIAACwAAAAAAAAAAAAIwEkAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-21T04:06:07.43Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "PutProductInExcelQueryHandler.cs",
+              "DocumentMoniker": "C:\\Users\\Yash\\source\\repos\\CleanArchitecture\\CleanArchitecture.Application\\Features\\Products\\Queries\\PutProductInExcel\\PutProductInExcelQueryHandler.cs",
+              "RelativeDocumentMoniker": "CleanArchitecture.Application\\Features\\Products\\Queries\\PutProductInExcel\\PutProductInExcelQueryHandler.cs",
+              "ToolTip": "C:\\Users\\Yash\\source\\repos\\CleanArchitecture\\CleanArchitecture.Application\\Features\\Products\\Queries\\PutProductInExcel\\PutProductInExcelQueryHandler.cs",
+              "RelativeToolTip": "CleanArchitecture.Application\\Features\\Products\\Queries\\PutProductInExcel\\PutProductInExcelQueryHandler.cs",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAYwEgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-21T04:05:16.347Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "DeleteOrderCommandHandler.cs",
+              "DocumentMoniker": "C:\\Users\\Yash\\source\\repos\\CleanArchitecture\\CleanArchitecture.Application\\Features\\Orders\\Command\\DeleteOrder\\DeleteOrderCommandHandler.cs",
+              "RelativeDocumentMoniker": "CleanArchitecture.Application\\Features\\Orders\\Command\\DeleteOrder\\DeleteOrderCommandHandler.cs",
+              "ToolTip": "C:\\Users\\Yash\\source\\repos\\CleanArchitecture\\CleanArchitecture.Application\\Features\\Orders\\Command\\DeleteOrder\\DeleteOrderCommandHandler.cs",
+              "RelativeToolTip": "CleanArchitecture.Application\\Features\\Orders\\Command\\DeleteOrder\\DeleteOrderCommandHandler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAABuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-21T03:51:30.2Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "EncodeHelper.cs",
+              "DocumentMoniker": "C:\\Users\\Yash\\source\\repos\\CleanArchitecture\\CleanArchitecture.Application\\Helpers\\EncodeHelper.cs",
+              "RelativeDocumentMoniker": "CleanArchitecture.Application\\Helpers\\EncodeHelper.cs",
+              "ToolTip": "C:\\Users\\Yash\\source\\repos\\CleanArchitecture\\CleanArchitecture.Application\\Helpers\\EncodeHelper.cs",
+              "RelativeToolTip": "CleanArchitecture.Application\\Helpers\\EncodeHelper.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-21T03:51:17.097Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ChangeToVendorCommandHandlerTests.cs",
+              "DocumentMoniker": "C:\\Users\\Yash\\source\\repos\\CleanArchitecture\\CleanArchitecture.Tests\\UserFeature.Tests\\Command.Tests\\ChangeToVendorCommandHandlerTests.cs",
+              "RelativeDocumentMoniker": "CleanArchitecture.Tests\\UserFeature.Tests\\Command.Tests\\ChangeToVendorCommandHandlerTests.cs",
+              "ToolTip": "C:\\Users\\Yash\\source\\repos\\CleanArchitecture\\CleanArchitecture.Tests\\UserFeature.Tests\\Command.Tests\\ChangeToVendorCommandHandlerTests.cs",
+              "RelativeToolTip": "CleanArchitecture.Tests\\UserFeature.Tests\\Command.Tests\\ChangeToVendorCommandHandlerTests.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAA5AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-21T03:50:04.297Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "UpdateProductCommandHandlerTests.cs",
+              "DocumentMoniker": "C:\\Users\\Yash\\source\\repos\\CleanArchitecture\\CleanArchitecture.Tests\\Products.Tests\\Command.Tests\\UpdateProductCommandHandlerTests.cs",
+              "RelativeDocumentMoniker": "CleanArchitecture.Tests\\Products.Tests\\Command.Tests\\UpdateProductCommandHandlerTests.cs",
+              "ToolTip": "C:\\Users\\Yash\\source\\repos\\CleanArchitecture\\CleanArchitecture.Tests\\Products.Tests\\Command.Tests\\UpdateProductCommandHandlerTests.cs",
+              "RelativeToolTip": "CleanArchitecture.Tests\\Products.Tests\\Command.Tests\\UpdateProductCommandHandlerTests.cs",
+              "ViewState": "AgIAAKkAAAAAAAAAAAAkwAoAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-21T03:49:40.672Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "UpdateOrderCommandHandlerTests.cs",
+              "DocumentMoniker": "C:\\Users\\Yash\\source\\repos\\CleanArchitecture\\CleanArchitecture.Tests\\Orders.Tests\\Command.Tests\\UpdateOrderCommandHandlerTests.cs",
+              "RelativeDocumentMoniker": "CleanArchitecture.Tests\\Orders.Tests\\Command.Tests\\UpdateOrderCommandHandlerTests.cs",
+              "ToolTip": "C:\\Users\\Yash\\source\\repos\\CleanArchitecture\\CleanArchitecture.Tests\\Orders.Tests\\Command.Tests\\UpdateOrderCommandHandlerTests.cs",
+              "RelativeToolTip": "CleanArchitecture.Tests\\Orders.Tests\\Command.Tests\\UpdateOrderCommandHandlerTests.cs",
+              "ViewState": "AgIAAM8AAAAAAAAAAAAowOoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-21T03:48:25.611Z",
+              "EditorCaption": ""
+            },
+            {
               "$type": "Bookmark",
               "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "ChangeToMemberCommandHandlerTests.cs",
-              "DocumentMoniker": "C:\\Users\\Yash\\source\\repos\\CleanArchitecture\\CleanArchitecture.Tests\\UserFeature.Tests\\Command.Tests\\ChangeToMemberCommandHandlerTests.cs",
-              "RelativeDocumentMoniker": "CleanArchitecture.Tests\\UserFeature.Tests\\Command.Tests\\ChangeToMemberCommandHandlerTests.cs",
-              "ToolTip": "C:\\Users\\Yash\\source\\repos\\CleanArchitecture\\CleanArchitecture.Tests\\UserFeature.Tests\\Command.Tests\\ChangeToMemberCommandHandlerTests.cs",
-              "RelativeToolTip": "CleanArchitecture.Tests\\UserFeature.Tests\\Command.Tests\\ChangeToMemberCommandHandlerTests.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 10,
+              "Title": "MakeOrderCommandHandlerTests.cs",
+              "DocumentMoniker": "C:\\Users\\Yash\\source\\repos\\CleanArchitecture\\CleanArchitecture.Tests\\Orders.Tests\\Command.Tests\\MakeOrderCommandHandlerTests.cs",
+              "RelativeDocumentMoniker": "CleanArchitecture.Tests\\Orders.Tests\\Command.Tests\\MakeOrderCommandHandlerTests.cs",
+              "ToolTip": "C:\\Users\\Yash\\source\\repos\\CleanArchitecture\\CleanArchitecture.Tests\\Orders.Tests\\Command.Tests\\MakeOrderCommandHandlerTests.cs",
+              "RelativeToolTip": "CleanArchitecture.Tests\\Orders.Tests\\Command.Tests\\MakeOrderCommandHandlerTests.cs",
+              "ViewState": "AgIAAGsAAAAAAAAAAAAgwAIAAAA6AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-16T04:48:39.553Z",
+              "WhenOpened": "2024-08-21T03:48:05.504Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 11,
+              "Title": "DeleteOrderCommandHandlerTests.cs",
+              "DocumentMoniker": "C:\\Users\\Yash\\source\\repos\\CleanArchitecture\\CleanArchitecture.Tests\\Orders.Tests\\Command.Tests\\DeleteOrderCommandHandlerTests.cs",
+              "RelativeDocumentMoniker": "CleanArchitecture.Tests\\Orders.Tests\\Command.Tests\\DeleteOrderCommandHandlerTests.cs",
+              "ToolTip": "C:\\Users\\Yash\\source\\repos\\CleanArchitecture\\CleanArchitecture.Tests\\Orders.Tests\\Command.Tests\\DeleteOrderCommandHandlerTests.cs",
+              "RelativeToolTip": "CleanArchitecture.Tests\\Orders.Tests\\Command.Tests\\DeleteOrderCommandHandlerTests.cs",
+              "ViewState": "AgIAAEUAAAAAAAAAAAAYwBMAAABJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-21T03:47:17.193Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "RegistrationCommandHandlerTests.cs",
+              "DocumentMoniker": "C:\\Users\\Yash\\source\\repos\\CleanArchitecture\\CleanArchitecture.Tests\\Authentication.Tests\\Command.Tests\\RegistrationCommandHandlerTests.cs",
+              "RelativeDocumentMoniker": "CleanArchitecture.Tests\\Authentication.Tests\\Command.Tests\\RegistrationCommandHandlerTests.cs",
+              "ToolTip": "C:\\Users\\Yash\\source\\repos\\CleanArchitecture\\CleanArchitecture.Tests\\Authentication.Tests\\Command.Tests\\RegistrationCommandHandlerTests.cs",
+              "RelativeToolTip": "CleanArchitecture.Tests\\Authentication.Tests\\Command.Tests\\RegistrationCommandHandlerTests.cs",
+              "ViewState": "AgIAAIAAAAAAAAAAAAAgwB0AAABCAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-21T03:47:08.162Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
               "Title": "CreateProductCommandHandlerTests.cs",
               "DocumentMoniker": "C:\\Users\\Yash\\source\\repos\\CleanArchitecture\\CleanArchitecture.Tests\\Products.Tests\\Command.Tests\\CreateProductCommandHandlerTests.cs",
               "RelativeDocumentMoniker": "CleanArchitecture.Tests\\Products.Tests\\Command.Tests\\CreateProductCommandHandlerTests.cs",
               "ToolTip": "C:\\Users\\Yash\\source\\repos\\CleanArchitecture\\CleanArchitecture.Tests\\Products.Tests\\Command.Tests\\CreateProductCommandHandlerTests.cs",
               "RelativeToolTip": "CleanArchitecture.Tests\\Products.Tests\\Command.Tests\\CreateProductCommandHandlerTests.cs",
-              "ViewState": "AgIAAHYAAAAAAAAAAAAYwKQAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAEkAAAAAAAAAAAAYwBcAAAAzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-08-16T04:46:53.304Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 5,
+              "Title": "ChangeToMemberCommandHandlerTests.cs",
+              "DocumentMoniker": "C:\\Users\\Yash\\source\\repos\\CleanArchitecture\\CleanArchitecture.Tests\\UserFeature.Tests\\Command.Tests\\ChangeToMemberCommandHandlerTests.cs",
+              "RelativeDocumentMoniker": "CleanArchitecture.Tests\\UserFeature.Tests\\Command.Tests\\ChangeToMemberCommandHandlerTests.cs",
+              "ToolTip": "C:\\Users\\Yash\\source\\repos\\CleanArchitecture\\CleanArchitecture.Tests\\UserFeature.Tests\\Command.Tests\\ChangeToMemberCommandHandlerTests.cs",
+              "RelativeToolTip": "CleanArchitecture.Tests\\UserFeature.Tests\\Command.Tests\\ChangeToMemberCommandHandlerTests.cs",
+              "ViewState": "AgIAAIAAAAAAAAAAAAAgwAoAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-16T04:48:39.553Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "LoginCommandHandlerTests.cs",
+              "DocumentMoniker": "C:\\Users\\Yash\\source\\repos\\CleanArchitecture\\CleanArchitecture.Tests\\Authentication.Tests\\Command.Tests\\LoginCommandHandlerTests.cs",
+              "RelativeDocumentMoniker": "CleanArchitecture.Tests\\Authentication.Tests\\Command.Tests\\LoginCommandHandlerTests.cs",
+              "ToolTip": "C:\\Users\\Yash\\source\\repos\\CleanArchitecture\\CleanArchitecture.Tests\\Authentication.Tests\\Command.Tests\\LoginCommandHandlerTests.cs",
+              "RelativeToolTip": "CleanArchitecture.Tests\\Authentication.Tests\\Command.Tests\\LoginCommandHandlerTests.cs",
+              "ViewState": "AgIAAIkAAAAAAAAAAAAgwKkAAABdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-21T03:46:53.289Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
               "Title": "DeleteProductCommandHandlerTests.cs",
               "DocumentMoniker": "C:\\Users\\Yash\\source\\repos\\CleanArchitecture\\CleanArchitecture.Tests\\Products.Tests\\Command.Tests\\DeleteProductCommandHandlerTests.cs",
               "RelativeDocumentMoniker": "CleanArchitecture.Tests\\Products.Tests\\Command.Tests\\DeleteProductCommandHandlerTests.cs",
               "ToolTip": "C:\\Users\\Yash\\source\\repos\\CleanArchitecture\\CleanArchitecture.Tests\\Products.Tests\\Command.Tests\\DeleteProductCommandHandlerTests.cs",
               "RelativeToolTip": "CleanArchitecture.Tests\\Products.Tests\\Command.Tests\\DeleteProductCommandHandlerTests.cs",
-              "ViewState": "AgIAAKIAAAAAAAAAAAArwLUAAAAUAAAAAAAAAA==",
+              "ViewState": "AgIAAJIAAAAAAAAAAAAgwBEAAAAxAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-08-16T03:22:48.424Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 14,
+              "Title": "RevokeForAllUsersCommandHandler.cs",
+              "DocumentMoniker": "C:\\Users\\Yash\\source\\repos\\CleanArchitecture\\CleanArchitecture.Application\\Features\\Auth\\Commands\\Revoke\\RevokeForAllUsers\\RevokeForAllUsersCommandHandler.cs",
+              "RelativeDocumentMoniker": "CleanArchitecture.Application\\Features\\Auth\\Commands\\Revoke\\RevokeForAllUsers\\RevokeForAllUsersCommandHandler.cs",
+              "ToolTip": "C:\\Users\\Yash\\source\\repos\\CleanArchitecture\\CleanArchitecture.Application\\Features\\Auth\\Commands\\Revoke\\RevokeForAllUsers\\RevokeForAllUsersCommandHandler.cs",
+              "RelativeToolTip": "CleanArchitecture.Application\\Features\\Auth\\Commands\\Revoke\\RevokeForAllUsers\\RevokeForAllUsersCommandHandler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACAAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-21T03:40:26.667Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
               "Title": "CreateProductCommandHandler.cs",
               "DocumentMoniker": "C:\\Users\\Yash\\source\\repos\\CleanArchitecture\\CleanArchitecture.Application\\Features\\Products\\Commands\\CreateProduct\\CreateProductCommandHandler.cs",
               "RelativeDocumentMoniker": "CleanArchitecture.Application\\Features\\Products\\Commands\\CreateProduct\\CreateProductCommandHandler.cs",
@@ -90,38 +286,6 @@
               "ViewState": "AgIAADkAAAAAAAAAAAAjwFMAAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-08-15T12:07:46.34Z",
-              "EditorCaption": ""
-            }
-          ]
-        },
-        {
-          "DockedWidth": 372,
-          "SelectedChildIndex": 0,
-          "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "UpdateProductCommandHandlerTests.cs",
-              "DocumentMoniker": "C:\\Users\\Yash\\source\\repos\\CleanArchitecture\\CleanArchitecture.Tests\\Products.Tests\\Command.Tests\\UpdateProductCommandHandlerTests.cs",
-              "RelativeDocumentMoniker": "CleanArchitecture.Tests\\Products.Tests\\Command.Tests\\UpdateProductCommandHandlerTests.cs",
-              "ToolTip": "C:\\Users\\Yash\\source\\repos\\CleanArchitecture\\CleanArchitecture.Tests\\Products.Tests\\Command.Tests\\UpdateProductCommandHandlerTests.cs",
-              "RelativeToolTip": "CleanArchitecture.Tests\\Products.Tests\\Command.Tests\\UpdateProductCommandHandlerTests.cs",
-              "ViewState": "AgIAAIQAAAAAAAAAAAAYwGcAAAAMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-16T04:27:00.966Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "DeleteProductCommandHandler.cs",
-              "DocumentMoniker": "C:\\Users\\Yash\\source\\repos\\CleanArchitecture\\CleanArchitecture.Application\\Features\\Products\\Commands\\DeleteProduct\\DeleteProductCommandHandler.cs",
-              "RelativeDocumentMoniker": "CleanArchitecture.Application\\Features\\Products\\Commands\\DeleteProduct\\DeleteProductCommandHandler.cs",
-              "ToolTip": "C:\\Users\\Yash\\source\\repos\\CleanArchitecture\\CleanArchitecture.Application\\Features\\Products\\Commands\\DeleteProduct\\DeleteProductCommandHandler.cs",
-              "RelativeToolTip": "CleanArchitecture.Application\\Features\\Products\\Commands\\DeleteProduct\\DeleteProductCommandHandler.cs",
-              "ViewState": "AgIAABQAAAAAAAAAAAAAwDcAAAArAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-15T12:06:31.455Z",
               "EditorCaption": ""
             }
           ]

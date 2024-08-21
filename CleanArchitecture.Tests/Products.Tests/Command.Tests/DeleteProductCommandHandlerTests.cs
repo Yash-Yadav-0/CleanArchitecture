@@ -1,24 +1,17 @@
-﻿using CleanArchitecture.Application.Features.Orders.Comments.DeleteOrder;
-using CleanArchitecture.Application.Features.Products.Commands.DeleteProduct;
+﻿using CleanArchitecture.Application.Features.Products.Commands.DeleteProduct;
 using CleanArchitecture.Application.Features.Products.Rules;
 using CleanArchitecture.Application.Interfaces.AutoMapper;
 using CleanArchitecture.Application.Interfaces.Storage;
 using CleanArchitecture.Domain.Entities;
 using CleanArchitecture.Persistence.Context;
 using CleanArchitecture.Persistence.UnitOfWorks;
-using Irony.Parsing;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Moq;
 using SendGrid.Helpers.Errors.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CleanArchitecture.Tests.Products.Tests.Command.Tests
 {

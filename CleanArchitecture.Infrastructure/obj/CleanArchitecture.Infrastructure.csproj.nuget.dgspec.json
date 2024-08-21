@@ -68,7 +68,7 @@
             },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
-              "version": "[8.0.7, )"
+              "version": "[8.0.8, )"
             },
             "Microsoft.AspNetCore.Http": {
               "target": "Package",
@@ -80,7 +80,7 @@
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[8.0.7, )"
+              "version": "[8.0.8, )"
             },
             "Npgsql": {
               "target": "Package",
@@ -96,7 +96,7 @@
             },
             "OpenTelemetry.Instrumentation.AspNetCore": {
               "target": "Package",
-              "version": "(, )"
+              "version": "[1.9.0, )"
             },
             "OpenTelemetry.Instrumentation.EntityFrameworkCore": {
               "target": "Package",
@@ -112,7 +112,7 @@
             },
             "Serilog.AspNetCore": {
               "target": "Package",
-              "version": "[8.0.2-dev-00338, )"
+              "version": "[8.0.2, )"
             },
             "System.ComponentModel.Annotations": {
               "target": "Package",
@@ -187,7 +187,7 @@
           "dependencies": {
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[8.0.7, )"
+              "version": "[8.0.8, )"
             }
           },
           "imports": [
@@ -273,11 +273,11 @@
             },
             "MailKit": {
               "target": "Package",
-              "version": "[4.7.0, )"
+              "version": "[4.7.1.1, )"
             },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[8.0.7, )"
+              "version": "[8.0.8, )"
             },
             "Microsoft.Extensions.Configuration.Abstractions": {
               "target": "Package",
@@ -297,11 +297,11 @@
             },
             "Microsoft.IdentityModel.JsonWebTokens": {
               "target": "Package",
-              "version": "[7.6.3, )"
+              "version": "[8.0.1, )"
             },
             "Microsoft.IdentityModel.Tokens": {
               "target": "Package",
-              "version": "[7.6.3, )"
+              "version": "[8.0.1, )"
             },
             "MimeKit": {
               "target": "Package",
@@ -309,19 +309,19 @@
             },
             "Quartz": {
               "target": "Package",
-              "version": "[3.11.0, )"
+              "version": "[3.13.0, )"
             },
             "Quartz.Extensions.DependencyInjection": {
               "target": "Package",
-              "version": "[3.11.0, )"
+              "version": "[3.13.0, )"
             },
             "Serilog": {
               "target": "Package",
-              "version": "[4.0.0, )"
+              "version": "[4.0.1, )"
             },
             "System.IdentityModel.Tokens.Jwt": {
               "target": "Package",
-              "version": "[7.6.3, )"
+              "version": "[8.0.1, )"
             },
             "System.Security.Cryptography.Cng": {
               "target": "Package",
@@ -407,25 +407,25 @@
           "dependencies": {
             "Bogus": {
               "target": "Package",
-              "version": "[35.5.1, )"
+              "version": "[35.6.0, )"
             },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[8.0.7, )"
+              "version": "[8.0.8, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[8.0.7, )"
+              "version": "[8.0.8, )"
             },
             "Microsoft.EntityFrameworkCore.Proxies": {
               "target": "Package",
-              "version": "[8.0.7, )"
+              "version": "[8.0.8, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[8.0.7, )"
+              "version": "[8.0.8, )"
             },
             "Microsoft.Extensions.DependencyInjection": {
               "target": "Package",

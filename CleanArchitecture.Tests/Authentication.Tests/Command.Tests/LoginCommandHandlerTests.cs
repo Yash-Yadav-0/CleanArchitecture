@@ -174,6 +174,5 @@ namespace CleanArchitecture.Tests.Authentication.Tests.Command.Tests
             var exception = await Assert.ThrowsAsync<EmailOrPasswordShouldnotbeInvalidException>(() => _handler.Handle(request, CancellationToken.None));
             Assert.Equal("Auth rules validation failed", exception.Message);
         }
-
     }
 }

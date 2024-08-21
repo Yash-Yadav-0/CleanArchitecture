@@ -11,7 +11,6 @@ using Microsoft.EntityFrameworkCore;
 using Moq;
 using System.Security.Claims;
 
-
 namespace CleanArchitecture.Tests.UserFeature.Tests.Command.Tests
 {
     //Change User to Vendor

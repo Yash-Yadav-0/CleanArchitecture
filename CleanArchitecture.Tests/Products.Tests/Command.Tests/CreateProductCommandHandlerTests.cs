@@ -10,12 +10,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CleanArchitecture.Tests.Products.Tests.Command.Tests
 {
@@ -30,7 +25,6 @@ namespace CleanArchitecture.Tests.Products.Tests.Command.Tests
         private readonly ApplicationDbContext _dbContext;
         private readonly CreateProductCommandHandler _handler;
         private readonly Guid _userID;
-
         public CreateProductCommandHandlerTests()
         {
             _userID = Guid.NewGuid();
