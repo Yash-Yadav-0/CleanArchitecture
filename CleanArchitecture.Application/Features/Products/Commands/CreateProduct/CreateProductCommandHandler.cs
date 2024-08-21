@@ -41,6 +41,11 @@ namespace CleanArchitecture.Application.Features.Products.Commands.CreateProduct
 
         public async Task<Unit> Handle(CreateProductCommandRequest request, CancellationToken cancellationToken)
         {
+            if (request == null)
+            {
+                throw new ArgumentNullException(nameof(request));
+            }
+
             LoggerHelper.LogInformation("Handling CreateProductCommandRequest with Title: {Title}", request.Title);
             try
             {
@@ -52,7 +57,7 @@ namespace CleanArchitecture.Application.Features.Products.Commands.CreateProduct
                 }
 
                 var userId = httpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
-               
+
                 if (userId == null)
                 {
                     LoggerHelper.LogWarning("Unauthorized attempt to create products. UserId is null.");
@@ -75,31 +80,26 @@ namespace CleanArchitecture.Application.Features.Products.Commands.CreateProduct
                 var product = new Product(request.Title, request.Description, request.Price, request.Discount, request.BrandId);
                 await UnitOfWork.writeRepository<Product>().AddAsync(product);
 
-                if (await UnitOfWork.SaveChangeAsync() > 0)
+                foreach (var categoryId in request.CategortIds)
                 {
-                    foreach (var categoryId in request.CategortIds)
+                    await UnitOfWork.writeRepository<ProductsCategories>().AddAsync(new ProductsCategories
                     {
-                        await UnitOfWork.writeRepository<ProductsCategories>()
-                            .AddAsync(new ProductsCategories
-                            {
-                                CategoryId = categoryId,
-                                ProductId = product.Id
-                            });
-                    }
+                        CategoryId = categoryId,
+                        ProductId = product.Id
+                    });
                 }
 
                 if (request.Images != null && request.Images.Any())
                 {
-
-                    IList<(string fileName, string Path)> list = await localStorage.UploadManyAsync(product.Id, "images", request.Images);
-                    if (list != null)
+                    IList<(string FileName, string Path)> uploadedFiles = await localStorage.UploadManyAsync(product.Id, "productimages", request.Images);
+                    if (uploadedFiles.Count > 0)
                     {
-                        foreach (var photo in list)
+                        foreach (var (FileName, Path) in uploadedFiles)
                         {
                             product.images.Add(new Domain.Entities.Image
                             {
-                                Path = photo.Path,
-                                FileName = photo.fileName,
+                                Path = Path,
+                                FileName = FileName,
                                 ProductId = product.Id
                             });
                         }
@@ -107,14 +107,14 @@ namespace CleanArchitecture.Application.Features.Products.Commands.CreateProduct
                 }
 
                 await UnitOfWork.SaveChangeAsync();
-                LoggerHelper.LogInformation("Successfully created product with Id: {productId}", product.Id);
-                return Unit.Value;
             }
             catch (Exception ex)
             {
                 LoggerHelper.LogError("Error occurred while handling CreateProductCommandRequest with Title: {Title}", ex, request.Title);
                 throw;
             }
+
+            return Unit.Value;
         }
 
         private async Task<bool> IsUserInRoleAsync(string userId, string roleName)

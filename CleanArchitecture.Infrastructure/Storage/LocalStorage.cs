@@ -17,14 +17,19 @@ namespace CleanArchitecture.Infrastructure.Storage
         private readonly string[] _allowedFileExtensions = { ".jpg", ".jpeg", ".png", ".webp", ".svg", ".jfif" };
         private const long _allowedFileSize = 1 * 1024 * 1024; // 1 Mb
 
-
         public LocalStorage(IWebHostEnvironment webHost)
         {
-            this.webHost = webHost;
-            _wwwroot = webHost.WebRootPath;
+            this.webHost = webHost ?? throw new ArgumentNullException(nameof(webHost));
+            _wwwroot = webHost.WebRootPath ?? throw new InvalidOperationException("Web root path is not set.");
         }
+
         public async Task<(string FileName, string Path)> UploadAsync(int id, string folderName, IFormFile file)
         {
+            if (string.IsNullOrEmpty(folderName))
+            {
+                throw new ArgumentException("Folder name must be provided.", nameof(folderName));
+            }
+
             if (file == null)
             {
                 throw new ArgumentNullException(nameof(file), "File is null.");
@@ -36,7 +41,7 @@ namespace CleanArchitecture.Infrastructure.Storage
             }
 
             string extension = Path.GetExtension(file.FileName);
-            if (!_allowedFileExtensions.Contains(extension))
+            if (!_allowedFileExtensions.Contains(extension, StringComparer.OrdinalIgnoreCase))
             {
                 throw new ArgumentException($"Not an allowed file format. Must be in format {string.Join(", ", _allowedFileExtensions)}", nameof(file));
             }
@@ -47,7 +52,7 @@ namespace CleanArchitecture.Infrastructure.Storage
                 Directory.CreateDirectory(folderPath);
             }
 
-            string newFileName = $"{file.FileName.Replace(extension, $"_{id}").ToLower()}_{DateTime.UtcNow:dd_MM_yyyy}{extension}";
+            string newFileName = $"{file.FileName.Replace(extension, $"_{id}", StringComparison.OrdinalIgnoreCase).ToLower()}_{Guid.NewGuid():N}_{DateTime.UtcNow:dd_MM_yyyy}{extension}";
             string path = Path.Combine(folderPath, newFileName);
 
             using var stream = new FileStream(path, FileMode.CreateNew);
@@ -56,7 +61,7 @@ namespace CleanArchitecture.Infrastructure.Storage
             return (newFileName, path);
         }
 
-        public async Task<IList<(string FilesName, string Path)>> UploadManyAsync(int id, string folderName, IFormFileCollection files)
+        public async Task<IList<(string FileName, string Path)>> UploadManyAsync(int id, string folderName, IFormFileCollection files)
         {
             if (files == null || files.Count == 0)
             {
@@ -69,7 +74,7 @@ namespace CleanArchitecture.Infrastructure.Storage
                 Directory.CreateDirectory(folderPath);
             }
 
-            List<(string FilesName, string Path)> uploadedFiles = new List<(string FilesName, string Path)>();
+            List<(string FileName, string Path)> uploadedFiles = new List<(string FileName, string Path)>();
 
             foreach (IFormFile file in files)
             {
@@ -79,12 +84,12 @@ namespace CleanArchitecture.Infrastructure.Storage
                 }
 
                 string extension = Path.GetExtension(file.FileName);
-                if (!_allowedFileExtensions.Contains(extension))
+                if (!_allowedFileExtensions.Contains(extension, StringComparer.OrdinalIgnoreCase))
                 {
                     throw new ArgumentException($"Not an allowed file format. Must be in format {string.Join(", ", _allowedFileExtensions)}", nameof(file));
                 }
 
-                string newFileName = $"{file.FileName.Replace(extension, $"_{id}").ToLower()}_{DateTime.UtcNow:dd_MM_yyyy}{extension}";
+                string newFileName = $"{file.FileName.Replace(extension, $"_{id}", StringComparison.OrdinalIgnoreCase).ToLower()}_{Guid.NewGuid():N}_{DateTime.UtcNow:dd_MM_yyyy}{extension}";
                 string path = Path.Combine(folderPath, newFileName);
 
                 using var stream = new FileStream(path, FileMode.CreateNew);
@@ -98,6 +103,16 @@ namespace CleanArchitecture.Infrastructure.Storage
 
         public Task DeleteAsync(string path, string fileName)
         {
+            if (string.IsNullOrEmpty(path))
+            {
+                throw new ArgumentException("Path must be provided.", nameof(path));
+            }
+
+            if (string.IsNullOrEmpty(fileName))
+            {
+                throw new ArgumentException("File name must be provided.", nameof(fileName));
+            }
+
             string filePath = Path.Combine(_wwwroot, _folderPath, path, fileName);
             if (!File.Exists(filePath))
             {

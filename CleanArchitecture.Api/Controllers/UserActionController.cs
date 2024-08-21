@@ -1,7 +1,9 @@
 ﻿using CleanArchitecture.Api.Controllers._BaseController;
 using CleanArchitecture.Application.Features.Auth.Queries.GetAllUsers;
+using CleanArchitecture.Application.Features.UserFeature.Commands.ChangeToAdmin;
 using CleanArchitecture.Application.Features.UserFeature.Commands.ChangeToMember;
 using CleanArchitecture.Application.Features.UserFeature.Commands.ChangeToVendor;
+using Grpc.Core;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -25,6 +27,13 @@ namespace CleanArchitecture.Api.Controllers
             await mediator.Send(request);
             return Ok();
         }
+        [HttpPost("ChangeTOAdmin")]
+        public async Task<IActionResult> ChangeToAdmin([FromForm] ChangeToAdminCommandRequest request, CancellationToken cancellationToken)
+        {
+            var result = await mediator.Send(request);
+            return Ok(result);
+        }
+
         [HttpGet("GetAllUsers")]
         public async Task<IActionResult> GetAllUsers(CancellationToken cancellationToken)
         {

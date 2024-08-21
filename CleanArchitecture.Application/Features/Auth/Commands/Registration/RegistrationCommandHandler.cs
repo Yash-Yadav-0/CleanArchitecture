@@ -8,11 +8,9 @@ using CleanArchitecture.Application.Interfaces.Mail;
 using CleanArchitecture.Application.Interfaces.Storage;
 using CleanArchitecture.Application.Interfaces.UnitOfWorks;
 using CleanArchitecture.Domain.Entities;
-using DocumentFormat.OpenXml.Wordprocessing;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Logging;
 
 public class RegistrationCommandHandler : BaseHandler, IRequestHandler<RegistrationCommandRequest, Unit>
@@ -22,7 +20,6 @@ public class RegistrationCommandHandler : BaseHandler, IRequestHandler<Registrat
     private readonly ILinkGeneratorHelper _linkGeneratorHelper;
     private readonly EmailConfirmationCommandRequest _emailConfirmationCommandRequest;
     private readonly ILocalStorage _localStorage;
-    private readonly IUrlHelper urlHelper;
 
     public UserManager<User> UserManager { get; }
     public RoleManager<Role> RoleManager { get; }
