@@ -36,7 +36,8 @@ namespace CleanArchitecture.Persistence
             })
                 .AddRoles<Role>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddDefaultTokenProviders();
+                .AddDefaultTokenProviders()
+                .AddApiEndpoints();
         }
     }
 }

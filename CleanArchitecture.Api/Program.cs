@@ -12,6 +12,7 @@ using Microsoft.OpenApi.Models;
 using System.Text.Json.Serialization;
 using Hangfire.PostgreSql;
 using CleanArchitecture.Application.Features.Products.Rules;
+using CleanArchitecture.Domain.Entities;
 
 namespace CleanArchitecture.Api
 {
@@ -52,7 +53,7 @@ namespace CleanArchitecture.Api
             //for authorize
 
             // Register LinkGenerator.
-            builder.Services.AddScoped<LinkGeneratorHelper>();
+            builder.Services.AddScoped<ILinkGeneratorHelper,LinkGeneratorHelper>();
 
             builder.Services.AddControllers()
                 .AddJsonOptions(config =>
@@ -103,6 +104,8 @@ namespace CleanArchitecture.Api
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+            //persistence(addapiendpoints)
+            app.MapIdentityApi<User>();
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
