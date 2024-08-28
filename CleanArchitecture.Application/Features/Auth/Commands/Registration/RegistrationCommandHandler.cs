@@ -51,7 +51,7 @@ public class RegistrationCommandHandler : BaseHandler, IRequestHandler<Registrat
     {
         LogHelper.LogInformation("Handling Registration for Email: {Email}", request.Email);
         await AuthRules.UserShouldnotBeExistsAsync(await UserManager.FindByEmailAsync(request.Email));
-        User user = Mapper.Map<User, RegistrationCommandRequest>(request);
+        User user = Mapper.Map<User>(request);
         user.UserName = request.Email;
         user.SecurityStamp = Guid.NewGuid().ToString();
         IdentityResult result = await UserManager.CreateAsync(user, request.Password);
@@ -69,7 +69,7 @@ public class RegistrationCommandHandler : BaseHandler, IRequestHandler<Registrat
             await RoleManager.CreateAsync(new Role
             {
                 Id = Guid.NewGuid(),
-                Name = "user",
+                Name = "USER",
                 NormalizedName = "USER",
                 ConcurrencyStamp = Guid.NewGuid().ToString(),
             });

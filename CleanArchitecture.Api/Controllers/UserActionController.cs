@@ -11,32 +11,31 @@ using Microsoft.AspNetCore.Mvc;
 namespace CleanArchitecture.Api.Controllers
 {
     [Route("api/[controller]/")]
+    [Authorize(Roles ="Admin")]
     [ApiController]
     public class UserActionController : BaseController
     {
         public UserActionController(IMediator mediator) : base(mediator) { }
-        [Authorize(Roles ="Admin")]
+
         [HttpPost("ChangeToMember")]
         public async Task<IActionResult> ChangeToMember([FromForm] ChangeToMemberCommandRequest request, CancellationToken cancellationToken)
         {
             await mediator.Send(request);
             return Ok();
         }
-        [Authorize(Roles ="Admin")]
+
         [HttpPost("ChangeToVendor")]
         public async Task<IActionResult> ChangeToVendor([FromForm] ChangeToVendorCommandRequest request,CancellationToken cancellationToken)
         {
             await mediator.Send(request);
             return Ok();
         }
-        [Authorize(Roles ="Admin")]
         [HttpPost("ChangeTOAdmin")]
         public async Task<IActionResult> ChangeToAdmin([FromForm] ChangeToAdminCommandRequest request, CancellationToken cancellationToken)
         {
             var result = await mediator.Send(request);
             return Ok(result);
         }
-        [Authorize(Roles ="Admin")]
         [HttpGet("GetAllUsers")]
         public async Task<IActionResult> GetAllUsers(CancellationToken cancellationToken)
         {

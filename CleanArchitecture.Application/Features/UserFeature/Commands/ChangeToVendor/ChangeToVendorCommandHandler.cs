@@ -45,7 +45,9 @@ namespace CleanArchitecture.Application.Features.UserFeature.Commands.ChangeToVe
         {
             LoggerHelper.LogInformation("Handling ChangeToVendorCommandRequest for Email: {Email}", request.Email);
 
-            var userId = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            //commented as this is checked in controller level.
+            /*var userId = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             if (userId == null)
             {
@@ -60,8 +62,8 @@ namespace CleanArchitecture.Application.Features.UserFeature.Commands.ChangeToVe
                 LoggerHelper.LogError("User does not have the required Admin role.", new UnauthorizedAccessException("User doesnot meet required Role."));
                 throw new UnauthorizedAccessException("User does not have the required Admin role.");
             }
-            //await userRules.UserShouldnotBeExistsAsync(await userManager.FindByEmailAsync(request.Email));
-            User? user = await userManager.FindByEmailAsync(request.Email);
+           */
+            var user = await userManager.FindByEmailAsync(request.Email);
 
             if (user == null)
             {
@@ -70,7 +72,7 @@ namespace CleanArchitecture.Application.Features.UserFeature.Commands.ChangeToVe
             }
             try
             {
-                if (!await roleManager.RoleExistsAsync("VENDOR"))
+                if (!await roleManager.RoleExistsAsync("Vendor"))
                 {
                     await roleManager.CreateAsync(new Role
                     {
@@ -82,7 +84,7 @@ namespace CleanArchitecture.Application.Features.UserFeature.Commands.ChangeToVe
                     await userManager.AddToRoleAsync(user, "VENDOR");
                     await userManager.UpdateAsync(user);
                 }
-
+                //Remove all current roles
                 var currentRole = await userManager.GetRolesAsync(user);
                 if (currentRole == null)
                 {

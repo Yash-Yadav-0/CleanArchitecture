@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CleanArchitecture.Persistence.Configuration
 {
-    internal class RoleConfiguration : IEntityTypeConfiguration<Role>
+    /*internal class RoleConfiguration : IEntityTypeConfiguration<Role>
     {
         public void Configure(EntityTypeBuilder<Role> builder)
         {
@@ -31,5 +31,5 @@ namespace CleanArchitecture.Persistence.Configuration
             };
             builder.HasData(Admin, USER, Vendor);
         }
-    }
+    }*/
 }
