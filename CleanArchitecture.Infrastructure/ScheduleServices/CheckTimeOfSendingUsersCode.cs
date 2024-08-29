@@ -18,31 +18,50 @@ namespace CleanArchitecture.Infrastructure.ScheduleServices
         //[AutomaticRetry(Attempts = 3)]
         public async Task CheckTimeOfSendingUsersAsync()
         {
-            using (var resource = serviceScopeFactory.CreateScope())
+            using var resource = serviceScopeFactory.CreateScope();
+
+            var mediatR = resource.ServiceProvider.GetRequiredService<IMediator>();
+
+            var userManager = resource.ServiceProvider.GetRequiredService<UserManager<User>>();
+
+            var mapper = resource.ServiceProvider.GetRequiredService<IMapper>();
+
+            try
             {
-                IMediator mediatR = resource.ServiceProvider.GetRequiredService<IMediator>();
+                var userQueryResponse = await mediatR.Send(new GetAllUsersQueryRequest());
 
-                var userManager = resource.ServiceProvider.GetRequiredService<UserManager<User>>();
+                var users = userQueryResponse.Select(x => new User
+                {
+                    Id = x.UserId,
+                    Email = x.Email,
+                    TimeOfCodeExpiration = x.TimeOfCodeExpiration,
+                }).ToList();
 
-                var mapper = resource.ServiceProvider.GetRequiredService<IMapper>();
-
-                Task<IList<GetAllUsersQueryResponse>> getAllUsersQueryResponsesTask = mediatR.Send(new GetAllUsersQueryRequest());
+                /*Task<IList<GetAllUsersQueryResponse>> getAllUsersQueryResponsesTask = mediatR.Send(new GetAllUsersQueryRequest());
 
                 IList<GetAllUsersQueryResponse> GetAllUsersQueryResponse = await getAllUsersQueryResponsesTask;
 
-                List<User> users = GetAllUsersQueryResponse.Select(x => new User() { Id = x.UserId, Email = x.Email, TimeOfCodeExpiration = x.TimeOfCodeExpiration }).ToList();
+                List<User> users = GetAllUsersQueryResponse.Select(x => new User() { Id = x.UserId, Email = x.Email, TimeOfCodeExpiration = x.TimeOfCodeExpiration }).ToList();*/
 
                 foreach (var user in users)
                 {
                     if (user.TimeOfCodeExpiration < DateTime.UtcNow)
                     {
+                        
                         User _user = await userManager.FindByEmailAsync(user.Email);
-                        _user.CodeForResetPassword = null;
-                        _user.IsCodeOfResetPasswordTrue = null;
-                        _user.TimeOfCodeExpiration = null;
-                        await userManager.UpdateAsync(_user);
+                        if (_user != null)
+                        {
+                            _user.CodeForResetPassword = null;
+                            _user.IsCodeOfResetPasswordTrue = null;
+                            _user.TimeOfCodeExpiration = null;
+                            await userManager.UpdateAsync(_user);
+                        }
                     }
                 }
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine($"An error occured: {ex.Message}");
             }
         }
     }
