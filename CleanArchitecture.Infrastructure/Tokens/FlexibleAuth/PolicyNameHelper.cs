@@ -1,9 +1,4 @@
 ﻿using CleanArchitecture.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CleanArchitecture.Infrastructure.Tokens.FlexibleAuth
 {
@@ -13,17 +8,18 @@ namespace CleanArchitecture.Infrastructure.Tokens.FlexibleAuth
 
         public static bool IsValidPolicyName(string? policyName)
         {
-            return policyName != null && policyName.StartsWith(Prefix, StringComparison.OrdinalIgnoreCase);
+            return policyName != null && policyName.StartsWith(Prefix, System.StringComparison.OrdinalIgnoreCase);
         }
+
         public static string GeneratePolicyNameFor(Permissions permissions)
         {
             return $"{Prefix}{(int)permissions}";
         }
+
         public static Permissions GetPermissionsFrom(string policyName)
         {
-            var permissionValue = int.Parse(policyName.Split("_")[1]);
+            var permissionValue = int.Parse(policyName.Split('_')[1]);
             return (Permissions)permissionValue;
         }
-
     }
 }

@@ -1,12 +1,16 @@
 ﻿using CleanArchitecture.Application.Interfaces.Mail;
 using CleanArchitecture.Application.Interfaces.Storage;
 using CleanArchitecture.Application.Interfaces.Tokens;
+using CleanArchitecture.Domain.Entities;
 using CleanArchitecture.Infrastructure.Mail;
 using CleanArchitecture.Infrastructure.Storage;
 using CleanArchitecture.Infrastructure.Tokens;
+using CleanArchitecture.Infrastructure.Tokens.FlexibleAuth;
+using CleanArchitecture.Persistence.Context;
 using Hangfire;
 using Hangfire.PostgreSql;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -45,7 +49,13 @@ namespace CleanArchitecture.Infrastructure
             });
             #endregion
 
+            //flexible api
+
+            services.AddSingleton<IAuthorizationHandler, PermissionAuthorizationHandler>();
+            services.AddSingleton<IAuthorizationPolicyProvider, FlexibleAuthorizationPolicyProvider>();
+
             #region Authentication and Authorization
+
             services.AddAuthentication(opt =>
             {
                 opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -67,7 +77,7 @@ namespace CleanArchitecture.Infrastructure
                 };
             });
 
-            services.AddAuthorization(options =>
+            /*services.AddAuthorization(options =>
             {
                 //policy based on specific claim
                 options.AddPolicy("RequiredAdminRole", policy =>
@@ -77,7 +87,7 @@ namespace CleanArchitecture.Infrastructure
                 options.AddPolicy("RequiredUserRole", policy =>
                     policy.RequireClaim(ClaimTypes.Role, "USER"));
             });
-
+*/
             #endregion
         }
     }

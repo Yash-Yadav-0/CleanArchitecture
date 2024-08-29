@@ -1,4 +1,5 @@
 ﻿using CleanArchitecture.Domain.Entities;
+using CleanArchitecture.Persistence.CustomAuthClaims;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
@@ -9,7 +10,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CleanArchitecture.Infrastructure.Tokens.FlexibleAuth.CustomAuthClaims
+namespace CleanArchitecture.Persistence.CustomAuthClaims
 {
     public class CustomUserClaimsPrincipalFactory : UserClaimsPrincipalFactory<User,Role>
     {
@@ -22,7 +23,6 @@ namespace CleanArchitecture.Infrastructure.Tokens.FlexibleAuth.CustomAuthClaims
         {
 
         }
-
         protected override async Task<ClaimsIdentity> GenerateClaimsAsync(User user)
         {
             var identity = await base.GenerateClaimsAsync(user);

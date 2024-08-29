@@ -6,6 +6,8 @@ using CleanArchitecture.Application.Features.Auth.Commands.ResetPassword.ISCodeF
 using CleanArchitecture.Application.Features.Auth.Commands.ResetPassword.SendForResetPassword;
 using CleanArchitecture.Application.Features.Auth.Commands.Revoke.RevokeForAllUsers;
 using CleanArchitecture.Application.Features.Auth.Commands.Revoke.RevokeForUser;
+using CleanArchitecture.Application.Helpers;
+using CleanArchitecture.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -16,10 +18,10 @@ namespace CleanArchitecture.Api.Controllers
     [ApiController]
     public class AuthenticationController : BaseController
     {
-        public AuthenticationController(IMediator mediatR) : base(mediatR) { }
+        public AuthenticationController(IMediator mediator) : base(mediator) { }
 
         [HttpGet("RefreshToken")]
-        public async Task<IActionResult> RefreshToken(RefreshTokenCommandRequest request)
+        public async Task<IActionResult> RefreshToken([FromForm] RefreshTokenCommandRequest request)
         {
             var demo = await mediator.Send(request);
             return Ok(demo);
@@ -33,30 +35,31 @@ namespace CleanArchitecture.Api.Controllers
         }
 
         [HttpPost("SendForResetPassword")]
-        public async Task<IActionResult> SendForResetPassword(SendForResetPasswordCommandsRequest request)
+        public async Task<IActionResult> SendForResetPassword([FromForm] SendForResetPasswordCommandsRequest request)
         {
             return Ok(await mediator.Send(request));
         }
 
         [HttpPut("ISCodeForResetPasswordCorrect")]
-        public async Task<IActionResult> ISCodeForResetPasswordCorrect(ISCodeForResetPasswordCommandRequest request)
+        public async Task<IActionResult> ISCodeForResetPasswordCorrect([FromForm] ISCodeForResetPasswordCommandRequest request)
         {
             return Ok(await mediator.Send(request));
         }
 
         [HttpPut("ResetPassword")]
-        public async Task<IActionResult> ResetPassword(ConfirmResetPasswordCommandRequest request)
+        public async Task<IActionResult> ResetPassword([FromForm] ConfirmResetPasswordCommandRequest request)
         {
             return Ok(await mediator.Send(request));
         }
 
-        [HttpDelete("RevokeSpacificUser")]
-        public async Task<IActionResult> RevokeSpacificUser([FromForm] RevokeForUserCommandRequest request)
+        [PermissionAuthorize(Permissions.ManageUsers)]
+        [HttpDelete("RevokeSpecificUser")]
+        public async Task<IActionResult> RevokeSpecificUser([FromForm] RevokeForUserCommandRequest request)
         {
 
             return Ok(await mediator.Send(request));
         }
-        [Authorize(Roles ="Admin")]
+        [PermissionAuthorize(Permissions.ManageUsers)]
         [HttpDelete("RevokeAllUser")]
         public async Task<IActionResult> RevokeAllUser(RevokeForAllUsersCommandRequest request)
         {

@@ -6,6 +6,8 @@ using CleanArchitecture.Application.Features.Products.Queries.GetAllProducts;
 using CleanArchitecture.Application.Features.Products.Queries.GetProductById;
 using CleanArchitecture.Application.Features.Products.Queries.GetProductsFiltration;
 using CleanArchitecture.Application.Features.Products.Queries.PutProductInExcel;
+using CleanArchitecture.Application.Helpers;
+using CleanArchitecture.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -13,7 +15,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CleanArchitecture.Api.Controllers
 {
-    [Route("api/[controller]/")]
+    [Route("api/[controller]")]
     [ApiController]
     public class ProductsController : BaseController
     {
@@ -35,31 +37,32 @@ namespace CleanArchitecture.Api.Controllers
         public async Task<List<GetProductsFilterationQueryResponse>> GetProductWithFilteration([FromQuery] GetProductsFilterationQueryRequest request)
             => await mediator.Send(request);
 
-        [HttpGet("GetProductById{id:int}")]
+        [HttpGet("GetProductById/{id:int}")]
         public async Task<IList<GetProductByIdQueryResponse>> GetProductById(int id)
         {
             return await mediator.Send(new GetProductByIdQueryRequest() { ProductId = id });
         }
-        [Authorize(Roles ="Admin")]
+        [PermissionAuthorize(Permissions.ManageProducts)]
         [HttpPost("CreateProducts")]
         public async Task<IActionResult> CreateProductsAsync([FromForm] CreateProductCommandRequest request)
         {
             await mediator.Send(request);
-            return Created();
+            return CreatedAtAction(nameof(GetProductById), new { id = request.BrandId }, request);
+            //return Created();
         }
-        [Authorize(Roles ="Admin")]
+        [PermissionAuthorize(Permissions.ManageProducts)]
         [HttpPut("UpdateProducts")]
         public async Task<IActionResult> UpdateProductsAsync([FromForm] UpdateProductCommandRequest request)
         {
             await mediator.Send(request);
-            return StatusCode(StatusCodes.Status202Accepted);
+            return Accepted();
+            //return StatusCode(StatusCodes.Status202Accepted);
         }
-        [Authorize(Roles ="Admin")]
-        [HttpPut("DeleteProducts")]
+        [PermissionAuthorize(Permissions.ManageProducts)]
+        [HttpDelete("DeleteProducts")]
         public async Task DeleteProductsAsync([FromForm] DeleteProductCommandRequest request)
         {
             await mediator.Send(request);
-
         }
     }
 }
