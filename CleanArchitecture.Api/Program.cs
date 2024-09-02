@@ -65,7 +65,7 @@ namespace CleanArchitecture.Api
 
             builder.Services.AddSwaggerGen(c =>
             {
-                c.UseInlineDefinitionsForEnums();
+                //c.UseInlineDefinitionsForEnums();
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Clean Architecture", Version = "v1", Description = "ECommerce Clean Arch. swagger client." });
 
                 // Adding Bearer token authentication
@@ -95,6 +95,16 @@ namespace CleanArchitecture.Api
             });
 
             #endregion
+
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy", policy =>
+                {
+                    policy.AllowAnyOrigin()
+                          .AllowAnyHeader()
+                          .AllowAnyMethod();
+                });
+            });
 
             var app = builder.Build();
 

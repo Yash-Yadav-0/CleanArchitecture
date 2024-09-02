@@ -1,16 +1,21 @@
 ﻿using CleanArchitecture.Application.Interfaces.Mail;
 using CleanArchitecture.Application.Interfaces.Storage;
 using CleanArchitecture.Application.Interfaces.Tokens;
+using CleanArchitecture.Domain.Entities;
 using CleanArchitecture.Infrastructure.Mail;
 using CleanArchitecture.Infrastructure.Storage;
 using CleanArchitecture.Infrastructure.Tokens;
+using CleanArchitecture.Infrastructure.Tokens.FlexibleAuth;
+using CleanArchitecture.Persistence.Context;
 using Hangfire;
 using Hangfire.PostgreSql;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using System.Security.Claims;
 using System.Text;
 
 namespace CleanArchitecture.Infrastructure
@@ -44,12 +49,19 @@ namespace CleanArchitecture.Infrastructure
             });
             #endregion
 
-            #region Authentication
+            //flexible api
+
+            services.AddSingleton<IAuthorizationHandler, PermissionAuthorizationHandler>();
+            services.AddSingleton<IAuthorizationPolicyProvider, FlexibleAuthorizationPolicyProvider>();
+
+            #region Authentication and Authorization
+
             services.AddAuthentication(opt =>
             {
                 opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, opt =>
+            })
+                .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, opt =>
             {
                 opt.SaveToken = true;
                 opt.TokenValidationParameters = new TokenValidationParameters()
@@ -64,15 +76,19 @@ namespace CleanArchitecture.Infrastructure
                     ClockSkew = TimeSpan.Zero
                 };
             });
-            #endregion
 
-            /*#region Redis
-            services.AddStackExchangeRedisCache(opt =>
+            /*services.AddAuthorization(options =>
             {
-                opt.Configuration = configuration["RedisCacheSettings:ConnectionString"];
-                opt.InstanceName = configuration["RedisCacheSettings:InstanceName"];
-            });*/
-
+                //policy based on specific claim
+                options.AddPolicy("RequiredAdminRole", policy =>
+                    policy.RequireClaim(ClaimTypes.Role, "Admin"));
+                options.AddPolicy("RequiredVendorRole", policy =>
+                    policy.RequireClaim(ClaimTypes.Role, "Vendor"));
+                options.AddPolicy("RequiredUserRole", policy =>
+                    policy.RequireClaim(ClaimTypes.Role, "USER"));
+            });
+*/
+            #endregion
         }
     }
 }

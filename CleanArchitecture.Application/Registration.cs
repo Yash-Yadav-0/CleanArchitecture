@@ -4,6 +4,7 @@ using CleanArchitecture.Application.Features.Auth.Commands.EmailConfirmation;
 using CleanArchitecture.Application.Features.Orders.Comments.DeleteOrder;
 using CleanArchitecture.Application.Features.Orders.Rules;
 using CleanArchitecture.Application.Features.Products.Rules;
+using CleanArchitecture.Application.Features.UserFeature.Queries;
 using CleanArchitecture.Application.Helpers;
 using CleanArchitecture.Application.Middlewares.ExceptionMiddleware;
 using CleanArchitecture.Domain.Entities;
@@ -27,21 +28,24 @@ namespace CleanArchitecture.Application
         public static void AddApplication(this IServiceCollection services)
         {
             var assembly = Assembly.GetExecutingAssembly();
+            //mediatr registration
             services.AddMediatR(config => config.RegisterServicesFromAssembly(assembly));
-            services.AddTransient<ExceptionMiddleware>();
+
+            //fluentValidation
             services.AddValidatorsFromAssembly(assembly);
+            services.AddTransient<ExceptionMiddleware>();
 
             ValidatorOptions.Global.LanguageManager.Culture = new CultureInfo("en-US");
 
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(FluentValidationBehaviors<,>));
 
-            // Register URL helpers
+            // HTTP context and action context accessor
             services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddHttpContextAccessor();
             services.AddScoped<ILinkGeneratorHelper, LinkGeneratorHelper>();
 
-            services.AddHttpContextAccessor();
+            // Add additional service registrations
 
             services.AddSingleton<EmailConfirmationCommandRequest>();
             services.AddTransient<ProductRules>();
@@ -50,6 +54,7 @@ namespace CleanArchitecture.Application
             services.AddTransient<SignInManager<User>>();
             services.AddRulesFromAssemblyContaining(assembly, typeof(BaseRule));
             services.AddSingleton<IProductRules, ProductRules>();
+
 
             //Opentelemetry configuration
             services.AddOpenTelemetry()
@@ -69,6 +74,11 @@ namespace CleanArchitecture.Application
                         .AddHttpClientInstrumentation()
                         .AddEntityFrameworkCoreInstrumentation()
                         .AddOtlpExporter();
+                });
+            services.AddControllers()
+                .AddJsonOptions(options =>
+                {
+                    options.JsonSerializerOptions.Converters.Add(new PermissionsConverter());
                 });
             //Serilog Configuration
             /*services.AddSingleton<Logger>(provider =>

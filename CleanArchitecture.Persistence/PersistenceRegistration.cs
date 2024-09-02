@@ -2,6 +2,7 @@
 using CleanArchitecture.Application.Interfaces.UnitOfWorks;
 using CleanArchitecture.Domain.Entities;
 using CleanArchitecture.Persistence.Context;
+using CleanArchitecture.Persistence.CustomAuthClaims;
 using CleanArchitecture.Persistence.Repositories;
 using CleanArchitecture.Persistence.UnitOfWorks;
 using Microsoft.AspNetCore.Identity;
@@ -25,7 +26,12 @@ namespace CleanArchitecture.Persistence
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-            services.AddIdentityCore<User>(opt =>
+            services.AddIdentityApiEndpoints<User>(options => options.SignIn.RequireConfirmedAccount = false)
+                .AddRoles<Role>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddClaimsPrincipalFactory<CustomUserClaimsPrincipalFactory>();
+
+            /*services.AddIdentityCore<User>(opt =>
             {
                 opt.Password.RequireNonAlphanumeric = false;
                 opt.Password.RequiredLength = 2;
@@ -37,7 +43,7 @@ namespace CleanArchitecture.Persistence
                 .AddRoles<Role>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders()
-                .AddApiEndpoints();
+                .AddApiEndpoints();*/
         }
     }
 }

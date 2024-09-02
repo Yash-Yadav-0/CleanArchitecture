@@ -24,9 +24,9 @@ namespace CleanArchitecture.Infrastructure.Tokens
             #region claims
             IList<Claim> claims = new List<Claim>()
             {
-                new Claim(ClaimTypes. NameIdentifier,user.Id.ToString()),
-                new Claim(System.IdentityModel.Tokens.Jwt.JwtRegisteredClaimNames.Jti,Guid.NewGuid().ToString()),
-                new Claim (System.IdentityModel.Tokens.Jwt.JwtRegisteredClaimNames.Email,user.Email)
+                new Claim(ClaimTypes. NameIdentifier, user.Id.ToString()),
+                new Claim(JwtRegisteredClaimNames.Jti,Guid.NewGuid().ToString()),
+                new Claim(JwtRegisteredClaimNames.Email,user.Email)
             };
 
             foreach (var role in roles)

@@ -1,6 +1,8 @@
 ﻿using CleanArchitecture.Application.Features.Auth.Queries.GetAllUsers;
 using CleanArchitecture.Application.Interfaces;
 using CleanArchitecture.Domain.Entities;
+using CleanArchitecture.Persistence.Configuration;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
@@ -9,9 +11,6 @@ namespace CleanArchitecture.Persistence.Context
 {
     public class ApplicationDbContext : IdentityDbContext<User, Role, Guid>
     {
-        public ApplicationDbContext()
-        {
-        }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> optionsBuilder) : base(optionsBuilder)
         {
         }
@@ -29,6 +28,14 @@ namespace CleanArchitecture.Persistence.Context
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+
+            modelBuilder.SeedRoles();
+            modelBuilder.SeedUsers();
+            modelBuilder.SeedUserRoles();
+
+            // Configure composite key for IdentityUserRole<Guid>
+            modelBuilder.Entity<IdentityUserRole<Guid>>()
+                .HasKey(ur => new { ur.UserId, ur.RoleId });
         }
     }
 }

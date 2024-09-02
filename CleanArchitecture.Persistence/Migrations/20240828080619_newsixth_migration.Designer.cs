@@ -12,15 +12,15 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CleanArchitecture.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240717040107_third_Migration")]
-    partial class third_Migration
+    [Migration("20240828080619_newsixth_migration")]
+    partial class newsixth_migration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.7")
+                .HasAnnotation("ProductVersion", "8.0.8")
                 .HasAnnotation("Proxies:ChangeTracking", false)
                 .HasAnnotation("Proxies:CheckEquality", false)
                 .HasAnnotation("Proxies:LazyLoading", true)
@@ -63,29 +63,29 @@ namespace CleanArchitecture.Persistence.Migrations
                         new
                         {
                             Id = 1,
-                            AddedOnDate = new DateTime(2024, 7, 17, 4, 1, 7, 184, DateTimeKind.Utc).AddTicks(4004),
-                            DeletedDate = new DateTime(2024, 7, 17, 4, 1, 7, 184, DateTimeKind.Utc).AddTicks(3921),
+                            AddedOnDate = new DateTime(2024, 8, 28, 8, 6, 18, 387, DateTimeKind.Utc).AddTicks(2003),
+                            DeletedDate = new DateTime(2024, 8, 28, 8, 6, 18, 387, DateTimeKind.Utc).AddTicks(1931),
                             IsDeleted = false,
-                            Name = "Home & Automotive",
-                            UpdatedDate = new DateTime(2024, 7, 17, 4, 1, 7, 184, DateTimeKind.Utc).AddTicks(3921)
+                            Name = "Industrial",
+                            UpdatedDate = new DateTime(2024, 8, 28, 8, 6, 18, 387, DateTimeKind.Utc).AddTicks(1931)
                         },
                         new
                         {
                             Id = 2,
-                            AddedOnDate = new DateTime(2024, 7, 17, 4, 1, 7, 184, DateTimeKind.Utc).AddTicks(4011),
-                            DeletedDate = new DateTime(2024, 7, 17, 4, 1, 7, 184, DateTimeKind.Utc).AddTicks(4006),
+                            AddedOnDate = new DateTime(2024, 8, 28, 8, 6, 18, 387, DateTimeKind.Utc).AddTicks(2052),
+                            DeletedDate = new DateTime(2024, 8, 28, 8, 6, 18, 387, DateTimeKind.Utc).AddTicks(2005),
                             IsDeleted = true,
-                            Name = "Baby",
-                            UpdatedDate = new DateTime(2024, 7, 17, 4, 1, 7, 184, DateTimeKind.Utc).AddTicks(4006)
+                            Name = "Sports & Beauty",
+                            UpdatedDate = new DateTime(2024, 8, 28, 8, 6, 18, 387, DateTimeKind.Utc).AddTicks(2004)
                         },
                         new
                         {
                             Id = 3,
-                            AddedOnDate = new DateTime(2024, 7, 17, 4, 1, 7, 184, DateTimeKind.Utc).AddTicks(4028),
-                            DeletedDate = new DateTime(2024, 7, 17, 4, 1, 7, 184, DateTimeKind.Utc).AddTicks(4012),
+                            AddedOnDate = new DateTime(2024, 8, 28, 8, 6, 18, 387, DateTimeKind.Utc).AddTicks(2062),
+                            DeletedDate = new DateTime(2024, 8, 28, 8, 6, 18, 387, DateTimeKind.Utc).AddTicks(2054),
                             IsDeleted = false,
-                            Name = "Health, Beauty & Sports",
-                            UpdatedDate = new DateTime(2024, 7, 17, 4, 1, 7, 184, DateTimeKind.Utc).AddTicks(4012)
+                            Name = "Books",
+                            UpdatedDate = new DateTime(2024, 8, 28, 8, 6, 18, 387, DateTimeKind.Utc).AddTicks(2053)
                         });
                 });
 
@@ -127,46 +127,46 @@ namespace CleanArchitecture.Persistence.Migrations
                         new
                         {
                             Id = 1,
-                            AddedOnDate = new DateTime(2024, 7, 17, 4, 1, 7, 186, DateTimeKind.Utc).AddTicks(3856),
-                            DeletedDate = new DateTime(2024, 7, 17, 4, 1, 7, 186, DateTimeKind.Utc).AddTicks(3849),
+                            AddedOnDate = new DateTime(2024, 8, 28, 8, 6, 18, 389, DateTimeKind.Utc).AddTicks(4539),
+                            DeletedDate = new DateTime(2024, 8, 28, 8, 6, 18, 389, DateTimeKind.Utc).AddTicks(4535),
                             IsDeleted = false,
                             Name = "Electric",
                             ParentId = 0,
                             Priorty = 1,
-                            UpdatedDate = new DateTime(2024, 7, 17, 4, 1, 7, 186, DateTimeKind.Utc).AddTicks(3849)
+                            UpdatedDate = new DateTime(2024, 8, 28, 8, 6, 18, 389, DateTimeKind.Utc).AddTicks(4535)
                         },
                         new
                         {
                             Id = 2,
-                            AddedOnDate = new DateTime(2024, 7, 17, 4, 1, 7, 186, DateTimeKind.Utc).AddTicks(3858),
-                            DeletedDate = new DateTime(2024, 7, 17, 4, 1, 7, 186, DateTimeKind.Utc).AddTicks(3857),
+                            AddedOnDate = new DateTime(2024, 8, 28, 8, 6, 18, 389, DateTimeKind.Utc).AddTicks(4542),
+                            DeletedDate = new DateTime(2024, 8, 28, 8, 6, 18, 389, DateTimeKind.Utc).AddTicks(4541),
                             IsDeleted = false,
                             Name = "ElModa",
                             ParentId = 0,
                             Priorty = 2,
-                            UpdatedDate = new DateTime(2024, 7, 17, 4, 1, 7, 186, DateTimeKind.Utc).AddTicks(3857)
+                            UpdatedDate = new DateTime(2024, 8, 28, 8, 6, 18, 389, DateTimeKind.Utc).AddTicks(4541)
                         },
                         new
                         {
                             Id = 3,
-                            AddedOnDate = new DateTime(2024, 7, 17, 4, 1, 7, 186, DateTimeKind.Utc).AddTicks(3860),
-                            DeletedDate = new DateTime(2024, 7, 17, 4, 1, 7, 186, DateTimeKind.Utc).AddTicks(3859),
+                            AddedOnDate = new DateTime(2024, 8, 28, 8, 6, 18, 389, DateTimeKind.Utc).AddTicks(4544),
+                            DeletedDate = new DateTime(2024, 8, 28, 8, 6, 18, 389, DateTimeKind.Utc).AddTicks(4543),
                             IsDeleted = false,
                             Name = "Computer",
                             ParentId = 1,
                             Priorty = 1,
-                            UpdatedDate = new DateTime(2024, 7, 17, 4, 1, 7, 186, DateTimeKind.Utc).AddTicks(3859)
+                            UpdatedDate = new DateTime(2024, 8, 28, 8, 6, 18, 389, DateTimeKind.Utc).AddTicks(4543)
                         },
                         new
                         {
                             Id = 4,
-                            AddedOnDate = new DateTime(2024, 7, 17, 4, 1, 7, 186, DateTimeKind.Utc).AddTicks(3862),
-                            DeletedDate = new DateTime(2024, 7, 17, 4, 1, 7, 186, DateTimeKind.Utc).AddTicks(3861),
+                            AddedOnDate = new DateTime(2024, 8, 28, 8, 6, 18, 389, DateTimeKind.Utc).AddTicks(4550),
+                            DeletedDate = new DateTime(2024, 8, 28, 8, 6, 18, 389, DateTimeKind.Utc).AddTicks(4549),
                             IsDeleted = false,
                             Name = "Women",
                             ParentId = 2,
                             Priorty = 1,
-                            UpdatedDate = new DateTime(2024, 7, 17, 4, 1, 7, 186, DateTimeKind.Utc).AddTicks(3861)
+                            UpdatedDate = new DateTime(2024, 8, 28, 8, 6, 18, 389, DateTimeKind.Utc).AddTicks(4545)
                         });
                 });
 
@@ -206,70 +206,6 @@ namespace CleanArchitecture.Persistence.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("details");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            AddedOnDate = new DateTime(2024, 7, 17, 4, 1, 7, 188, DateTimeKind.Utc).AddTicks(2324),
-                            CategoryId = 1,
-                            DeletedDate = new DateTime(2024, 7, 17, 4, 1, 7, 188, DateTimeKind.Utc).AddTicks(2204),
-                            Description = "Assumenda rerum doloremque quis incidunt.",
-                            IsDeleted = false,
-                            Title = "Dolorem.",
-                            UpdatedDate = new DateTime(2024, 7, 17, 4, 1, 7, 188, DateTimeKind.Utc).AddTicks(2204)
-                        },
-                        new
-                        {
-                            Id = 2,
-                            AddedOnDate = new DateTime(2024, 7, 17, 4, 1, 7, 188, DateTimeKind.Utc).AddTicks(2356),
-                            CategoryId = 3,
-                            DeletedDate = new DateTime(2024, 7, 17, 4, 1, 7, 188, DateTimeKind.Utc).AddTicks(2326),
-                            Description = "Quia excepturi est laborum non.",
-                            IsDeleted = true,
-                            Title = "Exercitationem quod.",
-                            UpdatedDate = new DateTime(2024, 7, 17, 4, 1, 7, 188, DateTimeKind.Utc).AddTicks(2326)
-                        },
-                        new
-                        {
-                            Id = 3,
-                            AddedOnDate = new DateTime(2024, 7, 17, 4, 1, 7, 188, DateTimeKind.Utc).AddTicks(2381),
-                            CategoryId = 4,
-                            DeletedDate = new DateTime(2024, 7, 17, 4, 1, 7, 188, DateTimeKind.Utc).AddTicks(2358),
-                            Description = "Sint magnam omnis architecto maiores.",
-                            IsDeleted = false,
-                            Title = "Architecto.",
-                            UpdatedDate = new DateTime(2024, 7, 17, 4, 1, 7, 188, DateTimeKind.Utc).AddTicks(2357)
-                        });
-                });
-
-            modelBuilder.Entity("CleanArchitecture.Domain.Entities.DeviceInfo", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("Browser")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("DeviceType")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("IpAddress")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<DateTime>("LoggedInAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("deviceInfo");
                 });
 
             modelBuilder.Entity("CleanArchitecture.Domain.Entities.Image", b =>
@@ -393,41 +329,41 @@ namespace CleanArchitecture.Persistence.Migrations
                         new
                         {
                             Id = 1,
-                            AddedOnDate = new DateTime(2024, 7, 17, 4, 1, 7, 190, DateTimeKind.Utc).AddTicks(1754),
+                            AddedOnDate = new DateTime(2024, 8, 28, 8, 6, 18, 391, DateTimeKind.Utc).AddTicks(5492),
                             BrandId = 1,
-                            DeletedDate = new DateTime(2024, 7, 17, 4, 1, 7, 190, DateTimeKind.Utc).AddTicks(1553),
-                            Description = "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design",
-                            Discount = 18.083372607392840m,
+                            DeletedDate = new DateTime(2024, 8, 28, 8, 6, 18, 391, DateTimeKind.Utc).AddTicks(5347),
+                            Description = "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
+                            Discount = 13.683889594268600m,
                             IsDeleted = false,
-                            Price = 97.99m,
-                            Title = "Fantastic Frozen Pizza",
-                            UpdatedDate = new DateTime(2024, 7, 17, 4, 1, 7, 190, DateTimeKind.Utc).AddTicks(1553)
+                            Price = 1813.51m,
+                            Title = "Practical Rubber Keyboard",
+                            UpdatedDate = new DateTime(2024, 8, 28, 8, 6, 18, 391, DateTimeKind.Utc).AddTicks(5347)
                         },
                         new
                         {
                             Id = 2,
-                            AddedOnDate = new DateTime(2024, 7, 17, 4, 1, 7, 190, DateTimeKind.Utc).AddTicks(1782),
+                            AddedOnDate = new DateTime(2024, 8, 28, 8, 6, 18, 391, DateTimeKind.Utc).AddTicks(5519),
                             BrandId = 1,
-                            DeletedDate = new DateTime(2024, 7, 17, 4, 1, 7, 190, DateTimeKind.Utc).AddTicks(1756),
-                            Description = "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
-                            Discount = 36.173927615778600m,
+                            DeletedDate = new DateTime(2024, 8, 28, 8, 6, 18, 391, DateTimeKind.Utc).AddTicks(5494),
+                            Description = "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
+                            Discount = 15.038294025563400m,
                             IsDeleted = false,
-                            Price = 372.78m,
-                            Title = "Practical Rubber Towels",
-                            UpdatedDate = new DateTime(2024, 7, 17, 4, 1, 7, 190, DateTimeKind.Utc).AddTicks(1756)
+                            Price = 970.75m,
+                            Title = "Tasty Fresh Chair",
+                            UpdatedDate = new DateTime(2024, 8, 28, 8, 6, 18, 391, DateTimeKind.Utc).AddTicks(5493)
                         },
                         new
                         {
                             Id = 3,
-                            AddedOnDate = new DateTime(2024, 7, 17, 4, 1, 7, 190, DateTimeKind.Utc).AddTicks(1803),
+                            AddedOnDate = new DateTime(2024, 8, 28, 8, 6, 18, 391, DateTimeKind.Utc).AddTicks(5548),
                             BrandId = 3,
-                            DeletedDate = new DateTime(2024, 7, 17, 4, 1, 7, 190, DateTimeKind.Utc).AddTicks(1783),
-                            Description = "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
-                            Discount = 19.899471559961680m,
+                            DeletedDate = new DateTime(2024, 8, 28, 8, 6, 18, 391, DateTimeKind.Utc).AddTicks(5520),
+                            Description = "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
+                            Discount = 33.178499799026160m,
                             IsDeleted = true,
-                            Price = 216.63m,
-                            Title = "Licensed Steel Gloves",
-                            UpdatedDate = new DateTime(2024, 7, 17, 4, 1, 7, 190, DateTimeKind.Utc).AddTicks(1783)
+                            Price = 1495.04m,
+                            Title = "Gorgeous Metal Hat",
+                            UpdatedDate = new DateTime(2024, 8, 28, 8, 6, 18, 391, DateTimeKind.Utc).AddTicks(5520)
                         });
                 });
 
@@ -505,6 +441,18 @@ namespace CleanArchitecture.Persistence.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("text");
 
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime?>("LastModifiedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("text");
+
                     b.Property<string>("Name")
                         .HasMaxLength(256)
                         .HasColumnType("character varying(256)");
@@ -512,6 +460,9 @@ namespace CleanArchitecture.Persistence.Migrations
                     b.Property<string>("NormalizedName")
                         .HasMaxLength(256)
                         .HasColumnType("character varying(256)");
+
+                    b.Property<int>("Permissions")
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
@@ -524,24 +475,35 @@ namespace CleanArchitecture.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("8ce510d6-6ae5-4571-b6a8-983c73016004"),
-                            ConcurrencyStamp = "6b2e6023-1201-497f-96a4-0db6000e8955",
+                            Id = new Guid("d24e2067-471f-4a8d-8d13-72f4a57b8f32"),
+                            ConcurrencyStamp = "edd5ca22-b0cc-4a2b-b817-8dc46de707d8",
+                            Name = "SuperAdmin",
+                            NormalizedName = "SUPERADMIN",
+                            Permissions = -1
+                        },
+                        new
+                        {
+                            Id = new Guid("6b03a8e9-d90e-404d-b1a7-51ed6702f4be"),
+                            ConcurrencyStamp = "112d11bc-9fe4-4e41-a215-e01eb6d9ad72",
                             Name = "Admin",
-                            NormalizedName = "ADMIN"
+                            NormalizedName = "ADMIN",
+                            Permissions = 56
                         },
                         new
                         {
-                            Id = new Guid("e8787a4e-1e10-42ba-b34b-c3ee297a03b4"),
-                            ConcurrencyStamp = "075f38ae-c5fa-4ef6-ab85-d9bff844e015",
-                            Name = "User",
-                            NormalizedName = "USER"
-                        },
-                        new
-                        {
-                            Id = new Guid("2048c126-5303-46a3-9092-b6a3522dc89f"),
-                            ConcurrencyStamp = "325b5ce1-7e0c-40e6-b1be-638264d496c7",
+                            Id = new Guid("3f72b4a3-bc5c-4464-9b22-cb8197745345"),
+                            ConcurrencyStamp = "6fca332c-5d9b-465d-ae83-39546e74f214",
                             Name = "Vendor",
-                            NormalizedName = "VENDOR"
+                            NormalizedName = "VENDOR",
+                            Permissions = 48
+                        },
+                        new
+                        {
+                            Id = new Guid("2e4d5f86-82ab-41c5-bbc3-d21e8f0b8a2c"),
+                            ConcurrencyStamp = "b56cfcdc-2d16-42fa-b28b-30c1f932c98a",
+                            Name = "Customer",
+                            NormalizedName = "CUSTOMER",
+                            Permissions = 96
                         });
                 });
 
@@ -639,6 +601,76 @@ namespace CleanArchitecture.Persistence.Migrations
                     b.HasDiscriminator().HasValue("User");
 
                     b.UseTphMappingStrategy();
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("5f87441a-8951-4535-a9c6-f4e3073ab1d7"),
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "e82b1632-39ae-4df8-be36-005ab707f670",
+                            Email = "superadmin@gmail.com",
+                            EmailConfirmed = true,
+                            FullName = "SuperAdmin User",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "SUPERADMIN@GMAIL.COM",
+                            NormalizedUserName = "SUPERADMIN@GMAIL.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEAV2jpyyf/CumcvhCxivo9uMSs/wKcwSeC556GGAv3MADr93vDECp3G9dgs8eOyt/g==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "7ZZZLCDPUZ2CY6CYAEPQLQ6O6DDDFRDE",
+                            TwoFactorEnabled = false,
+                            UserName = "SuperAdminUser"
+                        },
+                        new
+                        {
+                            Id = new Guid("3f42b4a3-bc5c-4464-9b22-cb819774539f"),
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "dc830f49-cb83-4c76-8267-ba596b51cb10",
+                            Email = "admin@gmail.com",
+                            EmailConfirmed = true,
+                            FullName = "Admin User",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "ADMIN@GMAIL.COM",
+                            NormalizedUserName = "ADMIN@GMAIL.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEIxDDO2nnhjTwNhf5zOa6ZkUPkllbQW7Qm+ka5EkoXGoZDYd+JlgRq3BSVNBqihgzA==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "7ZZZLCDPUZ2CY6CYAEPQLQ6O6WEROFTD",
+                            TwoFactorEnabled = false,
+                            UserName = "AdminUser"
+                        },
+                        new
+                        {
+                            Id = new Guid("8c528156-1623-41f9-bf02-d5e47a4a66d4"),
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "4d94c7e6-ff3b-4a9f-8347-088a624cfcd2",
+                            Email = "vendor@gmail.com",
+                            EmailConfirmed = true,
+                            FullName = "Vendor User",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "VENDOR@GMAIL.COM",
+                            NormalizedUserName = "VENDOR@GMAIL.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEA6YoDM0V6hrMt//qkjTdrnVbr0ig7Xn2W1tVZ/1pIl4mHUzsKUemOtpz/VBWOlGSw==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "7ZZZLCDPUZ2CY6CYAEPQLQ6O6IPXFJRU",
+                            TwoFactorEnabled = false,
+                            UserName = "VendorUser"
+                        },
+                        new
+                        {
+                            Id = new Guid("9f83774d-1822-47a3-9e6e-0a6f89bcb7c7"),
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "94402dac-8b9f-4bac-9a43-510d6e86d433",
+                            Email = "customer@gmail.com",
+                            EmailConfirmed = true,
+                            FullName = "Customer User",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "CUSTOMER@GMAIL.COM",
+                            NormalizedUserName = "CUSTOMER@GMAIL.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEMQ3jcg7SUo+3be4AMSMBOl/Rb8Yb+MaqLg4bPGv0gRe0jtdHxBjM+p4P/o02kquMg==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "7ZZZLCDPUZ2CY6CYAEPQLQ6O6IPWOSKT",
+                            TwoFactorEnabled = false,
+                            UserName = "CustomerUser"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
@@ -723,6 +755,28 @@ namespace CleanArchitecture.Persistence.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = new Guid("5f87441a-8951-4535-a9c6-f4e3073ab1d7"),
+                            RoleId = new Guid("d24e2067-471f-4a8d-8d13-72f4a57b8f32")
+                        },
+                        new
+                        {
+                            UserId = new Guid("3f42b4a3-bc5c-4464-9b22-cb819774539f"),
+                            RoleId = new Guid("6b03a8e9-d90e-404d-b1a7-51ed6702f4be")
+                        },
+                        new
+                        {
+                            UserId = new Guid("8c528156-1623-41f9-bf02-d5e47a4a66d4"),
+                            RoleId = new Guid("3f72b4a3-bc5c-4464-9b22-cb8197745345")
+                        },
+                        new
+                        {
+                            UserId = new Guid("9f83774d-1822-47a3-9e6e-0a6f89bcb7c7"),
+                            RoleId = new Guid("2e4d5f86-82ab-41c5-bbc3-d21e8f0b8a2c")
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
