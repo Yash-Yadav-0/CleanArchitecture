@@ -44,22 +44,8 @@ namespace CleanArchitecture.Application.Features.UserFeature.Commands.ChangeToAd
         public async Task<ChangeToAdminCommandResponse> Handle(ChangeToAdminCommandRequest request,CancellationToken cancellationToken)
         {
             LoggerHelper.LogInformation("Handling ChangeToAdminCommandRequest for Email: {Email}", request.Email);
-            var userId = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if(userId == null)
-            {
-                LoggerHelper.LogError("user is not authenticated.",
-                    new UnauthorizedAccessException());
-                throw new UnauthorizedAccessException();
-            }
-            /*var userAdmin = await userManager.FindByIdAsync(userId);
-            if(userAdmin == null || !(await userManager.IsInRoleAsync(userAdmin,"USER")))
-            {
-                LoggerHelper.LogError("User does not have the required Admin role.",
-                    new UnauthorizedAccessException("User does not have the required Admin role1."));
-                throw new UnauthorizedAccessException("User does not have the required Admin role11.");
-            }*/
 
-            User user = await userManager.FindByEmailAsync(request.Email);
+            var user = await userManager.FindByEmailAsync(request.Email);
 
             if(user == null)
             {
@@ -70,17 +56,7 @@ namespace CleanArchitecture.Application.Features.UserFeature.Commands.ChangeToAd
 
             try
             {
-                if(!await roleManager.RoleExistsAsync("USER"))
-                {
-                    await roleManager.CreateAsync(new Role
-                    {
-                        Id = Guid.NewGuid(),
-                        Name = "USER",
-                        NormalizedName = "USER",
-                        ConcurrencyStamp = Guid.NewGuid().ToString()
-                    });
-                }
-
+                //remove current role
                 var currentRole = await userManager.GetRolesAsync(user);
                 if(currentRole == null)
                 {
@@ -90,7 +66,8 @@ namespace CleanArchitecture.Application.Features.UserFeature.Commands.ChangeToAd
                 {
                     await userManager.RemoveFromRoleAsync(user, role);
                 }
-                await userManager.AddToRoleAsync(user, "ADMIN");
+                //add new role
+                await userManager.AddToRoleAsync(user, "Admin");
                 await userManager.UpdateAsync(user);
                 LogHelper.LogInformation("User wth Email: {Email} successfully changed to Admin role", request.Email);
             }

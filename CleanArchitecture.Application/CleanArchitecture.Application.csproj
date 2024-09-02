@@ -30,8 +30,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Features\UserFeature\Commands\ShowAllUserPermissions\" />
     <Folder Include="Features\UserFeature\Exceptions\" />
-    <Folder Include="Features\UserFeature\Queries\" />
   </ItemGroup>
 
 </Project>

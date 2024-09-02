@@ -3,6 +3,7 @@ using CleanArchitecture.Application.Features.Auth.Queries.GetAllUsers;
 using CleanArchitecture.Application.Features.UserFeature.Commands.ChangeToAdmin;
 using CleanArchitecture.Application.Features.UserFeature.Commands.ChangeToMember;
 using CleanArchitecture.Application.Features.UserFeature.Commands.ChangeToVendor;
+using CleanArchitecture.Application.Features.UserFeature.Queries;
 using CleanArchitecture.Application.Helpers;
 using Grpc.Core;
 using MediatR;
@@ -41,6 +42,14 @@ namespace CleanArchitecture.Api.Controllers
         public async Task<IActionResult> GetAllUsers(CancellationToken cancellationToken)
         {
             var result = await mediator.Send(new GetAllUsersQueryRequest(), cancellationToken);
+            return Ok(result);
+        }
+
+        [PermissionAuthorize(Domain.Entities.Permissions.All)]
+        [HttpGet("ShowUsersPermissions")]
+        public async Task<IActionResult> ShowAllUsersPermissions( CancellationToken cancellationToken)
+        {
+            var result = await mediator.Send(new ShowAllUserPermissionsQueryRequest(), cancellationToken);
             return Ok(result);
         }
     }

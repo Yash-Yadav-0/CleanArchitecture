@@ -36,7 +36,7 @@ namespace CleanArchitecture.Application.Features.UserFeature.Commands.ChangeToVe
             this.userManager = userManager;
             this.roleManager = roleManager;
             this.userRules = userRules;
-            this._mapper = mapper;
+            _mapper = mapper;
             _httpContextAccessor = httpContextAccessor;
         }
 
@@ -45,24 +45,8 @@ namespace CleanArchitecture.Application.Features.UserFeature.Commands.ChangeToVe
         {
             LoggerHelper.LogInformation("Handling ChangeToVendorCommandRequest for Email: {Email}", request.Email);
 
+            // Find user to change to vendor
 
-            //commented as this is checked in controller level.
-            /*var userId = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
-
-            if (userId == null)
-            {
-                LoggerHelper.LogError("User is not authenticated.", new UnauthorizedAccessException("User is not authenticated."));
-                throw new UnauthorizedAccessException("User is not authenticated.");
-            }
-
-            // Find the user and check if they are in the Admin role
-            var userAdmin = await userManager.FindByIdAsync(userId);
-            if (userAdmin == null || !(await userManager.IsInRoleAsync(userAdmin, "Admin")))
-            {
-                LoggerHelper.LogError("User does not have the required Admin role.", new UnauthorizedAccessException("User doesnot meet required Role."));
-                throw new UnauthorizedAccessException("User does not have the required Admin role.");
-            }
-           */
             var user = await userManager.FindByEmailAsync(request.Email);
 
             if (user == null)
@@ -72,18 +56,7 @@ namespace CleanArchitecture.Application.Features.UserFeature.Commands.ChangeToVe
             }
             try
             {
-                if (!await roleManager.RoleExistsAsync("Vendor"))
-                {
-                    await roleManager.CreateAsync(new Role
-                    {
-                        Id = Guid.NewGuid(),
-                        Name = "Vendor",
-                        NormalizedName = "VENDOR",
-                        ConcurrencyStamp = Guid.NewGuid().ToString(),
-                    });
-                    await userManager.AddToRoleAsync(user, "VENDOR");
-                    await userManager.UpdateAsync(user);
-                }
+                
                 //Remove all current roles
                 var currentRole = await userManager.GetRolesAsync(user);
                 if (currentRole == null)
@@ -95,8 +68,8 @@ namespace CleanArchitecture.Application.Features.UserFeature.Commands.ChangeToVe
                 {
                     await userManager.RemoveFromRoleAsync(user, role);
                 }
-
-                await userManager.AddToRoleAsync(user, "VENDOR");
+                //add new role as Vendor
+                await userManager.AddToRoleAsync(user, "Vendor");
                 await userManager.UpdateAsync(user);
 
                 LoggerHelper.LogInformation("User with Email: {Email} successfully changed to Vendor role.", request.Email);

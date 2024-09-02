@@ -22,7 +22,6 @@ namespace CleanArchitecture.Infrastructure.Tokens.FlexibleAuth
             if ((userPermission & requirement.Permissions) != 0)
             {
                 context.Succeed(requirement);
-                return Task.CompletedTask;
             }
             return Task.CompletedTask;
         }

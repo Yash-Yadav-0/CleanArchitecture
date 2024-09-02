@@ -7,6 +7,7 @@ using CleanArchitecture.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Serilog;
 using System.Security.Claims;
 
@@ -41,8 +42,8 @@ namespace CleanArchitecture.Application.Features.UserFeature.Commands.ChangeToMe
         public async Task<ChangeToMemberCommandResponse> Handle(ChangeToMemberCommandRequest request, CancellationToken cancellationToken)
         {
             LoggerHelper.LogInformation("Handling ChangeToMemberCommandRequest for Email: {Email}", request.Email);
-
-            var userId = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            //used for role identification in case of checking in after controller passes through role check(double check)
+            /*var userId = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             if (userId == null)
             {
@@ -59,7 +60,8 @@ namespace CleanArchitecture.Application.Features.UserFeature.Commands.ChangeToMe
                     new UnauthorizedAccessException("User does not have the required Admin role."));
                 throw new UnauthorizedAccessException("User does not have the required Admin role.");
             }
-            //await userRules.UserShouldnotBeExistsAsync(await userManager.FindByEmailAsync(request.Email));
+            //await userRules.UserShouldnotBeExistsAsync(await userManager.FindByEmailAsync(request.Email));*/
+
             User? user = await userManager.FindByEmailAsync(request.Email);
 
             if (user == null)
@@ -70,17 +72,6 @@ namespace CleanArchitecture.Application.Features.UserFeature.Commands.ChangeToMe
             }
             try
             {
-                if (!await roleManager.RoleExistsAsync("USER"))
-                {
-                    await roleManager.CreateAsync(new Role
-                    {
-                        Id = Guid.NewGuid(),
-                        Name = "USER",
-                        NormalizedName = "USER",
-                        ConcurrencyStamp = Guid.NewGuid().ToString(),
-                    });
-                }
-
                 // Remove any existing role if necessary before adding new one
                 var currentRoles = await userManager.GetRolesAsync(user);
                 if (currentRoles == null)
@@ -93,14 +84,14 @@ namespace CleanArchitecture.Application.Features.UserFeature.Commands.ChangeToMe
                     await userManager.RemoveFromRoleAsync(user, role);
                 }
 
-                await userManager.AddToRoleAsync(user, "USER");
+                await userManager.AddToRoleAsync(user, "Customer");
                 await userManager.UpdateAsync(user);
 
-                LoggerHelper.LogInformation("User with Email: {Email} successfully changed to User role.", request.Email);
+                LoggerHelper.LogInformation("User with Email: {Email} successfully changed to Customer role.", request.Email);
             }
             catch (Exception ex)
             {
-                LoggerHelper.LogError("Error occurred while changing user to User role for Email: {Email}", ex, request.Email);
+                LoggerHelper.LogError("Error occurred while changing user to Customer role for Email: {Email}", ex, request.Email);
                 throw; // Re-throw the exception after logging
             }
             return new()

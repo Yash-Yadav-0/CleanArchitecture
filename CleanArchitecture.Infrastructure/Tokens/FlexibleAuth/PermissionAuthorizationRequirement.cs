@@ -9,7 +9,6 @@ namespace CleanArchitecture.Infrastructure.Tokens.FlexibleAuth
         {
             Permissions = permission;
         }
-
         public Permissions Permissions { get; }
     }
 }
