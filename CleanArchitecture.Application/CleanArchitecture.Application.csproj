@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Features\UserFeature\Commands\ShowAllUserPermissions\**" />
+    <EmbeddedResource Remove="Features\UserFeature\Commands\ShowAllUserPermissions\**" />
+    <None Remove="Features\UserFeature\Commands\ShowAllUserPermissions\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="ClosedXML.Report" Version="0.2.10" />
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.9.2" />
     <PackageReference Include="MediatR" Version="12.4.0" />
@@ -30,7 +36,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\UserFeature\Commands\ShowAllUserPermissions\" />
     <Folder Include="Features\UserFeature\Exceptions\" />
   </ItemGroup>
 

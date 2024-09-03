@@ -3,6 +3,7 @@ using CleanArchitecture.Application.Features.Auth.Queries.GetAllUsers;
 using CleanArchitecture.Application.Features.UserFeature.Commands.ChangeToAdmin;
 using CleanArchitecture.Application.Features.UserFeature.Commands.ChangeToMember;
 using CleanArchitecture.Application.Features.UserFeature.Commands.ChangeToVendor;
+using CleanArchitecture.Application.Features.UserFeature.Commands.ChangeUserPermissions;
 using CleanArchitecture.Application.Features.UserFeature.Queries;
 using CleanArchitecture.Application.Helpers;
 using Grpc.Core;
@@ -50,6 +51,12 @@ namespace CleanArchitecture.Api.Controllers
         public async Task<IActionResult> ShowAllUsersPermissions( CancellationToken cancellationToken)
         {
             var result = await mediator.Send(new ShowAllUserPermissionsQueryRequest(), cancellationToken);
+            return Ok(result);
+        }
+        [HttpPatch("ChangeUserPermissionsByEmail")]
+        public async Task<IActionResult> ChangeUserPermissionsByEmail([FromForm]ChangeUserPermissionsRequest request,CancellationToken cancellationToken)
+        {
+            var result = await mediator.Send(request, cancellationToken);
             return Ok(result);
         }
     }
