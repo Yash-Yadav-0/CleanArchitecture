@@ -1,19 +1,9 @@
-﻿using CleanArchitecture.Application.Bases;
-using CleanArchitecture.Application.Features.UserFeature.Rules;
-using CleanArchitecture.Application.Helpers;
-using CleanArchitecture.Application.Interfaces.AutoMapper;
-using CleanArchitecture.Application.Interfaces.UnitOfWorks;
+﻿using CleanArchitecture.Application.Helpers;
 using CleanArchitecture.Domain.Entities;
-using DocumentFormat.OpenXml.Spreadsheet;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CleanArchitecture.Application.Features.UserFeature.Commands.ChangeUserPermissions
 {
@@ -48,7 +38,7 @@ namespace CleanArchitecture.Application.Features.UserFeature.Commands.ChangeUser
             }
             try
             {
-                // Remove the user from current roles
+                // Remove  current roles from user
                 var currentRoles = await _userManager.GetRolesAsync(user);
                 if (currentRoles.Any())
                 {
